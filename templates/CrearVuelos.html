@@ -6,31 +6,33 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>P L A V U E</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" type="image/png" href="assets/images/icon/favicon.ico">
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/font-awesome.min.css">
-    <link rel="stylesheet" href="assets/css/themify-icons.css">
-    <link rel="stylesheet" href="assets/css/metisMenu.css">
-    <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
-    <link rel="stylesheet" href="assets/css/slicknav.min.css">
+    <link rel="shortcut icon" type="image/png" href="{{ url_for('static', filename='images/icon/favicon.ico') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/themify-icons.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/metisMenu.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/owl.carousel.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/slicknav.min.css') }}">
 
     <!-- amchart css -->
     <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
     <!-- Start datatable css -->
-    <link rel="stylesheet" type="text/css" href="assets/css/tables/jquery.dataTables.css">
-    <link rel="stylesheet" type="text/css" href="hassets/css/tables/dataTables.bootstrap4.min.css">
-    <link rel="stylesheet" type="text/css" href="assets/css/tables/responsive.bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="assets/css/tables/responsive.jqueryui.min.css">
+    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='images/icon/logo3.png') }}"> -->
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/tables/jquery.dataTables.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/tables/dataTables.bootstrap4.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/tables/responsive.bootstrap.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/tables/responsive.jqueryui.min.css') }}">
     <!-- others css -->
-    <link rel="stylesheet" href="assets/css/typography.css">
-    <link rel="stylesheet" href="assets/css/default-css.css">
-    <link rel="stylesheet" href="assets/css/styles.css">
-    <link rel="stylesheet" href="assets/css/responsive.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/typography.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/default-css.css') }}s">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/responsive.css') }}">
     <!-- modernizr css -->
-    <script src="assets/js/vendor/modernizr-2.8.3.min.js"></script>
+    <script src="{{ url_for('static', filename='js/vendor/modernizr-2.8.3.min.js') }}"></script>
 
     <!-- select2 css -->
-    <link rel="stylesheet" href="assets/js/vendor/select2.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='js/vendor/select2.css') }}">
 </head>
 
 <body>
@@ -48,7 +50,7 @@
         <div class="sidebar-menu">
             <div class="sidebar-header">
                 <div class="logo">
-                    <a href="index.html"><img src="assets/images/icon/logo3.png" alt="logo"></a>
+                    <a href="index.html"><img src="{{ url_for('static', filename='images/icon/logo3.png') }}" alt="logo"></a>
                 </div>
             </div>
             <div class="main-menu">
@@ -89,12 +91,29 @@
 
                     <div class="col-sm-6 clearfix">
                         <div class="user-profile pull-right">
-                            <img class="avatar user-thumb" src="assets/images/icon/descarga.jpg" alt="avatar">
+                            <img class="avatar user-thumb" src="{{ url_for('static', filename='images/icon/descarga.jpg') }}" alt="avatar">
                             <h4 class="user-name dropdown-toggle" data-toggle="dropdown">Alejandra Negrete<i class="fa fa-angle-down"></i></h4>
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" href="#">Perfil</a>
                                 <a class="dropdown-item" href="Login.html">Cerrar sesión</a>
+                                <!-- <a href="#"><i class="ti-pencil"></i></a>
+                                <a href="#"><i class="ti-trash"></i></a> -->
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            
+            <div class="page-title-area">
+                <div class="row align-items-center">
+                    <div class="col-sm-12">
+                        <div class="breadcrumbs-area clearfix">
+                            <ul class="breadcrumbs pull-left">
+                                <li><a href="index.html">P L A V U E</a></li>
+                                <li><a href="perfilsuperadmi.html">Gestión de vuelos</a></li>
+                                <li><a href="CrearVuelos.html">Crear Vuelos</a></li>
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -108,7 +127,7 @@
                             <div class="card-body">
                                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                                     <li class="nav-item">
-                                        <a class="nav-link active" id="perfil-tab" data-toggle="tab" href="#perfil" role="tab" aria-controls="perfil" aria-selected="true">Agregar vuelos</a>
+                                        <a class="nav-link active" id="perfil-tab" data-toggle="tab" href="#perfil" role="tab" aria-controls="perfil" aria-selected="true">Crear vuelos</a>
                                     </li>
                                 </ul>
                                 <div class="tab-content mt-3" id="myTabContent">
@@ -234,11 +253,9 @@
                                             </div>
                                             <br>
                                             <br>
-                                            <div class="btncrearvuelo" >
-                                                <div class="submit-btn-area">
-                                                    <button id="form_cearvuelo" type="submit">Crear Vuelo <i class="ti-arrow-right"></i></button>                                    
-                                                </div>
-                                            </div>
+                                            <div class="btncentrado">
+                                                <button type="button" class="btn btn-rounded btn-primary mb-3">Crear vuelo</button>
+                                             </div>
                                         </form>
                                     </div>
                                 </div>
@@ -257,23 +274,22 @@
         </footer>
         <!-- footer area end-->
     </div>
-
-    <script src="assets/js/vendor/jquery-2.2.4.min.js"></script>
+    
+    <script src="{{ url_for('static', filename='js/vendor/jquery-2.2.4.min.js') }}"></script>
     <!-- bootstrap 4 js -->
-    <script src="assets/js/popper.min.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
-    <script src="assets/js/owl.carousel.min.js"></script>
-    <script src="assets/js/metisMenu.min.js"></script>
-    <script src="assets/js/jquery.slimscroll.min.js"></script>
-    <script src="assets/js/jquery.slicknav.min.js"></script>
-
+    <script src=" {{ url_for('static', filename='js/popper.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script> 
+    <script src="{{ url_for('static', filename='js/owl.carousel.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/metisMenu.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.slimscroll.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.slicknav.min.js') }}"></script>
     <!-- Start datatable js -->
-    <script src="assets/js/tables/jquery.dataTables.js"></script>
-    <script src="assets/js/tables/jquery.dataTables.min.js"></script>
-    <script src="assets/js/tables/dataTables.bootstrap4.min.js"></script>
-    <script src="assets/js/tables/dataTables.responsive.min.js"></script>
-    <script src="assets/js/tables/responsive.bootstrap.min.js"></script>
-
+    <script src="{{ url_for('static', filename='js/tables/jquery.dataTables.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/tables/jquery.dataTables.min.js') }}"></script> 
+    <script src="{{ url_for('static', filename='js/tables/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/tables/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/tables/responsive.bootstrap.min.js') }}"></script>
+    
     <!-- start chart js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
     <!-- start highcharts js -->
@@ -285,13 +301,13 @@
         ZC.LICENSE = ["569d52cefae586f634c54f86dc99e6a9", "ee6b7db5b51705a13dc2339db3edaf6d"];
     </script>
     <!-- all line chart activation -->
-    <script src="assets/js/line-chart.js"></script>
+    <script src="{{ url_for('static', filename='js/line-chart.js') }}"></script>
     <!-- all pie chart -->
-    <script src="assets/js/pie-chart.js"></script>
+    <script src="{{ url_for('static', filename='js/pie-chart.js') }}"></script>
     <!-- others plugins -->
-    <script src="assets/js/plugins.js"></script>
-    <script src="assets/js/scripts.js"></script>
-
+    <script src=" {{ url_for('static', filename='js/plugins.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+    
     </div>
     </div>
 </body>

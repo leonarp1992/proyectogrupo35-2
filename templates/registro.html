@@ -6,22 +6,22 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>P L A V U E</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" type="image/png" href="assets/images/icon/favicon.ico">
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/font-awesome.min.css">
-    <link rel="stylesheet" href="assets/css/themify-icons.css">
-    <link rel="stylesheet" href="assets/css/metisMenu.css">
-    <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
-    <link rel="stylesheet" href="assets/css/slicknav.min.css">
+    <link rel="shortcut icon" type="image/png" href="{{ url_for('static', filename='images/icon/favicon.ico') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/themify-icons.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/metisMenu.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/owl.carousel.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/slicknav.min.css') }}">
     <!-- amchart css -->
     <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
     <!-- others css -->
-    <link rel="stylesheet" href="assets/css/typography.css">
-    <link rel="stylesheet" href="assets/css/default-css.css">
-    <link rel="stylesheet" href="assets/css/styles.css">
-    <link rel="stylesheet" href="assets/css/responsive.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/typography.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/default-css.css') }}s">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/responsive.css') }}">
     <!-- modernizr css -->
-    <script src="assets/js/vendor/modernizr-2.8.3.min.js"></script>
+    <script src="{{ url_for('static', filename='js/vendor/modernizr-2.8.3.min.js') }}"></script>
 </head>
 
 <body>
@@ -39,33 +39,33 @@
             <div class="row no-gutters">
                 <div class="col-xl-4 offset-xl-8 col-lg-6 offset-lg-6">
                     <div class="login-box-s2 ptb--100">
-                        <form>
+                        <form action="" method="POST" name="formRegistro" onSubmit="validar_formulario();" >
                             <div class="login-form-head">
                                 <h4>P L A V U E</h4>
                                 <h3>Formulario de Registro</h3>
                             </div>
                             <div class="login-form-body">
                                 <div class="form-gp">
-                                    <label for="exampleInputName1">Nombre Completo</label>
-                                    <input type="text" id="exampleInputName1">
+                                    <label for="Nombre">Nombre Completo</label>
+                                    <input type="text" id="Nombre">
                                     <i class="ti-user"></i>
                                     <div class="text-danger"></div>
                                 </div>
                                 <div class="form-gp">
-                                    <label for="exampleInputEmail1">Correo</label>
-                                    <input type="email" id="exampleInputEmail1">
+                                    <label for="correo">Correo</label>
+                                    <input type="email" id="correo">
                                     <i class="ti-email"></i>
                                     <div class="text-danger"></div>
                                 </div>
                                 <div class="form-gp">
-                                    <label for="exampleInputPassword1">Contraseña</label>
-                                    <input type="password" id="exampleInputPassword1">
+                                    <label for="password">Contraseña</label>
+                                    <input type="password" id="password">
                                     <i class="ti-lock"></i>
                                     <div class="text-danger"></div>
                                 </div>
                                 <div class="form-gp">
-                                    <label for="exampleInputPassword2">Confirmar Contraseña</label>
-                                    <input type="password" id="exampleInputPassword2">
+                                    <label for="confpassword">Confirmar Contraseña</label>
+                                    <input type="password" id="confpassword">
                                     <i class="ti-lock"></i>
                                     <div class="text-danger"></div>
                                 </div>
@@ -91,18 +91,18 @@
     <!-- login area end -->
 
     <!-- jquery latest version -->
-    <script src="assets/js/vendor/jquery-2.2.4.min.js"></script>
+    <script src="{{ url_for('static', filename='js/vendor/jquery-2.2.4.min.js') }}"></script>
     <!-- bootstrap 4 js -->
-    <script src="assets/js/popper.min.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
-    <script src="assets/js/owl.carousel.min.js"></script>
-    <script src="assets/js/metisMenu.min.js"></script>
-    <script src="assets/js/jquery.slimscroll.min.js"></script>
-    <script src="assets/js/jquery.slicknav.min.js"></script>
+    <script src=" {{ url_for('static', filename='js/popper.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script> 
+    <script src="{{ url_for('static', filename='js/owl.carousel.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/metisMenu.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.slimscroll.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.slicknav.min.js') }}"></script>
     
     <!-- others plugins -->
-    <script src="assets/js/plugins.js"></script>
-    <script src="assets/js/scripts.js"></script>
+    <script src=" {{ url_for('static', filename='js/plugins.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
 </body>
 
 </html>
