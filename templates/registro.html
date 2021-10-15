@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html class="no-js" lang="es">
 
 <head>
@@ -39,7 +39,7 @@
             <div class="row no-gutters">
                 <div class="col-xl-4 offset-xl-8 col-lg-6 offset-lg-6">
                     <div class="login-box-s2 ptb--100">
-                        <form action="" method="POST" name="formRegistro" onSubmit="validar_formulario();" >
+                        <form action="{{url_for('registro')}}" method="POST" name="formRegistro" onSubmit="validar_formulario()" >
                             <div class="login-form-head">
                                 <h4>P L A V U E</h4>
                                 <h3>Formulario de Registro</h3>
@@ -103,6 +103,7 @@
     <!-- others plugins -->
     <script src=" {{ url_for('static', filename='js/plugins.js') }}"></script>
     <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/validacion.js') }}"></script>
 </body>
 
 </html>
