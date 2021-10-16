@@ -13,73 +13,73 @@ def login():
 
 @app.route("/registro")
 def registro():
-    return render_template("registro.html")
+    return render_template("registro.html", methods=["GET", "POST"])
 
-@app.route("/recuperarcontraseña")
+@app.route("/recuperarcontraseña", methods=["GET", "POST"])
 def recuperar_contraseña():
     return render_template('recuperarcontraseña.html')
 
-@app.route("/perfiladmin")
+@app.route("/perfiladmin", methods=["GET", "POST"])
 def perfil_admin():
     return render_template('perfiladmin.html')
 
-@app.route("/GestionPilotos")
+@app.route("/GestionPilotos", methods=["GET"])
 def Gestion_pilotos():
     return render_template('GestionPilotos.html')
 
-@app.route("/EditarPiloto")
+@app.route("/EditarPiloto", methods=["GET", "POST"])
 def Editar_pilotos():
     return render_template('EditarPiloto.html')
 
-@app.route("/GestionUsuarios")
+@app.route("/GestionUsuarios", methods=["GET"])
 def Gestion_Usuarios():
     return render_template('GestionUsuarios.html')
 
-@app.route("/EditarUsuario")
+@app.route("/EditarUsuario", methods=["GET", "POST"])
 def Editar_Usuarios():
     return render_template('EditarUsuario.html')
 
-@app.route("/GestionVuelos")
+@app.route("/GestionVuelos", methods=["GET"])
 def Gestion_Vuelos():
     return render_template('GestionVuelos.html')
 
-@app.route("/CrearVuelos")
+@app.route("/CrearVuelos", methods=["GET", "POST"])
 def Crear_Vuelos():
     return render_template('CrearVuelos.html')
 
-@app.route("/EditarVuelos")
+@app.route("/EditarVuelos", methods=["GET", "POST"])
 def Editar_Vuelos():
     return render_template('EditarVuelos.html')
 
-@app.route("/GestionComentarios")
+@app.route("/GestionComentarios", methods=["GET"])
 def Gestion_Comentarios():
     return render_template('GestionComentarios.html')
 
-@app.route("/perfilpiloto")
+@app.route("/perfilpiloto", methods=["GET", "POST"])
 def perfil_piloto():
     return render_template('perfilpiloto.html')
 
-@app.route("/historialvuelospiloto")
+@app.route("/historialvuelospiloto", methods=["GET"])
 def historial_vuelospiloto():
     return render_template('historialvuelospiloto.html')
 
-@app.route("/perfilusuario")
+@app.route("/perfilusuario", methods=["GET", "POST"])
 def perfil_usuario():
     return render_template('perfilusuario.html')
 
-@app.route("/itinerario")
+@app.route("/itinerario", methods=["GET", "POST"])
 def itinerario_usuario():
     return render_template('itinerariousuario.html')
 
-@app.route("/reservausuario")
+@app.route("/reservausuario", methods=["GET", "POST"])
 def reserva_usuario():
     return render_template('reservausuario.html')
 
-@app.route("/comentariosusuario")
+@app.route("/comentariosusuario", methods=["GET", "POST"])
 def comentarios_usuario():
     return render_template('comentariosusuario.html')
 
-@app.route("/calificacionvuelosusuario")
+@app.route("/calificacionvuelosusuario", methods=["GET", "POST"])
 def calificacionvuelos_usuario():
     return render_template('calificacionvuelosusuario.html')
 
