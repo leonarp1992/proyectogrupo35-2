@@ -1,0 +1,280 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>P L A V U E</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/png" href="{{ url_for('static', filename='images/icon/favicon.ico') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/themify-icons.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/metisMenu.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/owl.carousel.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/slicknav.min.css') }}">
+
+    <!-- amchart css -->
+    <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
+    <!-- Start datatable css -->
+    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='images/icon/logo3.png') }}"> -->
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/tables/jquery.dataTables.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/tables/dataTables.bootstrap4.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/tables/responsive.bootstrap.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/tables/responsive.jqueryui.min.css') }}">
+    <!-- others css -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/typography.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/default-css.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/responsive.css') }}">
+    <!-- modernizr css -->
+    <script src="{{ url_for('static', filename='js/vendor/modernizr-2.8.3.min.js') }}"></script>
+
+    <!-- select2 css -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='js/vendor/select2.css') }}">
+</head>
+
+<body>
+    <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+    <!-- preloader area start -->
+    <div id="preloader">
+        <div class="loader"></div>
+    </div>
+    <!-- preloader area end -->
+    <!-- page container area start -->
+    <div class="page-container">
+        <!-- sidebar menu area start -->
+        <div class="sidebar-menu">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <a href="index.html"><img src="static/images/icon/logo3.png" alt="logo"></a>
+                </div>
+            </div>
+            <div class="main-menu">
+                <div class="menu-inner">
+                    <nav>
+                        <ul class="metismenu" id="menu">
+                            <li>
+                                <a href="javascript:void(0)" aria-expanded="true"><i class="ti-user"></i><span>Perfil</span></a>
+                            </li>
+                            <li class="active">
+                                <a href="javascript:void(0)" aria-expanded="true"><i class="ti-view-list-alt"></i><span>Historial de Vuelos</span></a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <!-- sidebar menu area end -->
+        <!-- main content area start -->
+        <div class="main-content">
+            <!-- header area start -->
+            <div class="header-area">
+                <div class="row align-items-center">
+                    <!-- nav and search button -->
+                    <div class="col-md-6 col-sm-8 clearfix">
+                        <div class="nav-btn pull-left">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 clearfix">
+                        <div class="user-profile pull-right">
+                            <img class="avatar user-thumb" src="static/images/icon/descarga.jpg" alt="avatar">
+                            <h4 class="user-name dropdown-toggle" data-toggle="dropdown">Alejandra Negrete<i class="fa fa-angle-down"></i></h4>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="#">Perfil</a>
+                                <a class="dropdown-item" href="Login.html">Cerrar sesión</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="page-title-area">
+                <div class="row align-items-center">
+                    <div class="col-sm-12">
+                        <div class="breadcrumbs-area clearfix">
+                            <ul class="breadcrumbs pull-left">
+                                <li><a>P L A V U E</a></li>
+                                <li><span>Historial De Vuelos</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- page title area end -->
+            <div class="body main-content-inner">
+                <div class="row">
+                    <!-- Primary table start -->
+                    <div class="col-12 mt-5">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="header-title" align="center">Vuelos Pendientes</h4>
+                                <section class="panel">
+                                    <header class="panel-heading">
+                                        <a class="btn btn-rounded btn-primary mb-3" href="#" role="button">Ingresar</a>
+                                    </header>
+                                    <div class="panel-body">
+                                        <table class="table table-bordered table-striped mb-none" id="datatable-gestionvuelos1">
+                                            <thead>
+                                                <tr>
+                                                    <th>Rendering engine</th>
+                                                    <th>Browser</th>
+                                                    <th>Platform(s)</th>
+                                                    <th>Engine version</th>
+                                                    <th>CSS grade</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr class="gradeX">
+                                                    <td>Trident</td>
+                                                    <td>Internet
+                                                        Explorer 4.0</td>
+                                                    <td>Win 95+</td>
+                                                    <td class="center">4</td>
+                                                    <td class="center">X</td>
+                                                </tr>
+                                                <tr class="gradeC">
+                                                    <td>Trident</td>
+                                                    <td>Internet
+                                                            Explorer 5.0</td>
+                                                    <td>Win 95+</td>
+                                                    <td class="center">5</td>
+                                                    <td class="center">C</td>
+                                                </tr>
+                                                <tr class="gradeA">
+                                                    <td>Trident</td>
+                                                    <td>Internet
+                                                        Explorer 5.5</td>
+                                                    <td>Win 95+</td>
+                                                    <td class="center">5.5</td>
+                                                    <td class="center">A</td>
+                                                </tr>
+                                                <tr class="gradeA">
+                                                    <td>Trident</td>
+                                                    <td>Internet
+                                                        Explorer 6</td>
+                                                    <td>Win 98+</td>
+                                                    <td class="center">6</td>
+                                                    <td class="center">A</td>
+                                                    </tr>
+                                                <tr class="gradeA">
+                                                    <td>Trident</td>
+                                                    <td>Internet Explorer 7</td>
+                                                    <td>Win XP SP2+</td>
+                                                    <td class="center">7</td>
+                                                    <td class="center">A</td>
+                                                </tr>
+                                                <tr class="gradeA">
+                                                    <td>Trident</td>
+                                                    <td>AOL browser (AOL desktop)</td>
+                                                    <td>Win XP</td>
+                                                    <td class="center">6</td>
+                                                    <td class="center">A</td>
+                                                </tr>
+                                                <tr class="gradeA">
+                                                    <td>Gecko</td>
+                                                    <td>Firefox 1.0</td>
+                                                    <td>Win 98+ / OSX.2+</td>
+                                                    <td class="center">1.7</td>
+                                                    <td class="center">A</td>
+                                                </tr>
+                                                <tr class="gradeA">
+                                                    <td>Gecko</td>
+                                                    <td>Firefox 1.5</td>
+                                                    <td>Win 98+ / OSX.2+</td>
+                                                    <td class="center">1.8</td>
+                                                    <td class="center">A</td>
+                                                </tr>
+                                                <tr class="gradeA">
+                                                    <td>Gecko</td>
+                                                    <td>Firefox 2.0</td>
+                                                    <td>Win 98+ / OSX.2+</td>
+                                                    <td class="center">1.8</td>
+                                                    <td class="center">A</td>
+                                                    </tr>
+                                                <tr class="gradeA">
+                                                    <td>Gecko</td>
+                                                    <td>Firefox 3.0</td>
+                                                    <td>Win 2k+ / OSX.3+</td>
+                                                    <td class="center">1.9</td>
+                                                    <td class="center">A</td>
+                                                </tr>
+                                                <tr class="gradeA">
+                                                    <td>Gecko</td>
+                                                    <td>Camino 1.0</td>
+                                                    <td>OSX.2+</td>
+                                                    <td class="center">1.8</td>
+                                                    <td class="center">A</td>
+                                                </tr>
+                                                <tr class="gradeA">
+                                                    <td>Gecko</td>
+                                                    <td>Camino 1.5</td>
+                                                    <td>OSX.3+</td>
+                                                    <td class="center">1.8</td>
+                                                    <td class="center">A</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </section>
+                        </div>
+                    </div>
+                    <!-- Primary table end -->
+                </div>
+            </div>
+        </div>
+        <!-- main content area end -->
+        <!-- footer area start-->
+        <footer>
+            <div class="footer-area">
+                <p>© Copyright 2021. MisiónTIC 2022 - AEROPUERTO TRES DE MAYO.</p>
+            </div>
+        </footer>
+        <!-- footer area end-->
+    </div>
+    <!-- jquery latest version -->
+    <script src="{{ url_for('static', filename='js/vendor/jquery-2.2.4.min.js') }}"></script>
+    <!-- bootstrap 4 js -->
+    <script src=" {{ url_for('static', filename='js/popper.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script> 
+    <script src="{{ url_for('static', filename='js/owl.carousel.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/metisMenu.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.slimscroll.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.slicknav.min.js') }}"></script>
+    <!-- Start datatable js -->
+    <script src="{{ url_for('static', filename='js/tables/jquery.dataTables.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/tables/jquery.dataTables.min.js') }}"></script> 
+    <script src="{{ url_for('static', filename='js/tables/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/tables/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/tables/responsive.bootstrap.min.js') }}"></script>
+    
+    <!-- start chart js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
+    <!-- start highcharts js -->
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <!-- start zingchart js -->
+    <script src="https://cdn.zingchart.com/zingchart.min.js"></script>
+    <script>
+        zingchart.MODULESDIR = "https://cdn.zingchart.com/modules/";
+        ZC.LICENSE = ["569d52cefae586f634c54f86dc99e6a9", "ee6b7db5b51705a13dc2339db3edaf6d"];
+    </script>
+    <!-- all line chart activation -->
+    <script src="{{ url_for('static', filename='js/line-chart.js') }}"></script>
+    <!-- all pie chart -->
+    <script src="{{ url_for('static', filename='js/pie-chart.js') }}"></script>
+    <!-- others plugins -->
+    <script src=" {{ url_for('static', filename='js/plugins.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+    
+    </div>
+    </div>
+</body>
+
+</html>

@@ -51,6 +51,37 @@ def Crear_Vuelos():
 def Editar_Vuelos():
     return render_template('EditarVuelos.html')
 
+@app.route("/GestionComentarios")
+def Gestion_Comentarios():
+    return render_template('GestionComentarios.html')
+
+@app.route("/perfilpiloto")
+def perfil_piloto():
+    return render_template('perfilpiloto.html')
+
+@app.route("/historialvuelospiloto")
+def historial_vuelospiloto():
+    return render_template('historialvuelospiloto.html')
+
+@app.route("/perfilusuario")
+def perfil_usuario():
+    return render_template('perfilusuario.html')
+
+@app.route("/itinerariousuario")
+def itinerario_usuario():
+    return render_template('itinerariousuario.html')
+
+@app.route("/reservausuario")
+def reserva_usuario():
+    return render_template('reservausuario.html')
+
+@app.route("/comentariosusuario")
+def comentarios_usuario():
+    return render_template('comentariosusuario.html')
+
+@app.route("/calificacionvuelosusuario")
+def calificacionvuelos_usuario():
+    return render_template('calificacionvuelosusuario.html')
 
 
 if __name__ == '__main__':
