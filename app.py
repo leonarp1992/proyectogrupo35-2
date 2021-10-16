@@ -67,7 +67,7 @@ def historial_vuelospiloto():
 def perfil_usuario():
     return render_template('perfilusuario.html')
 
-@app.route("/itinerariousuario")
+@app.route("/itinerario")
 def itinerario_usuario():
     return render_template('itinerariousuario.html')
 

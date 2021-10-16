@@ -25,7 +25,7 @@
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/tables/responsive.jqueryui.min.css') }}">
         <!-- others css -->
         <link rel="stylesheet" href="{{ url_for('static', filename='css/typography.css') }}">
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/default-css.css') }}s">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/default-css.css') }}">
         <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
         <link rel="stylesheet" href="{{ url_for('static', filename='css/responsive.css') }}">
         <!-- modernizr css -->
@@ -50,19 +50,15 @@
         <div class="sidebar-menu">
             <div class="sidebar-header">
                 <div class="logo">
-                    <a href="index.html"><img src="assets/images/icon/logo3.png" alt="logo"></a>
+                    <a><img src="static/images/icon/logo3.png" alt="logo"></a>
                 </div>
             </div>
             <div class="main-menu">
                 <div class="menu-inner">
                     <nav>
                         <ul class="metismenu" id="menu">
-                            <li class="active">
-                                <a href="javascript:void(0)" aria-expanded="true"><i class="ti-user"></i><span>Perfil</span></a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0)" aria-expanded="true"><i class="ti-view-list-alt"></i><span>Historial de Vuelos</span></a>
-                            </li>
+                            <li class="active"><a href="../perfilpiloto" aria-expanded="true"><i class="ti-user"></i><span>Perfil</span></a></li>
+                            <li><a href="../historialvuelospiloto" aria-expanded="true"><i class="ti-view-list-alt"></i><span>Historial de Vuelos</span></a></li>
                         </ul>
                     </nav>
                 </div>
@@ -85,11 +81,11 @@
 
                     <div class="col-sm-6 clearfix">
                         <div class="user-profile pull-right">
-                            <img class="avatar user-thumb" src="assets/images/icon/descarga.jpg" alt="avatar">
+                            <img class="avatar user-thumb" src="static/images/icon/descarga.jpg" alt="avatar">
                             <h4 class="user-name dropdown-toggle" data-toggle="dropdown">Alejandra Negrete<i class="fa fa-angle-down"></i></h4>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#">Perfil</a>
-                                <a class="dropdown-item" href="Login.html">Cerrar sesión</a>
+                                <a class="dropdown-item" href="../perfilpiloto">Perfil</a>
+                                <a class="dropdown-item" href="../">Cerrar sesión</a>
                             </div>
                         </div>
                     </div>
@@ -101,7 +97,7 @@
                     <div class="col-sm-12">
                         <div class="breadcrumbs-area clearfix">
                             <ul class="breadcrumbs pull-left">
-                                <li><a href="index.html">P L A V U E</a></li>
+                                <li><a href="../perfilpiloto">P L A V U E</a></li>
                                 <li><span>Perfil</span></li>
                             </ul>
                         </div>
@@ -115,7 +111,7 @@
                     <div class="col-md-6 col-lg-2 mt-4"><!-- foto de usuario -->
                         <div class="panel-body">
                             <div class="thumb-info mb-md">
-                                <img src="assets/images/icon/descarga.jpg" class="rounded img-responsive" alt="Foto del usuario">
+                                <img src="static/images/icon/descarga.jpg" class="rounded img-responsive" alt="Foto del usuario">
                             </div>
                         </div>
                     </div>
@@ -497,7 +493,7 @@
                                                 <div class="col-md-6">
                                                     <br>
                                                     <label for="txtfoto">Foto</label><br>
-                                                    <img class="img-thumbnail" width="100" src="assets/images/icon/descarga.jpg">
+                                                    <img class="img-thumbnail" width="100" src="static/images/icon/descarga.jpg">
                                                     <input type="file" class="form-control form-control-sm" name="txtfoto"id="txtfoto" value="">
                                                 </div>
                                             </div>
@@ -578,7 +574,6 @@
         </footer>
         <!-- footer area end-->
     </div>
-
     
     <script src="{{ url_for('static', filename='js/vendor/jquery-2.2.4.min.js') }}"></script>
     <!-- bootstrap 4 js -->

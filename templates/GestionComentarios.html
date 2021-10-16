@@ -6,36 +6,33 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>P L A V U E</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" type="image/png" href="assets/images/icon/favicon.ico">
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/font-awesome.min.css">
-    <link rel="stylesheet" href="assets/css/themify-icons.css">
-    <link rel="stylesheet" href="assets/css/metisMenu.css">
-    <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
-    <link rel="stylesheet" href="assets/css/slicknav.min.css">
+    <link rel="shortcut icon" type="image/png" href="{{ url_for('static', filename='images/icon/favicon.ico') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/themify-icons.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/metisMenu.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/owl.carousel.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/slicknav.min.css') }}">
 
     <!-- amchart css -->
     <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
     <!-- Start datatable css -->
-    <link rel="stylesheet" type="text/css" href="assets/css/tables/jquery.dataTables.css">
-    <link rel="stylesheet" type="text/css" href="assets/css/tables/responsive.bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="assets/css/tables/responsive.jqueryui.min.css">
+    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='images/icon/logo3.png') }}"> -->
 
-
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/tables/jquery.dataTables.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/tables/dataTables.bootstrap4.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/tables/responsive.bootstrap.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/tables/responsive.jqueryui.min.css') }}">
     <!-- others css -->
-    <link rel="stylesheet" href="assets/css/typography.css">
-    <link rel="stylesheet" href="assets/css/default-css.css">
-    <link rel="stylesheet" href="assets/css/styles.css">
-    <link rel="stylesheet" href="assets/css/responsive.css">
-
-    <!-- Theme CSS -->
-	<link rel="stylesheet" href="assets/css/theme.css" />
-
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/typography.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/default-css.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/responsive.css') }}">
     <!-- modernizr css -->
-    <script src="assets/js/vendor/modernizr-2.8.3.min.js"></script>
+    <script src="{{ url_for('static', filename='js/vendor/modernizr-2.8.3.min.js') }}"></script>
 
     <!-- select2 css -->
-    <link rel="stylesheet" href="assets/js/vendor/select2.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='js/vendor/select2.css') }}">
 </head>
 
 <body>
@@ -53,28 +50,18 @@
         <div class="sidebar-menu">
             <div class="sidebar-header">
                 <div class="logo">
-                    <a href="index.html"><img src="assets/images/icon/logo3.png" alt="logo"></a>
+                    <a><img src="static/images/icon/logo3.png" alt="logo"></a>
                 </div>
             </div>
             <div class="main-menu">
                 <div class="menu-inner">
                     <nav>
                         <ul class="metismenu" id="menu">
-                            <li>
-                                <a href="javascript:void(0)" aria-expanded="true"><i class="ti-user"></i><span>Perfil</span></a>
-                            </li>
-                            <li >
-                                <a href="javascript:void(0)" aria-expanded="true"><i class="ti-view-list-alt"></i><span>Gestión de Pilotos</span></a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0)" aria-expanded="true"><i class="ti-user"></i><span>Gestión de usuarios</span></a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0)" aria-expanded="true"><i class="ti-view-list-alt"></i><span>Gestión de Vuelos</span></a>
-                            </li>
-                            <li class="active">
-                                <a href="javascript:void(0)" aria-expanded="true"><i class="ti-view-list-alt"></i><span>Gestión de Comentarios</span></a>
-                            </li>
+                            <li><a href="../perfiladmin" aria-expanded="true"><i class="ti-user"></i><span>Perfil</span></a></li>
+                            <li> <a href="../GestionPilotos" aria-expanded="true"><i class="ti-view-list-alt"></i><span>Gestión de Pilotos</span></a></li>
+                            <li><a href="../GestionUsuarios" aria-expanded="true"><i class="ti-user"></i><span>Gestión de usuarios</span></a></li>
+                            <li><a href="../GestionVuelos" aria-expanded="true"><i class="ti-view-list-alt"></i><span>Gestión de Vuelos</span></a></li>
+                            <li><a href="../GestionComentarios" aria-expanded="true"><i class="ti-view-list-alt"></i><span>Gestión de Comentarios</span></a></li>
                         </ul>
                     </nav>
                 </div>
@@ -97,11 +84,11 @@
 
                     <div class="col-sm-6 clearfix">
                         <div class="user-profile pull-right">
-                            <img class="avatar user-thumb" src="assets/images/icon/descarga.jpg" alt="avatar">
+                            <img class="avatar user-thumb" src="static/images/icon/descarga.jpg" alt="avatar">
                             <h4 class="user-name dropdown-toggle" data-toggle="dropdown">Alejandra Negrete<i class="fa fa-angle-down"></i></h4>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="perfilsuperadmi.html">Perfil</a>
-                                <a class="dropdown-item" href="Login.html">Cerrar sesión</a>
+                                <a class="dropdown-item" href="../perfiladmin">Perfil</a>
+                                <a class="dropdown-item" href="../">Cerrar sesión</a>
                             </div>
                         </div>
                     </div>
@@ -113,7 +100,7 @@
                     <div class="col-sm-12">
                         <div class="breadcrumbs-area clearfix">
                             <ul class="breadcrumbs pull-left">
-                                <li><a href="perfilsuperadmi.html">P L A V U E</a></li>
+                                <li><a href="../perfiladmin">P L A V U E</a></li>
                                 <li><span>Gestión de Comentarios</span></li>
                             </ul>
                         </div>
@@ -186,33 +173,21 @@
         <!-- footer area end-->
     </div>
     <!-- jquery latest version -->
-    <script src="assets/js/vendor/jquery-2.2.4.min.js"></script>
+    <script src="{{ url_for('static', filename='js/vendor/jquery-2.2.4.min.js') }}"></script>
     <!-- bootstrap 4 js -->
-    <script src="assets/js/popper.min.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
-    <script src="assets/js/owl.carousel.min.js"></script>
-    <script src="assets/js/metisMenu.min.js"></script>
-    <script src="assets/js/jquery.slimscroll.min.js"></script>
-    <script src="assets/js/jquery.slicknav.min.js"></script>
-    <script src="assets/js/nanoscroller.js"></script>
-
+    <script src=" {{ url_for('static', filename='js/popper.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script> 
+    <script src="{{ url_for('static', filename='js/owl.carousel.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/metisMenu.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.slimscroll.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.slicknav.min.js') }}"></script>
     <!-- Start datatable js -->
-    <script src="assets/js/tables/jquery.dataTables.js"></script>
-    <script src="assets/js/tables/jquery.dataTables.min.js"></script>
-    <script src="assets/js/tables/dataTables.responsive.min.js"></script>
-    <script src="assets/js/tables/responsive.bootstrap.min.js"></script>
-
-
-    <!-- Examples -->
-    <script src="assets/js/tables/examples.datatables.row.with.details.js"></script>
-    <script src="assets/js/tables/examples.datatables.tabletools.js"></script>
-
-    <!-- select2 js -->
-    <script src="assets/js/vendor/select2.js"></script>
-
-    <!-- Theme Base, Components and Settings -->
-	<script src="assets/js/theme.js"></script>
-
+    <script src="{{ url_for('static', filename='js/tables/jquery.dataTables.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/tables/jquery.dataTables.min.js') }}"></script> 
+    <script src="{{ url_for('static', filename='js/tables/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/tables/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/tables/responsive.bootstrap.min.js') }}"></script>
+    
     <!-- start chart js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
     <!-- start highcharts js -->
@@ -224,13 +199,13 @@
         ZC.LICENSE = ["569d52cefae586f634c54f86dc99e6a9", "ee6b7db5b51705a13dc2339db3edaf6d"];
     </script>
     <!-- all line chart activation -->
-    <script src="assets/js/line-chart.js"></script>
+    <script src="{{ url_for('static', filename='js/line-chart.js') }}"></script>
     <!-- all pie chart -->
-    <script src="assets/js/pie-chart.js"></script>
+    <script src="{{ url_for('static', filename='js/pie-chart.js') }}"></script>
     <!-- others plugins -->
-    <script src="assets/js/plugins.js"></script>
-    <script src="assets/js/scripts.js"></script>
-
+    <script src=" {{ url_for('static', filename='js/plugins.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+    
     </div>
     </div>
 </body>
