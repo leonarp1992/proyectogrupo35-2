@@ -55,11 +55,20 @@
                 <div class="menu-inner">
                     <nav>
                         <ul class="metismenu" id="menu">
-                            <li class="active">
+                            <li >
                                 <a href="javascript:void(0)" aria-expanded="true"><i class="ti-user"></i><span>Perfil</span></a>
                             </li>
+                            <li class="active">
+                                <a href="javascript:void(0)" aria-expanded="true"><i class="ti-view-list-alt"></i><span>Gestión de Pilotos</span></a>
+                            </li>
                             <li>
-                                <a href="javascript:void(0)" aria-expanded="true"><i class="ti-view-list-alt"></i><span>Historial de Vuelos</span></a>
+                                <a href="javascript:void(0)" aria-expanded="true"><i class="ti-user"></i><span>Gestión de usuarios</span></a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)" aria-expanded="true"><i class="ti-view-list-alt"></i><span>Gestión de Vuelos</span></a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)" aria-expanded="true"><i class="ti-view-list-alt"></i><span>Gestión de Comentarios</span></a>
                             </li>
                         </ul>
                     </nav>
@@ -99,8 +108,9 @@
                     <div class="col-sm-12">
                         <div class="breadcrumbs-area clearfix">
                             <ul class="breadcrumbs pull-left">
-                                <li><a href="index.html">P L A V U E</a></li>
-                                <li><span>Perfil</span></li>
+                                <li><a href="perfilsuperadmi.html">P L A V U E</a></li>
+                                <li><a href="GestionPilotos.html">Gestión de Pilotos</a></li>
+                                <li><span>Editar Piloto</span></li>
                             </ul>
                         </div>
                     </div>
@@ -110,36 +120,25 @@
             <!-- page title area end -->
             <div class="main-content-inner">
                 <div class="row">
-                    <div class="col-md-6 col-lg-2 mt-4"><!-- foto de usuario -->
-                        <div class="panel-body">
-                            <div class="thumb-info mb-md">
-                                <img src="assets/images/icon/descarga.jpg" class="rounded img-responsive" alt="Foto del usuario">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-12 col-lg-10 mt-4"><!-- Tab para formularios -->
+                    <div class="col-md-12 mt-4"><!-- Tab para formularios -->
                         <div class="card">
                             <div class="card-body">
                                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                                     <li class="nav-item">
-                                        <a class="nav-link active" id="perfil-tab" data-toggle="tab" href="#perfil" role="tab" aria-controls="perfil" aria-selected="true">Perfil</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" id="contraseña-tab" data-toggle="tab" href="#contraseña" role="tab" aria-controls="contraseña" aria-selected="false">Cambiar Contraseña</a>
+                                        <a class="nav-link active" id="perfil-tab" data-toggle="tab" href="#perfil" role="tab" aria-controls="perfil" aria-selected="true">Editar Piloto</a>
                                     </li>
                                 </ul>
                                 <div class="tab-content mt-3" id="myTabContent">
                                     <div class="tab-pane fade show active" id="perfil" role="tabpanel" aria-labelledby="perfil-tab">
-                                        <h3 class="header-title" align="center">Información Personal</h3>
+                                        <h3 class="header-title" align="center">Información del Piloto</h3>
                                         <br>
-
                                         <form class="needs-validation" name="form_perfil" action="/actualizarperfil" id="form_perfil" enctype="multipart/form-data" method="POST" onsubmit="return validarperfil()">
 
                                             <div class="form-row">
                                                 <div class="col-lg-3 col-md-6">
                                                     <br>
                                                     <label for="txtdocumento">Id Usuario / Documento <span style="color: red;">*</span></label>
-                                                    <input type="text" class="form-control form-control-sm" name="txtdocumento" id="txtdocumento" value="" required>
+                                                    <input type="text" class="form-control form-control-sm" name="txtdocumento" id="txtdocumento" value="" disabled>
                                                 </div>
                                                 <div class="col-lg-3 col-md-6">
                                                     <br>
@@ -157,7 +156,7 @@
                                                 <div class="col-lg-3 col-md-6">
                                                     <br>
                                                     <label for="listperfil">Perfil <span style="color: red;">*</span></label>
-                                                    <select data-plugin-selectTwo class="form-control form-control-sm" name="listperfil" id="listperfil" disabled>
+                                                    <select data-plugin-selectTwo class="form-control form-control-sm" name="listperfil" id="listperfil">
                                                         <option value="1" >Superadministrador</option>
                                                         <option value="2" selected="selected">Piloto</option>
                                                         <option value="3">Usuario</option>
@@ -492,70 +491,11 @@
                                                         <option value="999">Invalido</option>
                                                     </select>
                                                 </div>
-                                                <div class="col-md-6">
-                                                    <br>
-                                                    <label for="txtfoto">Foto</label><br>
-                                                    <img class="img-thumbnail" width="100" src="assets/images/icon/descarga.jpg">
-                                                    <input type="file" class="form-control form-control-sm" name="txtfoto"id="txtfoto" value="">
-                                                </div>
-                                            </div>
-
-                                            <hr>
-
-                                            <p>Ingrese los datos de un familiar en caso de emergencia:</p>
-
-                                            <div class="form-row">
-                                                <div class="col-md-4">
-                                                    <br>
-                                                    <label for="txtnombres">Nombres <span style="color: red;">*</span></label>
-                                                    <input type="text" class="form-control form-control-sm" name="txtnombres"id="txtnombres" value="" required>
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <br>
-                                                    <label for="txtapellidos">Apellidos <span style="color: red;">*</span></label>
-                                                    <input type="text" class="form-control form-control-sm" name="txtapellidos"id="txtapellidos" value="" required>
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <br>
-                                                    <label for="txtcelularcontacto">Celular <span style="color: red;">*</span></label>
-                                                    <input type="text" class="form-control form-control-sm" name="txtcelularcontacto"id="txtcelularcontacto" value="" maxlength="7" required>
-                                                </div>
                                             </div>
                                             <br>
-                                            <div class="btncrearvuelo">
-                                                <div class="form-row">
-                                                    <div class="col-md-auto">
-                                                        <button class="btn btn-primary" type="submit" style="float: left">Guardar</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                    <div class="tab-pane fade" id="contraseña" role="tabpanel" aria-labelledby="contraseña-tab">
-                                        <h3 class="header-title" align="center">Actualizar Contraseña</h3>
-                                        <br>
-
-                                        <form class="needs-validation" name="form_perfil" action="/actualizarperfil" id="form_perfil" enctype="multipart/form-data" method="POST" onsubmit="return validarperfil()">
-
-                                            <div class="form-row">
-                                                <div class="col-md-3">
-                                                    <br>
-                                                    <label for="txtcontraseña1">Nueva Contraseña <span style="color: red;">*</span></label>
-                                                    <input type="password" class="form-control form-control-sm" name="txtcontraseña1" id="txtcontraseña1" maxlength="13" required>
-                                                </div>
-                                                <div class="col-md-3">
-                                                    <br>
-                                                    <label for="txtcontraseña2">Repita Nueva Contraseña <span style="color: red;">*</span></label>
-                                                    <input type="password" class="form-control form-control-sm" name="txtcontraseña2" id="txtcontraseña2" maxlength="13" required>
-                                                </div>
-                                            </div>
-                                            <br>
-                                            <div class="form-row">
-                                                <div class="col-md-auto">
-                                                    <button class="btn btn-primary" type="submit" style="float: left">Guardar</button>
-                                                </div>
-                                                <div class="col-md-auto">
-                                                    <button class="btn btn-default" type="reset" style="float: left">Limpiar</button>
+                                            <div class="btncentrado" >
+                                                <div class="submit-btn-area">
+                                                    <button id="form_guardar" type="submit">Guardar<i class="ti-arrow-right"></i></button>                                    
                                                 </div>
                                             </div>
                                         </form>

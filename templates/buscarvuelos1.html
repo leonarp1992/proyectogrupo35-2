@@ -1,0 +1,330 @@
+{% extends 'basebuscarvuelo.html' %}
+
+{% block body %}
+
+
+
+    
+    <div id="preloader">
+        <div class="loader"></div>
+    </div>
+    <!-- extremo del área del precargador -->
+    <!-- inicio del área del contenedor de página -->
+    <div class="page-container">
+        <!-- Inicio del área del menú de la barra lateral -->
+        <div class="sidebar-menu">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <a href="index.html"><img src="static/images/icon/logo3.png" alt="logo"></a>
+                </div>
+            </div>
+            <div class="main-menu">
+                <div class="menu-inner">
+                    <nav>
+                        <ul class="metismenu" id="menu">
+                            <li>
+                                <a href="javascript:void(0)" aria-expanded="true"><i class="ti-user"></i><span>Perfil</span></a>
+                            </li>
+                            <li class="active">
+                                <a href="javascript:void(0)" aria-expanded="true"><i class="ti-view-list-alt"></i><span>Reserva</span></a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <!-- final del área del menú de la barra lateral -->
+        <!-- inicio del área de contenido principal -->
+        <div class="main-content">
+            <!-- inicio del área de encabezado -->
+            <div class="header-area">
+                <div class="row align-items-center">
+                    <!-- botón de navegación y búsqueda -->
+                    <div class="col-md-6 col-sm-8 clearfix">
+                        <div class="nav-btn pull-left">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 clearfix">
+                        <div class="user-profile pull-right">
+                            <img class="avatar user-thumb" src="static/images/icon/descarga.jpg" alt="avatar">
+                            <h4 class="user-name dropdown-toggle" data-toggle="dropdown">Alejandra Negrete<i class="fa fa-angle-down"></i></h4>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="../perfil">Perfil</a>
+                                <a class="dropdown-item" href="../login">Cerrar sesión</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="page-title-area">
+                <div class="row align-items-center">
+                    <div class="col-sm-12">
+                        <div class="breadcrumbs-area clearfix">
+                            <ul class="breadcrumbs pull-left">
+                                <li><a href="index.html">P L A V U E</a></li>
+                                <li><span>Buscar Vuelos</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- final del área del título de la página -->
+            <div class="main-content-inner">
+                <div class="row">
+                    
+                    <!-- Primary table start -->
+                    <div class="col-12 mt-5">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="col-md-12 col-lg-12 mt-4"><Tab para formularios -->
+                                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                        <li class="nav-item">
+                                            <a class="nav-link active" id="perfil-tab" data-toggle="tab" href="#perfil" role="tab" aria-controls="perfil" aria-selected="true">Vuelos</a>
+                                        </li>
+                                    </ul> 
+                                    <div class="tab-content mt-3" id="myTabContent">
+                                        <div class="tab-pane fade show active" id="perfil" role="tabpanel" aria-labelledby="perfil-tab">
+                                            <form class="needs-validation" name="form_perfil" action="/actualizarperfil" id="form_perfil" enctype="multipart/form-data" method="POST" onsubmit="return validarperfil()">
+                                                <div class="form-row">
+                                                    <div class="col-lg-3 col-md-8">
+                                                        <br>
+                                                        <label for="listtipodocumento">Selecciona tu vuelo <span style="color: red;">*</span></label>
+                                                        <select class="form-control form-control-sm" name="listtipodocumento" id="listtipodocumento">
+                                                            <option value="1" selected="selected">Solo ida</option>
+                                                            <option value="2">Ida y vuelta</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-8" style="margin-left:auto; margin-right:auto;">
+                                                        <br>
+                                                        <label for="listtipodocumento">Origen <span style="color: red;">*</span></label>
+                                                        <select class="form-control form-control-sm" name="listtipodocumento" id="listtipodocumento">
+                                                            <option value="188" selected="selected">Afganistán</option>
+                                                            <option value="355">Alabania</option>
+                                                            <option value="49">Alemania</option>
+                                                            <option value="376">Andorra</option>
+                                                            <option value="244">Angola</option>
+                                                            <option value="6">Anguilla</option>
+                                                        </select>
+                                                        
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-8" style="margin-left:auto; margin-right:auto;">
+                                                        <br>
+                                                        <label for="listtipodocumento">Destino <span style="color: red;">*</span></label>
+                                                        <select class="form-control form-control-sm" name="listtipodocumento" id="listtipodocumento">
+                                                            <option value="188" selected="selected">Afganistán</option>
+                                                            <option value="355">Alabania</option>
+                                                            <option value="49">Alemania</option>
+                                                            <option value="376">Andorra</option>
+                                                            <option value="244">Angola</option>
+                                                            <option value="6">Anguilla</option>
+                                                        </select>
+                                                    </div>
+                                                    
+                                                    
+                                                </div>
+                                                <hr>
+                                                <div class="form-row">
+                                                    <div class="col-lg-3 col-md-8">
+                                                        <br>
+                                                        <label for="listtipodocumento">Pasajeros <span style="color: red;">*</span></label><br>
+                                                        <input type="checkbox" name="pasajeros" id="pasajeros"> Adultos
+                                                        <input type="number" name="numpasajeros" id="numpasajeros" step="1" min="0" max="100" class="sunny"><br><br>
+                                                         
+                                                        <input type="checkbox" name="pasajeros" id="pasajeros"> Niños
+                                                        <input type="number" name="numpasajeros" id="numpasajeros" step="1" min="0" max="100" class="sunny"><br><br>
+                                                        <input type="checkbox" name="pasajeros" id="pasajeros"> Bebes    
+                                                        <input type="number" name="numpasajeros" id="numpasajeros" step="1" min="0" max="100" class="sunny">
+                                                            
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-8">
+                                                        <br>
+                                                        <label for="listtipodocumento">Fecha de vuelo <span style="color: red;">*</span></label><br>
+                                                        <label for="listtipodocumento">Salida  <input type="date" name="fechasalida" id="fechasalida"><br><br>
+                                                        <label for="listtipodocumento">Vuelta  <input type="date" name="fechavuelta" id="fechavuelta"><br><br>
+                                                            
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <br>
+                                                <hr>
+                                                <div class="form-row"></div>
+                                                    <div class="btncrear" >
+                                                        <div>
+                                                            <button type="button" class="btn btn-rounded btn-primary mb-3">Buscar</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                            </form>
+                                            <hr>
+                                            <br>
+                                            <h4 class="header-title" align="center">Elige tu vuelo</h4>
+                                                <div class="panel-body">
+                                                    <table class="table table-bordered table-striped mb-none" id="datatable-tabletools" data-swf-path="assets/vendor/jquery-datatables/extras/TableTools/swf/copy_csv_xls_pdf.swf">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Hora salida</th>
+                                                                <th>Origen</th>
+                                                                <th>Duracion</th>
+                                                                <th>Hora llegada</th>
+                                                                <th>Destino</th>
+                                                                <th>Linea economica</th>
+                                                                <th>Linea ejecutiva</th>
+                                                                <th>Seleccione</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr class="gradeX">
+                                                                <td>9:00 p.m</td>
+                                                                <td>Cartagena</td>
+                                                                <td>1 h 9 min</td>
+                                                                <td>10:09 p.m</td>
+                                                                <td>Medellin</td>
+                                                                <td>$716.870,oo</td>
+                                                                <td>$1.016.870,oo</td>
+                                                                <td>
+                                                                    <div class="contenedor">
+                                                                        <input type="radio" checked id="customRadio1" name="customRadio" class="">
+                                                                        <label class="custom-control-label" for="customRadio1"></label>
+                                                                    </div>
+                                                                </td>
+                                                                
+                                                            </tr>
+                                                            <tr class="gradeX">
+                                                                <td>9:00 p.m</td>
+                                                                <td>Cartagena</td>
+                                                                <td>1 h 9 min</td>
+                                                                <td>10:09 p.m</td>
+                                                                <td>Medellin</td>
+                                                                <td>$716.870,oo</td>
+                                                                <td>$1.016.870,oo</td>
+                                                                <td>
+                                                                    <div class="contenedor">
+                                                                        <input type="radio" checked id="customRadio2" name="customRadio" class="">
+                                                                        <label class="custom-control-label" for="customRadio2"></label>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr class="gradeX">
+                                                                <td>9:00 p.m</td>
+                                                                <td>Cartagena</td>
+                                                                <td>1 h 9 min</td>
+                                                                <td>10:09 p.m</td>
+                                                                <td>Medellin</td>
+                                                                <td>$716.870,oo</td>
+                                                                <td>$1.016.870,oo</td>
+                                                                <td>
+                                                                    <div class="contenedor">
+                                                                        <input type="radio" checked id="customRadio3" name="customRadio" class="">
+                                                                        <label class="custom-control-label" for="customRadio3"></label>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr class="gradeX">
+                                                                <td>9:00 p.m</td>
+                                                                <td>Cartagena</td>
+                                                                <td>1 h 9 min</td>
+                                                                <td>10:09 p.m</td>
+                                                                <td>Medellin</td>
+                                                                <td>$716.870,oo</td>
+                                                                <td>$1.016.870,oo</td>
+                                                                <td>
+                                                                    <div class="contenedor">
+                                                                        <input type="radio" checked id="customRadio4" name="customRadio" class="">
+                                                                        <label class="custom-control-label" for="customRadio4"></label>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr class="gradeX">
+                                                                <td>9:00 p.m</td>
+                                                                <td>Cartagena</td>
+                                                                <td>1 h 9 min</td>
+                                                                <td>10:09 p.m</td>
+                                                                <td>Medellin</td>
+                                                                <td>$716.870,oo</td>
+                                                                <td>$1.016.870,oo</td>
+                                                                <td>
+                                                                    <div class="contenedor">
+                                                                        <input type="radio" checked id="customRadio6" name="customRadio" class="">
+                                                                        <label class="custom-control-label" for="customRadio16"></label>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                            
+                                                        </tbody>
+                                                    </table>
+                                                    <div class="form-row"></div>
+                                                    <div class="btncrear" >
+                                                        <div>
+                                                            <button type="button" class="btn btn-rounded btn-primary mb-3">Reservar</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Primary table end -->
+                    </div> 
+                </div>
+            </div>
+            <!-- final del área de contenido principal -->
+            <!-- inicio del área de pie de página-->
+            <footer>
+                <div class="footer-area">
+                    <p>© Copyright 2021. MisiónTIC 2022 - AEROPUERTO TRES DE MAYO.</p>
+                </div>
+            </footer>
+            <!-- final del área de pie de página-->
+    </div>
+    <!-- jquery latest version -->
+    <script src="{{ url_for('static', filename='js/vendor/jquery-2.2.4.min.js') }}"></script>
+    <!-- bootstrap 4 js -->
+    <script src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/owl.carousel.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/metisMenu.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.slimscroll.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='jquery.slicknav.min.js') }}"></script>
+
+    <!-- Start datatable js -->
+    <script src="{{ url_for('static', filename='js/tables/jquery.dataTables.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/tables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/tables/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/tables/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/tables/responsive.bootstrap.min.js') }}"></script>
+
+    <!-- select2 js -->
+    <script src="{{ url_for('static', filename='js/vendor/select2.js') }}"></script>
+
+    <!-- start chart js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
+    <!-- start highcharts js -->
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <!-- start zingchart js -->
+    <script src="https://cdn.zingchart.com/zingchart.min.js"></script>
+    <script>
+        zingchart.MODULESDIR = "https://cdn.zingchart.com/modules/";
+        ZC.LICENSE = ["569d52cefae586f634c54f86dc99e6a9", "ee6b7db5b51705a13dc2339db3edaf6d"];
+    </script>
+    <!-- all line chart activation -->
+    <script src="{{ url_for('static', filename='js/line-chart.js') }}"></script>
+    <!-- all pie chart -->
+    <script src="{{ url_for('static', filename='js/pie-chart.js') }}"></script>
+    <!-- others plugins -->
+    <script src="{{ url_for('static', filename='js/plugins.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+
+    </div>
+    </div>
+{% endblock %}
+

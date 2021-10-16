@@ -50,7 +50,7 @@
         <div class="sidebar-menu">
             <div class="sidebar-header">
                 <div class="logo">
-                    <a href="index.html"><img src="{{ url_for('static', filename='images/icon/logo3.png') }}" alt="logo"></a>
+                    <a href="index.html"><img src="assets/images/icon/logo3.png" alt="logo"></a>
                 </div>
             </div>
             <div class="main-menu">
@@ -68,6 +68,9 @@
                             </li>
                             <li class="active">
                                 <a href="javascript:void(0)" aria-expanded="true"><i class="ti-view-list-alt"></i><span>Gestión de Vuelos</span></a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)" aria-expanded="true"><i class="ti-view-list-alt"></i><span>Gestión de Comentarios</span></a>
                             </li>
                         </ul>
                     </nav>
@@ -91,29 +94,12 @@
 
                     <div class="col-sm-6 clearfix">
                         <div class="user-profile pull-right">
-                            <img class="avatar user-thumb" src="{{ url_for('static', filename='images/icon/descarga.jpg') }}" alt="avatar">
+                            <img class="avatar user-thumb" src="assets/images/icon/descarga.jpg" alt="avatar">
                             <h4 class="user-name dropdown-toggle" data-toggle="dropdown">Alejandra Negrete<i class="fa fa-angle-down"></i></h4>
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" href="#">Perfil</a>
                                 <a class="dropdown-item" href="Login.html">Cerrar sesión</a>
-                                <!-- <a href="#"><i class="ti-pencil"></i></a>
-                                <a href="#"><i class="ti-trash"></i></a> -->
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            
-            <div class="page-title-area">
-                <div class="row align-items-center">
-                    <div class="col-sm-12">
-                        <div class="breadcrumbs-area clearfix">
-                            <ul class="breadcrumbs pull-left">
-                                <li><a href="index.html">P L A V U E</a></li>
-                                <li><a href="perfilsuperadmi.html">Gestión de vuelos</a></li>
-                                <li><a href="CrearVuelos.html">Crear Vuelos</a></li>
-                            </ul>
                         </div>
                     </div>
                 </div>
@@ -252,8 +238,8 @@
                                                 </div>
                                                 <div class="col-lg-3 col-md-6">
                                                     <br>
-                                                    <label for="ciudest">Estado del vuelo <span style="color: red;">*</span></label>
-                                                    <select data-plugin-selectTwo class="form-control form-control-sm" name="ciudest" id="ciudest">
+                                                    <label for="estadoVuelo">Estado del vuelo <span style="color: red;">*</span></label>
+                                                    <select data-plugin-selectTwo class="form-control form-control-sm" name="estadoVuelo" id="estadoVuelo">
                                                         <option value="">-</option>
                                                         <option value="A tiempo">A tiempo</option>
                                                         <option value="Retrasado">Retrasado</option>
@@ -262,11 +248,15 @@
                                                     </select> 
                                                 </div>
                                             </div>
+                                        </div>
+
                                             <br>
                                             <br>
-                                            <div class="btncentrado">
-                                                <button type="button" class="btn btn-rounded btn-primary mb-3">Crear vuelo</button>
-                                             </div>
+                                            <div class="btncentrado" >
+                                                <div class="submit-btn-area">
+                                                    <button id="form_cearvuelo" type="submit">Crear Vuelo <i class="ti-arrow-right"></i></button>                                    
+                                                </div>
+                                            </div>
                                         </form>
                                     </div>
                                 </div>
