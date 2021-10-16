@@ -7,9 +7,40 @@ app = Flask(__name__)
 app.secret_key = os.urandom(24)
 
 
+@app.route("/")
+def inicio():
+    return render_template("Login.html")
+
 @app.route("/", methods=["GET", "POST"])
 def login():
-    return render_template("Login.html")
+    try:
+        if request.method == "POST":
+            user1 = request.form['correo']
+            pass1 = request.form['password']
+            error = None
+            if not user1:
+                error = "Usuario Vacío"
+                flash(error)
+                return render_template("Login.html")
+            if not pass1:
+                error = "Contraseña Vacío"
+                flash(error)
+                return render_template("Login.html")
+            if (user1 == "Persona@gmail.com" and pass1 == "Persona123"):
+                return redirect("perfiladmin")
+            if (user1 == "Persona2@gmail.com" and pass1 == "Persona123"):
+                return redirect("perfilpiloto")
+            if (user1 == "Persona3@gmail.com" and pass1 == "Persona123"):
+                return redirect("perfilusuario")
+            else:
+                error = "Usuario o contraseña inválidos"
+                flash(error)
+                return render_template("Login.html")
+        else:
+            return render_template("Login.html")
+    except:
+        return render_template("Login.html")
+
 
 @app.route("/registro")
 def registro():
@@ -21,7 +52,7 @@ def recuperar_contraseña():
 
 @app.route("/perfiladmin", methods=["GET", "POST"])
 def perfil_admin():
-    return render_template('perfiladmin.html')
+    return render_template("perfiladmin.html")
 
 @app.route("/GestionPilotos", methods=["GET"])
 def Gestion_pilotos():
