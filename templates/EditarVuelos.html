@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/metisMenu.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/owl.carousel.min.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/slicknav.min.css') }}">
+
     <!-- amchart css -->
     <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
     <!-- Start datatable css -->
@@ -44,11 +45,6 @@
     </div>
     <!-- preloader area end -->
     <!-- page container area start -->
-    <div id="preloader">
-        <div class="loader"></div>
-    </div>
-    <!-- preloader area end -->
-    <!-- page container area start -->
     <div class="page-container">
         <!-- sidebar menu area start -->
         <div class="sidebar-menu">
@@ -61,7 +57,7 @@
                 <div class="menu-inner">
                     <nav>
                         <ul class="metismenu" id="menu">
-                            <li><a href="../perfiladmin" aria-expanded="true"><i class="ti-user"></i><span>Perfil</span></a></li>
+                            <<li><a href="../perfiladmin" aria-expanded="true"><i class="ti-user"></i><span>Perfil</span></a></li>
                             <li><a href="../GestionPilotos" aria-expanded="true"><i class="ti-view-list-alt"></i><span>Gestión de Pilotos</span></a></li>
                             <li><a href="../GestionUsuarios" aria-expanded="true"><i class="ti-user"></i><span>Gestión de usuarios</span></a></li>
                             <li class="active"><a href="../GestionVuelos" aria-expanded="true"><i class="ti-view-list-alt"></i><span>Gestión de Vuelos</span></a></li>
@@ -91,8 +87,8 @@
                             <img class="avatar user-thumb" src="static/images/icon/descarga.jpg" alt="avatar">
                             <h4 class="user-name dropdown-toggle" data-toggle="dropdown">Alejandra Negrete<i class="fa fa-angle-down"></i></h4>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="../perfiladmin">Perfil</a>
-                                <a class="dropdown-item" href="../">Cerrar sesión</a>
+                                <a class="dropdown-item" href="#">Perfil</a>
+                                <a class="dropdown-item" href="Login.html">Cerrar sesión</a>
                             </div>
                         </div>
                     </div>
@@ -105,12 +101,13 @@
                             <ul class="breadcrumbs pull-left">
                                 <li><a href="../perfiladmin">P L A V U E</a></li>
                                 <li><a href="../GestionVuelos">Gestión de vuelos</a></li>
-                                <li><span>Editar vuelos</span></li>
+                                <li><span>Editar vuelo</span></li>
                             </ul>
                         </div>
                     </div>
                 </div>
             </div>
+
 
             <!-- page title area end -->
             <div class="main-content-inner">
@@ -262,6 +259,7 @@
                                                     <button id="form_editvuelo" type="submit">Editar Vuelo <i class="ti-arrow-right"></i></button>                                    
                                                 </div>
                                             </div>
+                                        
                                         </form>
                                     </div>
                                 </div>
@@ -280,7 +278,6 @@
         </footer>
         <!-- footer area end-->
     </div>
-
     <script src="{{ url_for('static', filename='js/vendor/jquery-2.2.4.min.js') }}"></script>
     <!-- bootstrap 4 js -->
     <script src=" {{ url_for('static', filename='js/popper.min.js') }}"></script>
