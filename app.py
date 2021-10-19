@@ -2,6 +2,8 @@ from flask import Flask, render_template, request, flash, redirect, url_for
 import utils
 import yagmail
 import os
+import sqlite3
+from sqlite3 import Error
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
@@ -12,39 +14,26 @@ def inicio():
 
 @app.route("/", methods=["GET", "POST"])
 def login():
-    try:
-        if request.method == "POST":
-            user1 = request.form['correo']
-            pass1 = request.form['password']
-            error = None
-            if not user1:
-                error = "Usuario Vacío"
-                flash(error)
-                return render_template("Login.html")
-            if not pass1:
-                error = "Contraseña Vacío"
-                flash(error)
-                return render_template("Login.html")
-            if (user1 == "Persona@gmail.com" and pass1 == "Persona123"):
-                return redirect("perfiladmin")
-            if (user1 == "Persona2@gmail.com" and pass1 == "Persona123"):
-                return redirect("perfilpiloto")
-            if (user1 == "Persona3@gmail.com" and pass1 == "Persona123"):
-                return redirect("perfilusuario")
-            else:
-                error = "Usuario o contraseña inválidos"
-                flash(error)
-                return render_template("Login.html")
-        else:
-            return render_template("Login.html")
-    except:
-        return render_template("Login.html")
+    return render_template("Login.html")
 
-
-@app.route("/registro")
+@app.route("/registro", methods=["GET", "POST"])
 def registro():
-    return render_template("registro.html", methods=["GET", "POST"])
-
+    if request.method == 'POST':
+        nombre = request.form["Nombre"]
+        correo = request.form["correo"]
+        password = request.form["password"]
+        try:
+            with sqlite3.connect('Plavue.db') as con: #establecer objeto conexion a base de datos
+                cur = con.cursor() #manipular la conexión a la bd
+                cur.execute('INSERT INTO Usuarios (contraseña, Nombre, correo) VALUES (?,?,?)', (password, nombre,correo))
+                con.commit() #confirmar la transacción
+                return redirect(login)
+        except Error as er:
+            print('SQLite error: %s' % (' '.join(er.args)))
+            print('SQLite traceback: ')
+            return "No se pudo guardar"
+    return render_template("registro.html")
+   
 @app.route("/recuperarcontraseña", methods=["GET", "POST"])
 def recuperar_contraseña():
     return render_template('recuperarcontraseña.html')

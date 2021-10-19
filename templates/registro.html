@@ -39,7 +39,7 @@
             <div class="row no-gutters">
                 <div class="col-xl-4 offset-xl-8 col-lg-6 offset-lg-6">
                     <div class="login-box-s2 ptb--100">
-                        <form action="{{url_for('registro')}}" method="POST" name="formRegistro" onSubmit="validar_formulario()" >
+                        <form action="{{url_for('registro')}}" method="POST" name="formRegistro" >
                             <div class="login-form-head">
                                 <h4>P L A V U E</h4>
                                 <h3>Formulario de Registro</h3>
@@ -47,19 +47,19 @@
                             <div class="login-form-body">
                                 <div class="form-gp">
                                     <label for="Nombre">Nombre Completo</label>
-                                    <input type="text" id="Nombre">
+                                    <input type="text" id="Nombre" name="Nombre">
                                     <i class="ti-user"></i>
                                     <div class="text-danger"></div>
                                 </div>
                                 <div class="form-gp">
                                     <label for="correo">Correo</label>
-                                    <input type="email" id="correo">
+                                    <input type="email" id="correo" name="correo">
                                     <i class="ti-email"></i>
                                     <div class="text-danger"></div>
                                 </div>
                                 <div class="form-gp">
                                     <label for="password">Contraseña</label>
-                                    <input type="password" id="password">
+                                    <input type="password" id="password" name="password">
                                     <i class="ti-lock"></i>
                                     <div class="text-danger"></div>
                                 </div>
