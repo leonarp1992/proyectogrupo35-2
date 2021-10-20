@@ -134,7 +134,7 @@
                                         <h3 class="header-title" align="center">Información Personal</h3>
                                         <br>
 
-                                        <form class="needs-validation" name="form_perfil_admin" action="perfiladmin" id="form_perfil_admin" enctype="multipart/form-data" method="POST" onsubmit="return validarperfil()">
+                                        <form class="needs-validation" name="form_perfil_admin" action="{{url_for('perfil_admin')}}" id="form_perfil_admin" enctype="multipart/form-data" method="POST" >
 
                                             <div class="form-row">
                                                 <div class="col-lg-3 col-md-6">
@@ -159,7 +159,7 @@
                                                     <br>
                                                     <label for="listperfil">Perfil <span style="color: red;">*</span></label>
                                                     <select data-plugin-selectTwo class="form-control form-control-sm" name="listperfil" id="listperfil">
-                                                        <option value="1" selected="selected">Superadministrador</option>
+                                                        <option value="1" selected="selected">Aministrador</option>
                                                         <option value="2">Piloto</option>
                                                         <option value="3">Usuario</option>
                                                     </select>
