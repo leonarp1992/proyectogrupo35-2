@@ -133,14 +133,14 @@
                                     <div class="tab-pane fade show active" id="perfil" role="tabpanel" aria-labelledby="perfil-tab">
                                         <h3 class="header-title" align="center">Información Personal</h3>
                                         <br>
-
+                                        {%for r in row%}
                                         <form class="needs-validation" name="form_perfil_admin" action="{{url_for('perfil_admin')}}" id="form_perfil_admin" enctype="multipart/form-data" method="POST" >
-
                                             <div class="form-row">
                                                 <div class="col-lg-3 col-md-6">
+                                                    {%for r in row%}
                                                     <br>
                                                     <label for="txtdocumento">Id Usuario / Documento <span style="color: red;">*</span></label>
-                                                    <input type="text" class="form-control form-control-sm" name="txtdocumento" id="txtdocumento" value="" required>
+                                                    <input type="text" class="form-control form-control-sm" name="txtdocumento" id="txtdocumento" value=""  required>
                                                 </div>
                                                 <div class="col-lg-3 col-md-6">
                                                     <br>

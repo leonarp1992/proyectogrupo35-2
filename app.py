@@ -89,23 +89,6 @@ def recuperar_contraseña():
 
 @app.route("/perfiladmin", methods=["GET", "POST"])
 def perfil_admin():
-    # if request.method == "GET":
-
-     
-    if request.method == 'POST':
-        nombre = request.form["Nombre"]
-        correo = request.form["correo"]
-        password = request.form["password"]
-        try:
-            with sqlite3.connect('Plavue.db') as con: #establecer objeto conexion a base de datos
-                cur = con.cursor() #manipular la conexión a la bd
-                cur.execute('INSERT INTO Usuarios (contraseña, Nombre, correo) VALUES (?,?,?)', (password, nombre,correo))
-                con.commit() #confirmar la transacción
-                return redirect(login)
-        except Error as er:
-            print('SQLite error: %s' % (' '.join(er.args)))
-            print('SQLite traceback: ')
-            return "No se pudo guardar"
     return render_template("perfiladmin.html")
 
 @app.route("/GestionPilotos", methods=["GET"])
