@@ -1,0 +1,62 @@
+elif request.method == "POST":
+                 correo = request.form["correo"]
+                 password = generate_password_hash(request.form["password"])
+                 tipoPerfil = "Piloto"
+try:
+                    with sqlite3.connect('Plavue.db') as con: 
+                     cur = con.cursor()
+                     cur.execute("SELECT * FROM Usuarios WHERE correo=? AND contraseña =? AND tipoPerfil=?",[correo,password, tipoPerfil])
+                     if cur.fetchone():
+                         return render_template("perfilpiloto.html")
+                     elif request.method == "POST":
+                        correo = request.form["correo"]
+                        password = generate_password_hash(request.form["password"])
+                        try:
+                            with sqlite3.connect('Plavue.db') as con: 
+                             cur = con.cursor()
+                             cur.execute("SELECT * FROM Usuarios WHERE correo=? AND contraseña =?",[correo,password])
+                             if cur.fetchone():
+                                return render_template("perfilusuario.html")
+                             else:
+                                return "Usuario no permitido"
+                        except Error as er:
+                            print('SQLite error: %s' % (' '.join(er.args)))
+                            print('SQLite traceback: ')
+                 except Error as er:
+                    print('SQLite error: %s' % (' '.join(er.args)))
+                    print('SQLite traceback: ')
+
+gaby@hotmail.com = 12345
+
+elif request.method == "POST":
+correo = request.form["correo"]
+password = request.form["password"]
+tipoPerfilpil = "Piloto"
+try:
+    with sqlite3.connect('Plavue.db') as con: 
+     cur = con.cursor()
+     consulta = cur.execute("SELECT contraseña FROM Usuarios WHERE correo=? AND tipoPerfil=?",[correo, tipoPerfilpil]).fetchone()
+     if consulta != None:
+        if check_password_hash(consulta[0], password):
+            session['usuario'] = correo
+            return render_template("perfilpiloto.html")
+     elif request.method == "POST":
+        correo = request.form["correo"]
+        password = request.form["password"]
+        tipoPerfilus = ""
+        try:
+            with sqlite3.connect('Plavue.db') as con: 
+             cur = con.cursor()
+             consulta = cur.execute("SELECT contraseña FROM Usuarios WHERE correo=? AND tipoPerfil=?",[correo, tipoPerfilus]).fetchone()
+             if consulta != None:
+                 if check_password_hash(consulta[0], password):
+                     session['usuario'] = correo
+                            return render_template("perfilusuario.html") 
+                 else:
+                       return "Usuario o contraseña inválidos"
+        except Error as er:
+                print('SQLite error: %s' % (' '.join(er.args)))
+                print('SQLite traceback: ')  
+except Error as er:
+   print('SQLite error: %s' % (' '.join(er.args)))
+   print('SQLite traceback: ')

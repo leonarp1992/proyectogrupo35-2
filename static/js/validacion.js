@@ -42,3 +42,4 @@ function validarform(){
       alert("Usuario Validado correctamente");
   }
 }
+

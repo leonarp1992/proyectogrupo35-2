@@ -1,9 +1,12 @@
-from flask import Flask, render_template, request, flash, redirect, url_for
+from sqlite3.dbapi2 import Row
+from flask import Flask, render_template, request, flash, redirect, url_for, session
+from werkzeug.utils import escape
 import utils
 import yagmail
 import os
 import sqlite3
 from sqlite3 import Error
+from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
 
 app = Flask(__name__)
@@ -19,62 +22,57 @@ def login():
         return render_template("Login.html")
     
     if request.method == "POST":
-        correo = request.form["correo"]
-        password = request.form["password"]
-        tipoPerfil = "Administrador"
+        correo = escape(request.form["correo"])
+        password = escape(request.form["password"])
+        tipoPerfiladmin = 1
         try:
             with sqlite3.connect('Plavue.db') as con: 
              cur = con.cursor()
-             cur.execute("SELECT * FROM Usuarios WHERE correo=? AND contraseña =? AND tipoPerfil=?",[correo,password, tipoPerfil])
-             if cur.fetchone():
-                 return render_template("perfiladmin.html")
+             consulta = cur.execute("SELECT contraseña FROM Usuarios WHERE correo=? AND  tipoPerfil=?",[correo, tipoPerfiladmin]).fetchone()
+             if consulta != None:
+                 if check_password_hash(consulta[0], password):
+                     session['usuario'] = correo
+                     return redirect("/perfiladmin")
              elif request.method == "POST":
-                 correo = request.form["correo"]
-                 password = request.form["password"]
-                 tipoPerfil = "Piloto"
+                 tipoPerfilpil = 2
                  try:
-                    with sqlite3.connect('Plavue.db') as con: 
-                     cur = con.cursor()
-                     cur.execute("SELECT * FROM Usuarios WHERE correo=? AND contraseña =? AND tipoPerfil=?",[correo,password, tipoPerfil])
-                     if cur.fetchone():
-                         return render_template("perfilpiloto.html")
-                     elif request.method == "POST":
-                        correo = request.form["correo"]
-                        password = request.form["password"]
-                        try:
-                            with sqlite3.connect('Plavue.db') as con: 
-                             cur = con.cursor()
-                             cur.execute("SELECT * FROM Usuarios WHERE correo=? AND contraseña =?",[correo,password])
-                             if cur.fetchone():
-                                return render_template("perfilusuario.html")
-                             else:
-                                return "Usuario no permitido"
-                        except Error as er:
-                            print('SQLite error: %s' % (' '.join(er.args)))
-                            print('SQLite traceback: ')
+                     with sqlite3.connect('Plavue.db') as con: 
+                         cur = con.cursor()
+                         consulta = cur.execute("SELECT contraseña FROM Usuarios WHERE correo=? AND  tipoPerfil=?",[correo, tipoPerfilpil]).fetchone()
+                         if consulta != None:
+                             if check_password_hash(consulta[0], password):
+                                 session['usuario'] = correo
+                                 return redirect("/perfilpiloto")
+                         elif request.method == "POST":
+                             try:
+                                 with sqlite3.connect('Plavue.db') as con: 
+                                     cur = con.cursor()
+                                     consulta = cur.execute("SELECT contraseña FROM Usuarios WHERE correo=?",[correo]).fetchone()
+                                     if consulta != None:
+                                         if check_password_hash(consulta[0], password):
+                                             session['usuario'] = correo
+                                             return redirect("/perfilusuario")
+                             except Error as er:
+                                     print('SQLite error: %s' % (' '.join(er.args)))
+                                     print('SQLite traceback: ')
                  except Error as er:
-                    print('SQLite error: %s' % (' '.join(er.args)))
-                    print('SQLite traceback: ')
+                     print('SQLite error: %s' % (' '.join(er.args)))
+                     print('SQLite traceback: ')
         except Error as er:
             print('SQLite error: %s' % (' '.join(er.args)))
-            print('SQLite traceback: ')
+            print('SQLite traceback: ')  
     return render_template("Login.html")
 
 @app.route("/registro", methods=["GET", "POST"])
 def registro():
-    now = datetime.now()
-    id = now.strftime("%Y%m%d%H%M%S")
-    print(id)
     if request.method == 'POST':
-        now = datetime.now()
-        id = now.strftime("%Y%m%d%H%M%S")
         nombre = request.form["Nombre"]
         correo = request.form["correo"]
-        password = request.form["password"]        
+        password =  generate_password_hash(request.form["password"])     
         try:
             with sqlite3.connect('Plavue.db') as con: #establecer objeto conexion a base de datos
                 cur = con.cursor() #manipular la conexión a la bd
-                cur.execute('INSERT INTO Usuarios (idUsuario, contraseña, Nombre, correo) VALUES (?,?,?,?)', (id, password, nombre,correo))
+                cur.execute('INSERT INTO Usuarios (contraseña, Nombre, correo) VALUES (?,?,?)', (password, nombre,correo))
                 con.commit() #confirmar la transacción
                 return render_template("Login.html")
         except Error as er:
@@ -89,7 +87,48 @@ def recuperar_contraseña():
 
 @app.route("/perfiladmin", methods=["GET", "POST"])
 def perfil_admin():
-    return render_template("perfiladmin.html")
+
+    if "usuario" in session:
+            try:
+                with sqlite3.connect("Plavue.db") as con:
+                    con.row_factory = sqlite3.Row
+                    cur = con.cursor()
+                    cur.execute("SELECT * FROM Usuarios WHERE correo = ?", [session["usuario"]])
+                    query = cur.fetchone()
+                with sqlite3.connect("Plavue.db") as con1:
+                    con1.row_factory = sqlite3.Row
+                    cur = con1.cursor()
+                    cur.execute("SELECT * FROM tipo_documento")
+                    query1 = cur.fetchall() 
+                with sqlite3.connect("Plavue.db") as con2:
+                    con2.row_factory = sqlite3.Row
+                    cur = con2.cursor()
+                    cur.execute("SELECT * FROM Perfil")
+                    query2 = cur.fetchall()   
+                with sqlite3.connect("Plavue.db") as con3:
+                    con3.row_factory = sqlite3.Row
+                    cur = con3.cursor()
+                    cur.execute("SELECT * FROM Estado")
+                    query3 = cur.fetchall()
+                with sqlite3.connect("Plavue.db") as con4:
+                    con4.row_factory = sqlite3.Row
+                    cur = con4.cursor()
+                    cur.execute("SELECT * FROM Genero")
+                    query4 = cur.fetchall()   
+                with sqlite3.connect("Plavue.db") as con5:
+                    con5.row_factory = sqlite3.Row
+                    cur = con5.cursor()
+                    cur.execute("SELECT * FROM Nacionalidad")
+                    query5 = cur.fetchall()                
+                    if query is None:
+                        return "Usuario no existe!"
+                return render_template("perfiladmin.html", perfil = query, tipodocumento = query1, tipoperfil = query2, estado = query3, sexo = query4, pais = query5 )
+            except Error as er:
+                print('SQLite error: %s' % (' '.join(er.args)))
+                print('SQLite traceback: ')     
+    else:
+        return render_template("Login.html")
+
 
 @app.route("/GestionPilotos", methods=["GET"])
 def Gestion_pilotos():
