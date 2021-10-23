@@ -138,13 +138,12 @@ def perfil_admin():
                 pais = request.form["listnacionalidad"]
                 nombrecon = request.form["txtnombrecon"]
                 celularcon = request.form["txtcelularcon"]
-                correo = request.form["txtcorreo"]
                 # contraseña1 = request.form["txtcontraseña1"]
                 # contraseña2 = request.form["txtcontraseña2"]
                 try:
                     with sqlite3.connect('Plavue.db') as con:  
                         cur = con.cursor() #manipular la conexión a la bd
-                        cur.execute('UPDATE Usuarios SET Documento=?, tipoDocumento=?, tipoPerfil=?, estadoUsuario=?, Nombre=?, fechaNacimiento=?, sexo=?, Celular=?, nacionalidad=?, nombreContacto=?, numeroContacto=? WHERE correo=? ', (documento, tipodocumento, perfil, estado, nombre, fechanacimiento, sexo, celular, pais, nombrecon, celularcon, correo))
+                        cur.execute('UPDATE Usuarios SET Documento=?, tipoDocumento=?, tipoPerfil=?, estadoUsuario=?, Nombre=?, fechaNacimiento=?, sexo=?, Celular=?, nacionalidad=?, nombreContacto=?, numeroContacto=? WHERE correo=? ', (documento, tipodocumento, perfil, estado, nombre, fechanacimiento, sexo, celular, pais, nombrecon, celularcon, session['usuario']))
                         con.commit()
                         return redirect('/perfiladmin')
                 except Error as er:
@@ -155,7 +154,28 @@ def perfil_admin():
 
 @app.route("/GestionPilotos", methods=["GET"])
 def Gestion_pilotos():
-    return render_template('GestionPilotos.html')
+    if "usuario" in session:
+        if request.method == "GET":
+            tipoPerfil = "Piloto"
+            try:
+                with sqlite3.connect("Plavue.db") as con:
+                    con.row_factory = sqlite3.Row
+                    cur = con.cursor()
+                    cur.execute("SELECT * FROM Usuarios WHERE correo = ?", [session["usuario"]])
+                    query = cur.fetchone()
+                with sqlite3.connect("Plavue.db") as con1:
+                    con1.row_factory = sqlite3.Row
+                    cur1 = con1.cursor()
+                    cur1.execute("SELECT * FROM Usuarios WHERE tipoPerfil =? ", [tipoPerfil])
+                    query2 = cur.fetchall()
+                    if query2 is None:
+                        return "Usuario no existe!"
+                return render_template("GestionPilotos.html", perfil = query, tabla = query2)
+            except Error as er:
+                print('SQLite error: %s' % (' '.join(er.args)))
+                print('SQLite traceback: ') 
+        return render_template('GestionPilotos.html')
+    return render_template("Login.html")
 
 @app.route("/EditarPiloto", methods=["GET", "POST"])
 def Editar_pilotos():
@@ -238,13 +258,12 @@ def perfil_piloto():
                 pais = request.form["listnacionalidad"]
                 nombrecon = request.form["txtnombrecon"]
                 celularcon = request.form["txtcelularcon"]
-                correo = request.form["txtcorreo"]
                 # contraseña1 = request.form["txtcontraseña1"]
                 # contraseña2 = request.form["txtcontraseña2"]
                 try:
                     with sqlite3.connect('Plavue.db') as con:  
                         cur = con.cursor() #manipular la conexión a la bd
-                        cur.execute('UPDATE Usuarios SET Documento=?, tipoDocumento=?, tipoPerfil=?, estadoUsuario=?, Nombre=?, fechaNacimiento=?, sexo=?, Celular=?, nacionalidad=?, nombreContacto=?, numeroContacto=? WHERE correo=? ', (documento, tipodocumento, perfil, estado, nombre, fechanacimiento, sexo, celular, pais, nombrecon, celularcon, correo))
+                        cur.execute('UPDATE Usuarios SET Documento=?, tipoDocumento=?, tipoPerfil=?, estadoUsuario=?, Nombre=?, fechaNacimiento=?, sexo=?, Celular=?, nacionalidad=?, nombreContacto=?, numeroContacto=? WHERE correo=? ', (documento, tipodocumento, perfil, estado, nombre, fechanacimiento, sexo, celular, pais, nombrecon, celularcon, session['usuario']))
                         con.commit()
                         return redirect('/perfilpiloto')
                 except Error as er:
@@ -310,13 +329,12 @@ def perfil_usuario():
                 pais = request.form["listnacionalidad"]
                 nombrecon = request.form["txtnombrecon"]
                 celularcon = request.form["txtcelularcon"]
-                correo = request.form["txtcorreo"]
                 # contraseña1 = request.form["txtcontraseña1"]
                 # contraseña2 = request.form["txtcontraseña2"]
                 try:
                     with sqlite3.connect('Plavue.db') as con:  
                         cur = con.cursor() #manipular la conexión a la bd
-                        cur.execute('UPDATE Usuarios SET Documento=?, tipoDocumento=?, tipoPerfil=?, estadoUsuario=?, Nombre=?, fechaNacimiento=?, sexo=?, Celular=?, nacionalidad=?, nombreContacto=?, numeroContacto=? WHERE correo=? ', (documento, tipodocumento, perfil, estado, nombre, fechanacimiento, sexo, celular, pais, nombrecon, celularcon, correo))
+                        cur.execute('UPDATE Usuarios SET Documento=?, tipoDocumento=?, tipoPerfil=?, estadoUsuario=?, Nombre=?, fechaNacimiento=?, sexo=?, Celular=?, nacionalidad=?, nombreContacto=?, numeroContacto=? WHERE correo=? ', (documento, tipodocumento, perfil, estado, nombre, fechanacimiento, sexo, celular, pais, nombrecon, celularcon, session['usuario']))
                         con.commit()
                         return redirect('/perfilusuario')
                 except Error as er:
