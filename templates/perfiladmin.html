@@ -138,7 +138,7 @@
                                                 <div class="col-lg-3 col-md-6">
                                                     <br>
                                                     <label for="txtdocumento">Documento <span style="color: red;">*</span></label>
-                                                    <input type="text" class="form-control form-control-sm" name="txtdocumento" id="txtdocumento" value="{{perfil[0]}}" disabled>
+                                                    <input type="text" class="form-control form-control-sm" name="txtdocumento" id="txtdocumento" value="{{perfil[0]}}" >
                                                 </div>
                                                 <div class="col-lg-3 col-md-6">
                                                     <br>
@@ -185,12 +185,12 @@
                                                 <div class="col-md-6">
                                                     <br>
                                                     <label for="txtprimernombre">Nombre completo<span style="color: red;">*</span></label>
-                                                    <input type="text" class="form-control form-control-sm" name="txtprimernombre" id="txtprimernombre" value="{{perfil[5]}}" required>
+                                                    <input type="text" class="form-control form-control-sm" name="txtnombre" id="txtnombre" value="{{perfil[5]}}" required>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <br>
                                                     <label for="txtcorreo">Correo <span style="color: red;">*</span></label>
-                                                    <input type="email" class="form-control form-control-sm" name="txtcorreo"id="txtcorreo" value="{{perfil[6]}}" maxlength="100" required>
+                                                    <input type="email" class="form-control form-control-sm" name="txtcorreo"id="txtcorreo" value="{{perfil[6]}}" maxlength="100" >
                                                 </div>
                                             </div>
 
@@ -216,7 +216,7 @@
                                                 <div class="col-lg-3 col-md-6">
                                                     <br>
                                                     <label for="txtcelular">Celular <span style="color: red;">*</span></label>
-                                                    <input type="text" class="form-control form-control-sm" name="txtcelular"id="txtcelular" value="{{perfil[9]}}" maxlength="10" required>
+                                                    <input type="text" class="form-control form-control-sm" name="txtcelular"id="txtcelular" value="{{perfil[9]}}" maxlength="20" required>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <br>
@@ -252,17 +252,17 @@
                                                 <div class="col-md-6">
                                                     <br>
                                                     <label for="txtnombres">Nombre completo <span style="color: red;">*</span></label>
-                                                    <input type="text" class="form-control form-control-sm" name="txtnombres"id="txtnombres" value="{{perfil[11]}}" required>
+                                                    <input type="text" class="form-control form-control-sm" name="txtnombrecon"id="txtnombrecon" value="{{perfil[11]}}" required>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <br>
                                                     <label for="txtcelularcontacto">Celular <span style="color: red;">*</span></label>
-                                                    <input type="text" class="form-control form-control-sm" name="txtcelularcontacto"id="txtcelularcontacto" value="{{perfil[12]}}" maxlength="7" required>
+                                                    <input type="text" class="form-control form-control-sm" name="txtcelularcon" id="txtcelularcon" value="{{perfil[12]}}" maxlength="20" required>
                                                 </div>
                                             </div>
                                             <br>
-                                            <div class="form-row">
-                                                <div class="col-md-auto">
+                                            <div class="btncentrado">
+                                                <div class="submit-btn-area">
                                                     <button class="btn btn-primary" type="submit" style="float: left">Guardar</button>
                                                 </div>
                                             </div>
@@ -275,24 +275,28 @@
                                         <form class="needs-validation" name="form_perfil" action="/actualizarperfil" id="form_perfil" enctype="multipart/form-data" method="POST" onsubmit="return validarperfil()">
 
                                             <div class="form-row">
-                                                <div class="col-md-3">
+                                                <div class="col-md-6">
                                                     <br>
                                                     <label for="txtcontraseña1">Nueva Contraseña <span style="color: red;">*</span></label>
-                                                    <input type="password" class="form-control form-control-sm" name="txtcontraseña1" id="txtcontraseña1" maxlength="13" required>
+                                                    <input type="password" class="form-control form-control-sm" name="txtcontraseña1" id="txtcontraseña1" maxlength="20" required>
                                                 </div>
-                                                <div class="col-md-3">
+                                                <div class="col-md-6">
                                                     <br>
                                                     <label for="txtcontraseña2">Repita Nueva Contraseña <span style="color: red;">*</span></label>
-                                                    <input type="password" class="form-control form-control-sm" name="txtcontraseña2" id="txtcontraseña2" maxlength="13" required>
+                                                    <input type="password" class="form-control form-control-sm" name="txtcontraseña2" id="txtcontraseña2" maxlength="20" required>
                                                 </div>
                                             </div>
                                             <br>
-                                            <div class="form-row">
-                                                <div class="col-md-auto">
-                                                    <button class="btn btn-primary" type="submit" style="float: left">Guardar</button>
+                                            <div  class="form-row">
+                                                <div class="btncentrado">
+                                                    <div class="submit-btn-area">
+                                                        <button class="btn btn-primary" type="submit" style="float: left">Guardar</button>
+                                                    </div>
                                                 </div>
-                                                <div class="col-md-auto">
-                                                    <button class="btn btn-default" type="reset" style="float: left">Limpiar</button>
+                                                <div class="btncentrado">
+                                                    <div class="submit-btn-area">
+                                                        <button class="btn btn-default" type="reset" style="float: left">Limpiar</button>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </form>

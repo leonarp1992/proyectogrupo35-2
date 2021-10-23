@@ -87,8 +87,8 @@ def recuperar_contraseña():
 
 @app.route("/perfiladmin", methods=["GET", "POST"])
 def perfil_admin():
-
     if "usuario" in session:
+        if request.method == "GET":
             try:
                 with sqlite3.connect("Plavue.db") as con:
                     con.row_factory = sqlite3.Row
@@ -125,10 +125,33 @@ def perfil_admin():
                 return render_template("perfiladmin.html", perfil = query, tipodocumento = query1, tipoperfil = query2, estado = query3, sexo = query4, pais = query5 )
             except Error as er:
                 print('SQLite error: %s' % (' '.join(er.args)))
-                print('SQLite traceback: ')     
-    else:
-        return render_template("Login.html")
-
+                print('SQLite traceback: ')  
+        if request.method == "POST":
+                documento = request.form["txtdocumento"]
+                tipodocumento = request.form["listtipodocumento"]
+                perfil = request.form["listperfil"]
+                estado = request.form["listestado"]
+                nombre = request.form["txtnombre"]
+                fechanacimiento = request.form["txtfechanacimiento"]
+                sexo = request.form["listsexo"]
+                celular = request.form["txtcelular"]
+                pais = request.form["listnacionalidad"]
+                nombrecon = request.form["txtnombrecon"]
+                celularcon = request.form["txtcelularcon"]
+                correo = request.form["txtcorreo"]
+                # contraseña1 = request.form["txtcontraseña1"]
+                # contraseña2 = request.form["txtcontraseña2"]
+                try:
+                    with sqlite3.connect('Plavue.db') as con:  
+                        cur = con.cursor() #manipular la conexión a la bd
+                        cur.execute('UPDATE Usuarios SET Documento=?, tipoDocumento=?, tipoPerfil=?, estadoUsuario=?, Nombre=?, fechaNacimiento=?, sexo=?, Celular=?, nacionalidad=?, nombreContacto=?, numeroContacto=? WHERE correo=? ', (documento, tipodocumento, perfil, estado, nombre, fechanacimiento, sexo, celular, pais, nombrecon, celularcon, correo))
+                        con.commit()
+                        return redirect('/perfiladmin')
+                except Error as er:
+                    print('SQLite error: %s' % (' '.join(er.args)))
+                    print('SQLite traceback: ') 
+        return render_template("perfiladmin.html")   
+    return render_template("Login.html")
 
 @app.route("/GestionPilotos", methods=["GET"])
 def Gestion_pilotos():
@@ -164,7 +187,71 @@ def Gestion_Comentarios():
 
 @app.route("/perfilpiloto", methods=["GET", "POST"])
 def perfil_piloto():
-    return render_template('perfilpiloto.html')
+    if "usuario" in session:
+        if request.method == "GET":
+            try:
+                with sqlite3.connect("Plavue.db") as con:
+                    con.row_factory = sqlite3.Row
+                    cur = con.cursor()
+                    cur.execute("SELECT * FROM Usuarios WHERE correo = ?", [session["usuario"]])
+                    query = cur.fetchone()
+                with sqlite3.connect("Plavue.db") as con1:
+                    con1.row_factory = sqlite3.Row
+                    cur = con1.cursor()
+                    cur.execute("SELECT * FROM tipo_documento")
+                    query1 = cur.fetchall() 
+                with sqlite3.connect("Plavue.db") as con2:
+                    con2.row_factory = sqlite3.Row
+                    cur = con2.cursor()
+                    cur.execute("SELECT * FROM Perfil")
+                    query2 = cur.fetchall()   
+                with sqlite3.connect("Plavue.db") as con3:
+                    con3.row_factory = sqlite3.Row
+                    cur = con3.cursor()
+                    cur.execute("SELECT * FROM Estado")
+                    query3 = cur.fetchall()
+                with sqlite3.connect("Plavue.db") as con4:
+                    con4.row_factory = sqlite3.Row
+                    cur = con4.cursor()
+                    cur.execute("SELECT * FROM Genero")
+                    query4 = cur.fetchall()   
+                with sqlite3.connect("Plavue.db") as con5:
+                    con5.row_factory = sqlite3.Row
+                    cur = con5.cursor()
+                    cur.execute("SELECT * FROM Nacionalidad")
+                    query5 = cur.fetchall()                
+                    if query is None:
+                        return "Usuario no existe!"
+                return render_template("perfilpiloto.html", perfil = query, tipodocumento = query1, tipoperfil = query2, estado = query3, sexo = query4, pais = query5 )
+            except Error as er:
+                print('SQLite error: %s' % (' '.join(er.args)))
+                print('SQLite traceback: ')  
+        if request.method == "POST":
+                documento = request.form["txtdocumento"]
+                tipodocumento = request.form["listtipodocumento"]
+                perfil = request.form["listperfil"]
+                estado = request.form["listestado"]
+                nombre = request.form["txtnombre"]
+                fechanacimiento = request.form["txtfechanacimiento"]
+                sexo = request.form["listsexo"]
+                celular = request.form["txtcelular"]
+                pais = request.form["listnacionalidad"]
+                nombrecon = request.form["txtnombrecon"]
+                celularcon = request.form["txtcelularcon"]
+                correo = request.form["txtcorreo"]
+                # contraseña1 = request.form["txtcontraseña1"]
+                # contraseña2 = request.form["txtcontraseña2"]
+                try:
+                    with sqlite3.connect('Plavue.db') as con:  
+                        cur = con.cursor() #manipular la conexión a la bd
+                        cur.execute('UPDATE Usuarios SET Documento=?, tipoDocumento=?, tipoPerfil=?, estadoUsuario=?, Nombre=?, fechaNacimiento=?, sexo=?, Celular=?, nacionalidad=?, nombreContacto=?, numeroContacto=? WHERE correo=? ', (documento, tipodocumento, perfil, estado, nombre, fechanacimiento, sexo, celular, pais, nombrecon, celularcon, correo))
+                        con.commit()
+                        return redirect('/perfilpiloto')
+                except Error as er:
+                    print('SQLite error: %s' % (' '.join(er.args)))
+                    print('SQLite traceback: ') 
+        return render_template("perfilpiloto.html")   
+    return render_template("Login.html")
 
 @app.route("/historialvuelospiloto", methods=["GET"])
 def historial_vuelospiloto():
@@ -172,7 +259,71 @@ def historial_vuelospiloto():
 
 @app.route("/perfilusuario", methods=["GET", "POST"])
 def perfil_usuario():
-    return render_template('perfilusuario.html')
+    if "usuario" in session:
+        if request.method == "GET":
+            try:
+                with sqlite3.connect("Plavue.db") as con:
+                    con.row_factory = sqlite3.Row
+                    cur = con.cursor()
+                    cur.execute("SELECT * FROM Usuarios WHERE correo = ?", [session["usuario"]])
+                    query = cur.fetchone()
+                with sqlite3.connect("Plavue.db") as con1:
+                    con1.row_factory = sqlite3.Row
+                    cur = con1.cursor()
+                    cur.execute("SELECT * FROM tipo_documento")
+                    query1 = cur.fetchall() 
+                with sqlite3.connect("Plavue.db") as con2:
+                    con2.row_factory = sqlite3.Row
+                    cur = con2.cursor()
+                    cur.execute("SELECT * FROM Perfil")
+                    query2 = cur.fetchall()   
+                with sqlite3.connect("Plavue.db") as con3:
+                    con3.row_factory = sqlite3.Row
+                    cur = con3.cursor()
+                    cur.execute("SELECT * FROM Estado")
+                    query3 = cur.fetchall()
+                with sqlite3.connect("Plavue.db") as con4:
+                    con4.row_factory = sqlite3.Row
+                    cur = con4.cursor()
+                    cur.execute("SELECT * FROM Genero")
+                    query4 = cur.fetchall()   
+                with sqlite3.connect("Plavue.db") as con5:
+                    con5.row_factory = sqlite3.Row
+                    cur = con5.cursor()
+                    cur.execute("SELECT * FROM Nacionalidad")
+                    query5 = cur.fetchall()                
+                    if query is None:
+                        return "Usuario no existe!"
+                return render_template("perfilusuario.html", perfil = query, tipodocumento = query1, tipoperfil = query2, estado = query3, sexo = query4, pais = query5 )
+            except Error as er:
+                print('SQLite error: %s' % (' '.join(er.args)))
+                print('SQLite traceback: ')  
+        if request.method == "POST":
+                documento = request.form["txtdocumento"]
+                tipodocumento = request.form["listtipodocumento"]
+                perfil = request.form["listperfil"]
+                estado = request.form["listestado"]
+                nombre = request.form["txtnombre"]
+                fechanacimiento = request.form["txtfechanacimiento"]
+                sexo = request.form["listsexo"]
+                celular = request.form["txtcelular"]
+                pais = request.form["listnacionalidad"]
+                nombrecon = request.form["txtnombrecon"]
+                celularcon = request.form["txtcelularcon"]
+                correo = request.form["txtcorreo"]
+                # contraseña1 = request.form["txtcontraseña1"]
+                # contraseña2 = request.form["txtcontraseña2"]
+                try:
+                    with sqlite3.connect('Plavue.db') as con:  
+                        cur = con.cursor() #manipular la conexión a la bd
+                        cur.execute('UPDATE Usuarios SET Documento=?, tipoDocumento=?, tipoPerfil=?, estadoUsuario=?, Nombre=?, fechaNacimiento=?, sexo=?, Celular=?, nacionalidad=?, nombreContacto=?, numeroContacto=? WHERE correo=? ', (documento, tipodocumento, perfil, estado, nombre, fechanacimiento, sexo, celular, pais, nombrecon, celularcon, correo))
+                        con.commit()
+                        return redirect('/perfilusuario')
+                except Error as er:
+                    print('SQLite error: %s' % (' '.join(er.args)))
+                    print('SQLite traceback: ') 
+        return render_template("perfilusuario.html")   
+    return render_template("Login.html")
 
 @app.route("/itinerario", methods=["GET", "POST"])
 def itinerario_usuario():
