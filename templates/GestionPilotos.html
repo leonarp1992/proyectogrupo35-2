@@ -84,7 +84,7 @@
 
                     <div class="col-sm-6 clearfix">
                         <div class="user-profile pull-right">
-                            <img class="avatar user-thumb" src="static/images/icon/descarga.jpg" alt="avatar">
+                            <img class="avatar user-thumb" src="static/images/icon/admin.jpg" alt="avatar">
                             <h4 class="user-name dropdown-toggle" data-toggle="dropdown">{{perfil[5]}}<i class="fa fa-angle-down"></i></h4>
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" href="../perfiladmin">Perfil</a>
@@ -115,28 +115,30 @@
                     <div class="col-12 mt-5">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="header-title" align="center">Información de Pilotos</h4>
+                                <h4 class="header-title" align ="center">Información de Pilotos</h4>
                                 <section class="panel">
                                     <div class="panel-body">
-                                        <table class="table table-bordered table-striped mb-none" id="datatable-tabletools" data-swf-path="static/vendor/jquery-datatables/extras/TableTools/swf/copy_csv_xls_pdf.swf">
+                                        <table class="table table-bordered table-striped mb-none" id="datatable-gestionpilotos" data-swf-path="static/vendor/jquery-datatables/extras/TableTools/swf/copy_csv_xls_pdf.swf">
                                             <thead>
                                                 <tr>
-                                                    <th>Id Usuario</th>
+                                                    <th>Documento</th>
                                                     <th>Nombre</th>
                                                     <th>Teléfono</th>
-                                                    <th>Nacionalidad</th>
+                                                    <th>Correo</th>
                                                     <th>Acción</th>  
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                                {% for r in tabla %}
                                                 <tr class="gradeX">
-                                                    <td>123456546</td>
-                                                    <td>Leonar Andres Pérez López</td>
-                                                    <td>555-55555</td>
-                                                    <td class="center">Colombiano</td>
+                                                    <td>{{ r ['Documento'] }}</td>
+                                                    <td>{{ r ['Nombre'] }}</td>
+                                                    <td>{{ r ['Celular']}}</td>
+                                                    <td class="center">{{ r ['Correo' ]}}</td>
                                                     <td class="center"><div ><a href="../EditarPiloto"><i
                                                         class="fa fa-pencil-square"></i>Editar</a></div></td>
                                                 </tr>
+                                                {% endfor %}
                                             </tbody>
                                         </table>
                                     </div>
@@ -171,6 +173,7 @@
     <script src="{{ url_for('static', filename='js/tables/dataTables.bootstrap4.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/tables/dataTables.responsive.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/tables/responsive.bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/tables/examples.datatables.row.with.details.js') }}"></script>
     
     <!-- start chart js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
