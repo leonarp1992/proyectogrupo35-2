@@ -25,10 +25,6 @@
 </head>
 
 <body>
-    <!--[if lt IE 8]>
-            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
-    <!-- preloader area start -->
     <div id="preloader">
         <div class="loader"></div>
     </div>
@@ -47,7 +43,7 @@
                             <div class="login-form-body">
                                 <div class="form-gp">
                                     <label for="Nombre">Nombre Completo</label>
-                                    <input type="text" id="Nombre" name="Nombre">
+                                    <input type="text" id="Nombre" name="Nombre" minlength="8">
                                     <i class="ti-user"></i>
                                     <div class="text-danger"></div>
                                 </div>
@@ -59,13 +55,13 @@
                                 </div>
                                 <div class="form-gp">
                                     <label for="password">Contraseña</label>
-                                    <input type="password" id="password" name="password">
+                                    <input type="password" id="password" name="password" minlength="8">
                                     <i class="ti-lock"></i>
                                     <div class="text-danger"></div>
                                 </div>
                                 <div class="form-gp">
                                     <label for="confpassword">Confirmar Contraseña</label>
-                                    <input type="password" id="confpassword">
+                                    <input type="password" id="confpassword" name ="confpassword" minlength="8">
                                     <i class="ti-lock"></i>
                                     <div class="text-danger"></div>
                                 </div>

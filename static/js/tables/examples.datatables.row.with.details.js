@@ -4,7 +4,7 @@
 	'use strict';
 
 	var datatableInit = function() {
-		var $table = $('#datatable-gestionpilotos');
+		var $table = $('#datatable');
 
 		// format function for row details
 		var fnFormatDetails = function( datatable, tr ) {
@@ -89,7 +89,7 @@
 	'use strict';
 
 	var datatableInit = function() {
-		var $table = $('#datatable-gestionusuarios');
+		var $table = $('#datatable-gestion');
 
 		// format function for row details
 		var fnFormatDetails = function( datatable, tr ) {

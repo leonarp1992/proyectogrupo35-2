@@ -12,9 +12,6 @@ from datetime import datetime
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
 
-# @app.route("/")
-# def inicio():
-#     return render_template("Login.html")
 
 @app.route("/", methods=["GET", "POST"])
 def login():
@@ -68,17 +65,24 @@ def registro():
     if request.method == 'POST':
         nombre = request.form["Nombre"]
         correo = request.form["correo"]
-        password =  generate_password_hash(request.form["password"])     
-        try:
-            with sqlite3.connect('Plavue.db') as con: #establecer objeto conexion a base de datos
-                cur = con.cursor() #manipular la conexión a la bd
-                cur.execute('INSERT INTO Usuarios (contraseña, Nombre, correo) VALUES (?,?,?)', (password, nombre,correo))
-                con.commit() #confirmar la transacción
-                return render_template("Login.html")
-        except Error as er:
-            print('SQLite error: %s' % (' '.join(er.args)))
-            print('SQLite traceback: ')
-            return "No se pudo guardar"
+        password1 = (request.form["password"])
+        password2 = (request.form["confpassword"])
+        if password1 == password2:
+            password = generate_password_hash(password1)
+            try:
+                with sqlite3.connect('Plavue.db') as con: #establecer objeto conexion a base de datos
+                    cur = con.cursor() #manipular la conexión a la bd
+                    cur.execute('INSERT INTO Usuarios (contraseña, Nombre, correo) VALUES (?,?,?)', (password, nombre,correo))
+                    con.commit() #confirmar la transacción
+                    return render_template("Login.html")
+            except Error as er:
+                print('SQLite error: %s' % (' '.join(er.args)))
+                print('SQLite traceback: ')
+                return "No se pudo guardar"
+        else:
+            error = "Contraseña inválida"
+            flash(error)
+            return render_template("registro.html")
     return render_template("registro.html")
    
 @app.route("/recuperarcontraseña", methods=["GET", "POST"])
@@ -177,9 +181,74 @@ def Gestion_pilotos():
         return render_template('GestionPilotos.html')
     return render_template("Login.html")
 
-@app.route("/EditarPiloto", methods=["GET", "POST"])
-def Editar_pilotos():
-    return render_template('EditarPiloto.html')
+@app.route("/EditarPiloto", methods = ["GET", "POAT"])
+@app.route("/EditarPiloto/<correo>", methods=["GET", "POST"])
+def Editar_pilotos(correo):
+    if "usuario" in session:
+        if request.method == "GET":
+            try:
+                with sqlite3.connect("Plavue.db") as con:
+                    con.row_factory = sqlite3.Row
+                    cur = con.cursor()
+                    cur.execute("SELECT * FROM Usuarios WHERE correo = ?", [session["usuario"]])
+                    query = cur.fetchone()
+                with sqlite3.connect("Plavue.db") as con6:
+                    con6.row_factory = sqlite3.Row
+                    cur = con6.cursor()
+                    cur.execute("SELECT * FROM Usuarios WHERE correo = ?", [correo])
+                    query6 = cur.fetchone()                    
+                with sqlite3.connect("Plavue.db") as con1:
+                    con1.row_factory = sqlite3.Row
+                    cur = con1.cursor()
+                    cur.execute("SELECT * FROM tipo_documento")
+                    query1 = cur.fetchall() 
+                with sqlite3.connect("Plavue.db") as con2:
+                    con2.row_factory = sqlite3.Row
+                    cur = con2.cursor()
+                    cur.execute("SELECT * FROM Perfil")
+                    query2 = cur.fetchall()   
+                with sqlite3.connect("Plavue.db") as con3:
+                    con3.row_factory = sqlite3.Row
+                    cur = con3.cursor()
+                    cur.execute("SELECT * FROM Estado")
+                    query3 = cur.fetchall()
+                with sqlite3.connect("Plavue.db") as con4:
+                    con4.row_factory = sqlite3.Row
+                    cur = con4.cursor()
+                    cur.execute("SELECT * FROM Genero")
+                    query4 = cur.fetchall()   
+                with sqlite3.connect("Plavue.db") as con5:
+                    con5.row_factory = sqlite3.Row
+                    cur = con5.cursor()
+                    cur.execute("SELECT * FROM Nacionalidad")
+                    query5 = cur.fetchall()                
+                    if query is None:
+                        return "Usuario no existe!"
+                return render_template("EditarPiloto.html", perfil = query, tipodocumento = query1, tipoperfil = query2, estado = query3, sexo = query4, pais = query5, tabla = query6)
+            except Error as er:
+                print('SQLite error: %s' % (' '.join(er.args)))
+                print('SQLite traceback: ')
+        if request.method == "POST":
+                documento = request.form["txtdocumento"]
+                tipodocumento = request.form["listtipodocumento"]
+                perfil = request.form["listperfil"]
+                estado = request.form["listestado"]
+                nombre = request.form["txtnombre"]
+                fechanacimiento = request.form["txtfechanacimiento"]
+                sexo = request.form["listsexo"]
+                celular = request.form["txtcelular"]
+                pais = request.form["listnacionalidad"]
+                try:
+                    with sqlite3.connect('Plavue.db') as con:  
+                        cur = con.cursor() #manipular la conexión a la bd
+                        cur.execute('UPDATE Usuarios SET Documento=?, tipoDocumento=?, tipoPerfil=?, estadoUsuario=?, Nombre=?, fechaNacimiento=?, sexo=?, Celular=?, nacionalidad=? WHERE documento=? ', (documento, tipodocumento, perfil, estado, nombre, fechanacimiento, sexo, celular, pais, documento))
+                        con.commit()
+                        return redirect('/GestionPilotos')
+                except Error as er:
+                    print('SQLite error: %s' % (' '.join(er.args)))
+                    print('SQLite traceback: ') 
+        return render_template("EditarPiloto.html")   
+    return render_template("Login.html")
 
 @app.route("/GestionUsuarios", methods=["GET"])
 def Gestion_Usuarios():
@@ -207,8 +276,73 @@ def Gestion_Usuarios():
     return render_template("Login.html")
 
 @app.route("/EditarUsuario", methods=["GET", "POST"])
-def Editar_Usuarios():
-    return render_template('EditarUsuario.html')
+@app.route("/EditarUsuario/<correo>", methods=["GET", "POST"])
+def Editar_Usuarios(correo):
+    if "usuario" in session:
+        if request.method == "GET":
+            try:
+                with sqlite3.connect("Plavue.db") as con:
+                    con.row_factory = sqlite3.Row
+                    cur = con.cursor()
+                    cur.execute("SELECT * FROM Usuarios WHERE correo = ?", [session["usuario"]])
+                    query = cur.fetchone()
+                with sqlite3.connect("Plavue.db") as con6:
+                    con6.row_factory = sqlite3.Row
+                    cur = con6.cursor()
+                    cur.execute("SELECT * FROM Usuarios WHERE correo = ?", [correo])
+                    query6 = cur.fetchone()                    
+                with sqlite3.connect("Plavue.db") as con1:
+                    con1.row_factory = sqlite3.Row
+                    cur = con1.cursor()
+                    cur.execute("SELECT * FROM tipo_documento")
+                    query1 = cur.fetchall() 
+                with sqlite3.connect("Plavue.db") as con2:
+                    con2.row_factory = sqlite3.Row
+                    cur = con2.cursor()
+                    cur.execute("SELECT * FROM Perfil")
+                    query2 = cur.fetchall()   
+                with sqlite3.connect("Plavue.db") as con3:
+                    con3.row_factory = sqlite3.Row
+                    cur = con3.cursor()
+                    cur.execute("SELECT * FROM Estado")
+                    query3 = cur.fetchall()
+                with sqlite3.connect("Plavue.db") as con4:
+                    con4.row_factory = sqlite3.Row
+                    cur = con4.cursor()
+                    cur.execute("SELECT * FROM Genero")
+                    query4 = cur.fetchall()   
+                with sqlite3.connect("Plavue.db") as con5:
+                    con5.row_factory = sqlite3.Row
+                    cur = con5.cursor()
+                    cur.execute("SELECT * FROM Nacionalidad")
+                    query5 = cur.fetchall()                
+                    if query is None:
+                        return "Usuario no existe!"
+                return render_template("EditarUsuario.html", perfil = query, tipodocumento = query1, tipoperfil = query2, estado = query3, sexo = query4, pais = query5, tabla = query6)
+            except Error as er:
+                print('SQLite error: %s' % (' '.join(er.args)))
+                print('SQLite traceback: ')
+        if request.method == "POST":
+                documento = request.form["txtdocumento"]
+                tipodocumento = request.form["listtipodocumento"]
+                perfil = request.form["listperfil"]
+                estado = request.form["listestado"]
+                nombre = request.form["txtnombre"]
+                fechanacimiento = request.form["txtfechanacimiento"]
+                sexo = request.form["listsexo"]
+                celular = request.form["txtcelular"]
+                pais = request.form["listnacionalidad"]
+                try:
+                    with sqlite3.connect('Plavue.db') as con:  
+                        cur = con.cursor() #manipular la conexión a la bd
+                        cur.execute('UPDATE Usuarios SET Documento=?, tipoDocumento=?, tipoPerfil=?, estadoUsuario=?, Nombre=?, fechaNacimiento=?, sexo=?, Celular=?, nacionalidad=? WHERE documento=? ', (documento, tipodocumento, perfil, estado, nombre, fechanacimiento, sexo, celular, pais, documento))
+                        con.commit()
+                        return redirect('/GestionUsuarios')
+                except Error as er:
+                    print('SQLite error: %s' % (' '.join(er.args)))
+                    print('SQLite traceback: ') 
+        return render_template("EditarUsuarios.html")   
+    return render_template("Login.html")
 
 @app.route("/GestionVuelos", methods=["GET"])
 def Gestion_Vuelos():

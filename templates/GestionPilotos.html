@@ -57,7 +57,7 @@
                 <div class="menu-inner">
                     <nav>
                         <ul class="metismenu" id="menu">
-                            <li><a href="../perfiladmin" aria-expanded="true"><i class="ti-user"></i><span>Perfil</span></a></li>
+                            <li><a href="../perfiladmin" aria-expanded="true"><i class="ti-user"></i><span>Perfil - Superadmin</span></a></li>
                             <li class="active"><a href="../GestionPilotos" aria-expanded="true"><i class="ti-view-list-alt"></i><span>Gestión de Pilotos</span></a></li>
                             <li><a href="../GestionUsuarios" aria-expanded="true"><i class="ti-user"></i><span>Gestión de usuarios</span></a></li>
                             <li><a href="../GestionVuelos" aria-expanded="true"><i class="ti-view-list-alt"></i><span>Gestión de Vuelos</span></a></li>
@@ -134,8 +134,8 @@
                                                     <td>{{ r ['Documento'] }}</td>
                                                     <td>{{ r ['Nombre'] }}</td>
                                                     <td>{{ r ['Celular']}}</td>
-                                                    <td class="center">{{ r ['Correo' ]}}</td>
-                                                    <td class="center"><div ><a href="../EditarPiloto"><i
+                                                    <td name="Correopiloto" class="center">{{ r ['Correo' ]}}</td>
+                                                    <td class="center"><div ><a href="../EditarPiloto/{{r ['Correo']}}"><i
                                                         class="fa fa-pencil-square"></i>Editar</a></div></td>
                                                 </tr>
                                                 {% endfor %}

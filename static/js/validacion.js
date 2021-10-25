@@ -20,26 +20,32 @@ function validarform(){
   var user = document.formRegistro.Nombre;
   var correo = document.formRegistro.correo;
   var clave = document.formRegistro.password;
-
-  var user_len = user.value.length;
-  if(user_len == 0 || user_len <8){
-      alert("Nombre inválido, el usuario debe tener minimo 8 caracteres");
+  var clave2 = document.formRegistro.confpassword;
+  if (clave == clave2){
+    var user_len = user.value.length;
+    if(user_len == 0 || user_len <8){
+        alert("Nombre inválido, el usuario debe tener minimo 8 caracteres");
+    }else{
+        alert("Usuario Validado correctamente");
+    }
+  
+    var formatocorreo = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
+    if (!formatocorreo.test(correo.value)){
+        alert("Debe ingesar un correo valido")
+    }else{
+        alert("Correo validado correctamente")
+    }
+  
+    var pass_len = clave.value.length;
+    if(pass_len == 0 || user_len <8){
+        alert("Contraseña inválida, la contraseña debe tener minimo 8 caracteres");
+    }else{
+        alert("Usuario Validado correctamente");
+    }
   }else{
-      alert("Usuario Validado correctamente");
+    alert("Las Contraseñas deben coincidir");
   }
 
-  var formatocorreo = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
-  if (!formatocorreo.test(correo.value)){
-      alert("Debe ingesar un correo valido")
-  }else{
-      alert("Correo validado correctamente")
-  }
-
-  var pass_len = clave.value.length;
-  if(pass_len == 0 || user_len <8){
-      alert("Contraseña inválida, la contraseña debe tener minimo 8 caracteres");
-  }else{
-      alert("Usuario Validado correctamente");
-  }
 }
+
 

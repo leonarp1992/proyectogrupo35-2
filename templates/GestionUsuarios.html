@@ -115,7 +115,7 @@
                     <div class="col-12 mt-5">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="header-title" align="center">Información del Usuario</h4>
+                                <h4 class="header-title" align="center">Información de Usuarios</h4>
                                 <section class="panel">
                                     <div class="panel-body">
                                         <table class="table table-bordered table-striped mb-none" id="datatable-gestionusuarios" data-swf-path="static/vendor/jquery-datatables/extras/TableTools/swf/copy_csv_xls_pdf.swf">
@@ -135,7 +135,7 @@
                                                     <td>{{ r ['Nombre'] }}</td>
                                                     <td>{{ r ['Celular']}}</td>
                                                     <td class="center">{{ r ['Correo' ]}}</td>
-                                                    <td class="center"><div ><a href="../EditarPiloto"><i
+                                                    <td class="center"><div ><a href="../EditarUsuario/{{r ['Correo']}}"><i
                                                         class="fa fa-pencil-square"></i>Editar</a></div></td>
                                                 </tr>
                                                 {% endfor %}
