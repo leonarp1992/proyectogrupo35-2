@@ -85,7 +85,7 @@
                     <div class="col-sm-6 clearfix">
                         <div class="user-profile pull-right">
                             <img class="avatar user-thumb" src="static/images/icon/admin.jpg" alt="avatar">
-                            <h4 class="user-name dropdown-toggle" data-toggle="dropdown">Alejandra Negrete<i class="fa fa-angle-down"></i></h4>
+                            <h4 class="user-name dropdown-toggle" data-toggle="dropdown">{{perfil[6]}}<i class="fa fa-angle-down"></i></h4>
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" href="../perfiladmin">Perfil</a>
                                 <a class="dropdown-item" href="../">Cerrar sesión</a>
@@ -128,18 +128,32 @@
                                                     <th>Estado del vuelo</th>
                                                     <th>Ciudad de origen</th>
                                                     <th>Ciudad destino</th>
+                                                    <th>Piloto</th>
+                                                    <th style="display: none;">Hora de salida</th>
+                                                    <th style="display: none;">Hora de llegada</th>
+                                                    <th style="display: none;">Fecha del vuelo</th>
+                                                    <th style="display: none;">Estado del vuelo</th>
+                                                    <th style="display: none;">Cupos disponibles</th>
                                                     <th>Acción</th>  
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                                {% for r in vuelos %}
                                                 <tr class="gradeX">
-                                                    <td>123456</td>
-                                                    <td>A tiempo</td>
-                                                    <td>Valledupar</td>
-                                                    <td class="center">Bogotá DC</td>
-                                                    <td class="center"><div ><a href="../EditarVuelos"><i
+                                                    <td>{{r ["Id_vuelo"]}}</td>
+                                                    <td>{{r ["estado"]}}</td>
+                                                    <td>{{r ["origen"]}}</td>
+                                                    <td>{{r ["destino"]}}</td>
+                                                    <td>{{r ["piloto"]}}</td>
+                                                    <td class="center"><div ><a href="../EditarVuelos/{{r ['Id_vuelo']}}"><i
                                                         class="fa fa-pencil-square"></i>Editar</a></div><a href="#"><i class="fa fa-trash"></i> Eliminar</a></div></td>
+                                                    <td style="display: none;" >{{r ["horaSalida"]}}</td>
+                                                    <td style="display: none;">{{r ["horaLlegada"]}}</td>
+                                                    <td style="display: none;">{{r ["fecha"]}}</td>
+                                                    <td style="display: none;">{{r ["estado"]}}</td>
+                                                    <td style="display: none;">{{r ["cupos"]}}</td>                                                   
                                                 </tr>
+                                                {% endfor %}
                                             </tbody>
                                         </table>
                                     </div>

@@ -84,8 +84,8 @@
 
                     <div class="col-sm-6 clearfix">
                         <div class="user-profile pull-right">
-                            <img class="avatar user-thumb" src="static/images/icon/descarga.jpg" alt="avatar">
-                            <h4 class="user-name dropdown-toggle" data-toggle="dropdown">perfil{{[5]}}<i class="fa fa-angle-down"></i></h4>
+                            <img class="avatar user-thumb" src="static/images/icon/admin.jpg" alt="avatar">
+                            <h4 class="user-name dropdown-toggle" data-toggle="dropdown">{{perfil[6]}}<i class="fa fa-angle-down"></i></h4>
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" href="../perfiladmin">Perfil</a>
                                 <a class="dropdown-item" href="../">Cerrar sesión</a>
@@ -126,7 +126,7 @@
                                         <h3 class="header-title" align="center">Información del vuelo</h3>
                                         <br>
 
-                                        <form class="needs-validation" name="form_crearvuelo" action="/gestionvuelos" id="form_crearvuelo" enctype="multipart/form-data" method="POST" onsubmit="return validarperfil()">
+                                        <form class="needs-validation" name="form_crearvuelo" action="/CrearVuelos" id="form_crearvuelo" enctype="multipart/form-data" method="POST" onsubmit="return validarperfil()">
 
                                             <div class="form-row">
                                                 <div class="col-lg-3 col-md-6">
@@ -329,7 +329,6 @@
     <!-- others plugins -->
     <script src=" {{ url_for('static', filename='js/plugins.js') }}"></script>
     <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
-    
     </div>
     </div>
 </body>
