@@ -85,7 +85,7 @@
                     <div class="col-sm-6 clearfix">
                         <div class="user-profile pull-right">
                             <img class="avatar user-thumb" src="static/images/icon/descarga.jpg" alt="avatar">
-                            <h4 class="user-name dropdown-toggle" data-toggle="dropdown">Alejandra Negrete<i class="fa fa-angle-down"></i></h4>
+                            <h4 class="user-name dropdown-toggle" data-toggle="dropdown">perfil{{[5]}}<i class="fa fa-angle-down"></i></h4>
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" href="../perfiladmin">Perfil</a>
                                 <a class="dropdown-item" href="../">Cerrar sesión</a>
@@ -131,14 +131,18 @@
                                             <div class="form-row">
                                                 <div class="col-lg-3 col-md-6">
                                                     <br>
-                                                    <label for="txtidavion">Id Avión <span style="color: red;">*</span></label>
-                                                    <input type="text" class="form-control form-control-sm" name="txtidavion" id="txtidavion" value="" required>
+                                                    <label for="txtidavion">Id Vuelo <span style="color: red;">*</span></label>
+                                                    <input type="text" class="form-control form-control-sm" name="txtidavion" id="txtidavion" value="" disabled>
                                                 </div>
                                                 <div class="col-lg-3 col-md-6">
                                                     <br>
                                                     <label for="txtplaca">Placa <span style="color: red;">*</span></label>
                                                     <input type="text" class="form-control form-control-sm" name="txtplaca" id="txtplaca" value="" required>
-
+                                                </div>
+                                                <div class="col-lg-3 col-md-6">
+                                                    <br>
+                                                    <label for="txtaereolinea">Aereolinea<span style="color: red;">*</span></label>
+                                                    <input type="text" class="form-control form-control-sm" name="txtaereolinea" id="txtaereolinea" value="" required>
                                                 </div>
                                                 <div class="col-lg-3 col-md-6">
                                                     <br>
@@ -179,6 +183,9 @@
                                                         <option value="Yopal">Yopal</option>
                                                     </select>                                    
                                                 </div>
+                                            </div>
+
+                                            <div class="form-row">
                                                 <div class="col-lg-3 col-md-6">
                                                     <br>
                                                     <label for="ciudest">Ciudad de destino <span style="color: red;">*</span></label>
@@ -218,14 +225,6 @@
                                                         <option value="Yopal">Yopal</option>
                                                     </select> 
                                                 </div>
-                                            </div>
-
-                                            <div class="form-row">
-                                                <div class="col-lg-3 col-md-6">
-                                                    <br>
-                                                    <label for="fecha-salida">Fecha de salida <span style="color: red;">*</span></label>
-                                                    <input type="date" class="form-control form-control-sm" name="fecha-salida" id="fecha-salida" language="es" data-plugin-datepicker value="" required>
-                                                </div>
                                                 <div class="col-lg-3 col-md-6">
                                                     <br>
                                                     <label for="hora-salida">Hora de salida <span style="color: red;">*</span></label>
@@ -238,9 +237,12 @@
                                                 </div>
                                                 <div class="col-lg-3 col-md-6">
                                                     <br>
-                                                    <label for="numcantidadpasajeros">Cantidad de pasajeros <span style="color: red;">*</span></label>
-                                                    <input type="number" class="form-control form-control-sm" name="numcantidadpasajeros" id="numcantidadpasajeros" value="" required>
+                                                    <label for="fecha-salida">Fecha de salida <span style="color: red;">*</span></label>
+                                                    <input type="date" class="form-control form-control-sm" name="fecha-salida" id="fecha-salida" language="es" data-plugin-datepicker value="" required>
                                                 </div>
+                                                    <br>
+                                            </div>
+                                            <div class="form-row">
                                                 <div class="col-lg-3 col-md-6">
                                                     <br>
                                                     <label for="estadoVuelo">Estado del vuelo <span style="color: red;">*</span></label>
@@ -252,9 +254,23 @@
                                                         <option value="Despegó">Despegó</option>
                                                     </select> 
                                                 </div>
+                                                <div class="col-lg-3 col-md-6">
+                                                    <br>
+                                                    <label for="txtcappasajeros">Capacidad de pasajeros <span style="color: red;">*</span></label>
+                                                    <input type="text" class="form-control form-control-sm" name="txtcappasajeros" id="txtcappasajeros" value="" required>
+                                                </div>
+                                                <div class="col-lg-3 col-md-6">
+                                                    <br>
+                                                    <label for="txtcuposdisponibles">Cupos disponibles <span style="color: red;">*</span></label>
+                                                    <input type="text" class="form-control form-control-sm" name="txtcuposdisponibles" id="txtcuposdisponibles" value="" required>
+                                                </div>
+                                                <div class="col-lg-3 col-md-6">
+                                                    <br>
+                                                    <label for="txtprecio">Pecio <span style="color: red;">*</span></label>
+                                                    <input type="text" class="form-control form-control-sm" name="txtprecio" id="txtprecio" language="es" data-plugin-datepicker value="" required>
+                                                </div>
+                                                    <br>
                                             </div>
-                                        </div>
-
                                             <br>
                                             <br>
                                             <div class="btncentrado" >

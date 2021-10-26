@@ -62,17 +62,31 @@ def login():
 
 @app.route("/registro", methods=["GET", "POST"])
 def registro():
+    if request.method == 'GET':
+        with sqlite3.connect("Plavue.db") as con1:
+            con1.row_factory = sqlite3.Row
+            cur = con1.cursor()
+            cur.execute("SELECT * FROM tipo_documento")
+            query1 = cur.fetchall() 
+            return render_template("registro.html", tipodocumento = query1)
+
     if request.method == 'POST':
+        now = datetime.now()
+        id_usuario = now.strftime("%Y%m%d%H%M%S")
+        tipo_documento = request.form["listtipodocumento"]
+        documento = request.form["txtdocumento"]
         nombre = request.form["Nombre"]
         correo = request.form["correo"]
         password1 = (request.form["password"])
         password2 = (request.form["confpassword"])
+        tipoperfil = 3
+        estado = 1
         if password1 == password2:
             password = generate_password_hash(password1)
             try:
                 with sqlite3.connect('Plavue.db') as con: #establecer objeto conexion a base de datos
                     cur = con.cursor() #manipular la conexión a la bd
-                    cur.execute('INSERT INTO Usuarios (contraseña, Nombre, correo) VALUES (?,?,?)', (password, nombre,correo))
+                    cur.execute('INSERT INTO Usuarios (Id_usuario, Documento, tipoDocumento, contraseña, Nombre, correo, tipoPerfil, estado) VALUES (?,?,?,?,?,?,?)', (id_usuario, documento, tipo_documento, password, nombre,correo, tipoperfil, estado))
                     con.commit() #confirmar la transacción
                     return render_template("Login.html")
             except Error as er:
@@ -350,28 +364,29 @@ def Gestion_Vuelos():
 
 @app.route("/CrearVuelos", methods=["GET", "POST"])
 def Crear_Vuelos():
-    if "usuario" in session:
-        if request.method == "GET":
-            tipoPerfil = 3
-            try:
-                with sqlite3.connect("Plavue.db") as con:
-                    con.row_factory = sqlite3.Row
-                    cur = con.cursor()
-                    cur.execute("SELECT * FROM Usuarios WHERE correo = ?", [session["usuario"]])
-                    query = cur.fetchone()
-                with sqlite3.connect("Plavue.db") as con1:
-                    con1.row_factory = sqlite3.Row
-                    cur1 = con1.cursor()
-                    cur1.execute("SELECT * FROM Usuarios WHERE tipoPerfil =? ", [tipoPerfil])
-                    query2 = cur1.fetchall()
-                    if query2 is None:
-                        return "Usuario no existe!"
-                return render_template("GestionUsuarios.html", perfil = query, tabla = query2)
-            except Error as er:
-                print('SQLite error: %s' % (' '.join(er.args)))
-                print('SQLite traceback: ') 
-        return render_template('GestionUsuarios.html')
-    return render_template("Login.html")
+    return render_template("CrearVuelos.html")
+    # if "usuario" in session:
+    #     if request.method == "GET":
+    #         tipoPerfil = 3
+    #         try:
+    #             with sqlite3.connect("Plavue.db") as con:
+    #                 con.row_factory = sqlite3.Row
+    #                 cur = con.cursor()
+    #                 cur.execute("SELECT * FROM Usuarios WHERE correo = ?", [session["usuario"]])
+    #                 query = cur.fetchone()
+    #             with sqlite3.connect("Plavue.db") as con1:
+    #                 con1.row_factory = sqlite3.Row
+    #                 cur1 = con1.cursor()
+    #                 cur1.execute("SELECT * FROM Usuarios WHERE tipoPerfil =? ", [tipoPerfil])
+    #                 query2 = cur1.fetchall()
+    #                 if query2 is None:
+    #                     return "Usuario no existe!"
+    #             return render_template("GestionVuelos.html", perfil = query, tabla = query2)
+    #         except Error as er:
+    #             print('SQLite error: %s' % (' '.join(er.args)))
+    #             print('SQLite traceback: ') 
+    #     return render_template('GestionUsuarios.html')
+    # return render_template("Login.html")
 
 @app.route("/EditarVuelos", methods=["GET", "POST"])
 def Editar_Vuelos():
@@ -514,8 +529,6 @@ def perfil_usuario():
         if request.method == "POST":
                 documento = request.form["txtdocumento"]
                 tipodocumento = request.form["listtipodocumento"]
-                perfil = request.form["listperfil"]
-                estado = request.form["listestado"]
                 nombre = request.form["txtnombre"]
                 fechanacimiento = request.form["txtfechanacimiento"]
                 sexo = request.form["listsexo"]
@@ -528,7 +541,7 @@ def perfil_usuario():
                 try:
                     with sqlite3.connect('Plavue.db') as con:  
                         cur = con.cursor() #manipular la conexión a la bd
-                        cur.execute('UPDATE Usuarios SET Documento=?, tipoDocumento=?, tipoPerfil=?, estadoUsuario=?, Nombre=?, fechaNacimiento=?, sexo=?, Celular=?, nacionalidad=?, nombreContacto=?, numeroContacto=? WHERE correo=? ', (documento, tipodocumento, perfil, estado, nombre, fechanacimiento, sexo, celular, pais, nombrecon, celularcon, session['usuario']))
+                        cur.execute('UPDATE Usuarios SET Documento=?, tipoDocumento=?, Nombre=?, fechaNacimiento=?, sexo=?, Celular=?, nacionalidad=?, nombreContacto=?, numeroContacto=? WHERE correo=? ', (documento, tipodocumento, nombre, fechanacimiento, sexo, celular, pais, nombrecon, celularcon, session['usuario']))
                         con.commit()
                         return redirect('/perfilusuario')
                 except Error as er:
