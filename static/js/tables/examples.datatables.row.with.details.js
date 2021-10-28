@@ -180,28 +180,28 @@
 			var data = datatable.fnGetData( tr );
 
 			return [
-				'<table class="table mb-none">',
-					'<tr class="b-top-none">',
-						'<td><label class="mb-none">Id Avión</label></td>',
-						'<td> fes2653 </td>',
-					'</tr>',
-					'<tr class="b-top-none">',
-						'<td><label class="mb-none">Fecha de salida</label></td>',
-						'<td> 12/10/2021 </td>',
-					'</tr>',
-					'<tr>',
-						'<td><label class="mb-none">Hora de salida</label></td>',
-						'<td>14:10:00</td>',
-					'</tr>',
-					'<tr>',
-						'<td><label class="mb-none">Hora de llegada</label></td>',
-						'<td>14:40:00</td>',
-					'</tr>',
-					'<tr>',
-						'<td><label class="mb-none">Cantidad de pasajeros</label></td>',
-						'<td>70</td>',
-					'</tr>',
-				'</div>'
+				// '<table class="table mb-none">',
+				// 	'<tr class="b-top-none">',
+				// 		'<td><label class="mb-none">Id Avión</label></td>',
+				// 		'<td> fes2653 </td>',
+				// 	'</tr>',
+				// 	'<tr class="b-top-none">',
+				// 		'<td><label class="mb-none">Fecha de salida</label></td>',
+				// 		'<td> 12/10/2021 </td>',
+				// 	'</tr>',
+				// 	'<tr>',
+				// 		'<td><label class="mb-none">Hora de salida</label></td>',
+				// 		'<td>14:10:00</td>',
+				// 	'</tr>',
+				// 	'<tr>',
+				// 		'<td><label class="mb-none">Hora de llegada</label></td>',
+				// 		'<td>14:40:00</td>',
+				// 	'</tr>',
+				// 	'<tr>',
+				// 		'<td><label class="mb-none">Cantidad de pasajeros</label></td>',
+				// 		'<td>70</td>',
+				// 	'</tr>',
+				// '</div>'
 			].join('');
 		};
 
@@ -252,7 +252,6 @@
 	});
 
 }).apply( this, [ jQuery ]);
-
 
 (function( $ ) {
 
@@ -326,6 +325,7 @@
 	});
 
 }).apply( this, [ jQuery ]);
+
 (function( $ ) {
 
 	'use strict';

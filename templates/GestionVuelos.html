@@ -57,7 +57,7 @@
                 <div class="menu-inner">
                     <nav>
                         <ul class="metismenu" id="menu">
-                            <li><a href="../perfiladmin" aria-expanded="true"><i class="ti-user"></i><span>Perfil</span></a></li>
+                            <li><a href="../perfiladmin" aria-expanded="true"><i class="ti-user"></i><span>Perfil - Superadmin</span></a></li>
                             <li><a href="../GestionPilotos" aria-expanded="true"><i class="ti-view-list-alt"></i><span>Gestión de Pilotos</span></a></li>
                             <li><a href="../GestionUsuarios" aria-expanded="true"><i class="ti-user"></i><span>Gestión de usuarios</span></a></li>
                             <li class="active"><a href="../GestionVuelos" aria-expanded="true"><i class="ti-view-list-alt"></i><span>Gestión de Vuelos</span></a></li>
@@ -142,8 +142,20 @@
                                                     <tr class="gradeX">
                                                         <td>{{r ["Id_vuelo"]}}</td>
                                                         <td>{{r ["estado"]}}</td>
-                                                        <td>{{r ["origen"]}}</td>
-                                                        <td>{{r ["destino"]}}</td>
+                                                        <td>
+                                                            {% for c in ciudad %}
+                                                                {% if r["origen"] == c["Id_ciudad"] %}
+                                                                    <span>{{c["Ciudad"]}}</span>
+                                                                {% endif %}
+                                                            {% endfor %}
+                                                        </td>
+                                                        <td>
+                                                            {% for c in ciudad %}
+                                                            {% if r["destino"] == c["Id_ciudad"] %}
+                                                                <span>{{c["Ciudad"]}}</span>
+                                                            {% endif %}
+                                                            {% endfor %}
+                                                        </td>
                                                         <td>{{r ["piloto"]}}</td>
                                                         <td class="center"><div ><a href="../EditarVuelos/{{r ['Id_vuelo']}}"><i
                                                             class="fa fa-pencil-square"></i>Editar</a></div><a href="#"><i class="fa fa-trash"></i> Eliminar</a></div></td>

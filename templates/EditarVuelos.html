@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/metisMenu.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/owl.carousel.min.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/slicknav.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/datepicker/datepicker3.css') }}">
 
     <!-- amchart css -->
     <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
@@ -57,7 +58,7 @@
                 <div class="menu-inner">
                     <nav>
                         <ul class="metismenu" id="menu">
-                            <<li><a href="../perfiladmin" aria-expanded="true"><i class="ti-user"></i><span>Perfil</span></a></li>
+                            <<li><a href="../perfiladmin" aria-expanded="true"><i class="ti-user"></i><span>Perfil - Superadmin</span></a></li>
                             <li><a href="../GestionPilotos" aria-expanded="true"><i class="ti-view-list-alt"></i><span>Gestión de Pilotos</span></a></li>
                             <li><a href="../GestionUsuarios" aria-expanded="true"><i class="ti-user"></i><span>Gestión de usuarios</span></a></li>
                             <li class="active"><a href="../GestionVuelos" aria-expanded="true"><i class="ti-view-list-alt"></i><span>Gestión de Vuelos</span></a></li>
@@ -84,8 +85,8 @@
 
                     <div class="col-sm-6 clearfix">
                         <div class="user-profile pull-right">
-                            <img class="avatar user-thumb" src="static/images/icon/descarga.jpg" alt="avatar">
-                            <h4 class="user-name dropdown-toggle" data-toggle="dropdown">Alejandra Negrete<i class="fa fa-angle-down"></i></h4>
+                            <img class="avatar user-thumb" src="static/images/icon/admin.jpg" alt="avatar">
+                            <h4 class="user-name dropdown-toggle" data-toggle="dropdown">{{perfil[6]}}<i class="fa fa-angle-down"></i></h4>
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" href="#">Perfil</a>
                                 <a class="dropdown-item" href="Login.html">Cerrar sesión</a>
@@ -125,131 +126,107 @@
                                         <h3 class="header-title" align="center">Información del vuelo</h3>
                                         <br>
 
-                                        <form class="needs-validation" name="form_editvuelo" action="/gestionvuelos" id="form_editvuelo" enctype="multipart/form-data" method="POST" onsubmit="return validarperfil()">
+                                        <form class="needs-validation" name="form_editvuelo" action="/gestionvuelos" id="form_editvuelo" enctype="multipart/form-data" method="POST">
 
                                             <div class="form-row">
                                                 <div class="col-lg-3 col-md-6">
                                                     <br>
-                                                    <label for="txtidavion">Id Avión <span style="color: red;">*</span></label>
-                                                    <input type="text" class="form-control form-control-sm" name="txtidavion" id="txtidavion" value="" required>
+                                                    <label for="txtidavion">Id Vuelo <span style="color: red;">*</span></label>
+                                                    <input type="text" class="form-control form-control-sm" name="txtidavion" id="txtidavion" value="{{tabla[0]}}" disabled>
                                                 </div>
                                                 <div class="col-lg-3 col-md-6">
                                                     <br>
                                                     <label for="txtplaca">Placa <span style="color: red;">*</span></label>
-                                                    <input type="text" class="form-control form-control-sm" name="txtplaca" id="txtplaca" value="" required>
-
+                                                    <input type="text" class="form-control form-control-sm" name="txtplaca" id="txtplaca" value="{{tabla[1]}}" required>
+                                                </div>
+                                                <div class="col-lg-3 col-md-6">
+                                                    <br>
+                                                    <label for="txtaereolinea">Aereolinea <span style="color: red;">*</span></label>
+                                                    <input type="text" class="form-control form-control-sm" name="txtaereolinea" id="txtaereolinea" value="{{tabla[2]}}" required>
                                                 </div>
                                                 <div class="col-lg-3 col-md-6">
                                                     <br>
                                                     <label for="ciudorigen">Ciudad de origen <span style="color: red;">*</span></label>
-                                                    <select data-plugin-selectTwo class="form-control form-control-sm" name="ciudorigen" id="ciudorigen">
-                                                        <option value="">-</option>
-                                                        <option value="Arauca">Arauca</option>
-                                                        <option value="Armenia">Armenia</option>
-                                                        <option value="Barranquilla">Barranquilla</option>
-                                                        <option value="Bogotá">Bogotá</option>
-                                                        <option value="Bucaramanga">Bucaramanga</option>
-                                                        <option value="Cali">Cali</option>
-                                                        <option value="Cartagena">Cartagena</option>
-                                                        <option value="Cúcuta">Cúcuta</option>
-                                                        <option value="Florencia">Florencia</option>
-                                                        <option value="Ibagué">Ibagué</option>
-                                                        <option value="Leticia">Leticia</option>
-                                                        <option value="Manizales">Manizales</option>
-                                                        <option value="Medellín">Medellín</option>
-                                                        <option value="Mitú">Mitú</option>
-                                                        <option value="Mocoa">Mocoa</option>
-                                                        <option value="Montería">Montería</option>
-                                                        <option value="Neiva">Neiva</option>
-                                                        <option value="Pasto">Pasto</option>
-                                                        <option value="Pereira">Pereira</option>
-                                                        <option value="Popayán">Popayán</option>
-                                                        <option value="Puerto Carreño">Puerto Carreño</option>
-                                                        <option value="Puerto Inírida">Puerto Inírida</option>
-                                                        <option value="Quibdó">Quibdó</option>
-                                                        <option value="Riohacha">Riohacha</option>
-                                                        <option value="San Andrés">San Andrés</option>
-                                                        <option value="San José del Guaviare">San José del Guaviare</option>
-                                                        <option value="Santa Marta">Santa Marta</option>
-                                                        <option value="Sincelejo">Sincelejo</option>
-                                                        <option value="Tunja">Tunja</option>
-                                                        <option value="Valledupar">Valledupar</option>
-                                                        <option value="Villavicencio">Villavicencio</option>
-                                                        <option value="Yopal">Yopal</option>
+                                                    <select class="form-control form-control-sm" name="ciudorigen" id="ciudorigen">
+                                                        {% for r in ciudades %}
+                                                        {% if r[0] == tabla[3] %}
+                                                            <option value="{{ r[0] }}" selected>{{ r[1] }}</option>
+                                                        {% else %}
+                                                            <option value="{{ r[0] }}">{{ r[1] }}</option>
+                                                        {% endif %}
+                                                    {% endfor %}
                                                     </select>                                    
-                                                </div>
-                                                <div class="col-lg-3 col-md-6">
-                                                    <br>
-                                                    <label for="ciudest">Ciudad de destino <span style="color: red;">*</span></label>
-                                                    <select data-plugin-selectTwo class="form-control form-control-sm" name="ciudest" id="ciudest">
-                                                        <option value="">-</option>
-                                                        <option value="Arauca">Arauca</option>
-                                                        <option value="Armenia">Armenia</option>
-                                                        <option value="Barranquilla">Barranquilla</option>
-                                                        <option value="Bogotá">Bogotá</option>
-                                                        <option value="Bucaramanga">Bucaramanga</option>
-                                                        <option value="Cali">Cali</option>
-                                                        <option value="Cartagena">Cartagena</option>
-                                                        <option value="Cúcuta">Cúcuta</option>
-                                                        <option value="Florencia">Florencia</option>
-                                                        <option value="Ibagué">Ibagué</option>
-                                                        <option value="Leticia">Leticia</option>
-                                                        <option value="Manizales">Manizales</option>
-                                                        <option value="Medellín">Medellín</option>
-                                                        <option value="Mitú">Mitú</option>
-                                                        <option value="Mocoa">Mocoa</option>
-                                                        <option value="Montería">Montería</option>
-                                                        <option value="Neiva">Neiva</option>
-                                                        <option value="Pasto">Pasto</option>
-                                                        <option value="Pereira">Pereira</option>
-                                                        <option value="Popayán">Popayán</option>
-                                                        <option value="Puerto Carreño">Puerto Carreño</option>
-                                                        <option value="Puerto Inírida">Puerto Inírida</option>
-                                                        <option value="Quibdó">Quibdó</option>
-                                                        <option value="Riohacha">Riohacha</option>
-                                                        <option value="San Andrés">San Andrés</option>
-                                                        <option value="San José del Guaviare">San José del Guaviare</option>
-                                                        <option value="Santa Marta">Santa Marta</option>
-                                                        <option value="Sincelejo">Sincelejo</option>
-                                                        <option value="Tunja">Tunja</option>
-                                                        <option value="Valledupar">Valledupar</option>
-                                                        <option value="Villavicencio">Villavicencio</option>
-                                                        <option value="Yopal">Yopal</option>
-                                                    </select> 
                                                 </div>
                                             </div>
 
                                             <div class="form-row">
                                                 <div class="col-lg-3 col-md-6">
                                                     <br>
-                                                    <label for="fecha-salida">Fecha de salida <span style="color: red;">*</span></label>
-                                                    <input type="date" class="form-control form-control-sm" name="fecha-salida" id="fecha-salida" language="es" data-plugin-datepicker value="" required>
+                                                    <label for="ciudest">Ciudad de destino <span style="color: red;">*</span></label>
+                                                    <select class="form-control form-control-sm" name="ciudest" id="ciudest">
+                                                        {% for r in ciudades %}
+                                                        {% if r[0] == tabla[4] %}
+                                                            <option value="{{ r[0] }}" selected>{{ r[1] }}</option>
+                                                        {% else %}
+                                                            <option value="{{ r[0] }}">{{ r[1] }}</option>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                    </select> 
                                                 </div>
                                                 <div class="col-lg-3 col-md-6">
                                                     <br>
                                                     <label for="hora-salida">Hora de salida <span style="color: red;">*</span></label>
-                                                    <input type="time" class="form-control form-control-sm" name="hora-salida" id="hora-salida" value="" required>
+                                                    <input type="time" class="form-control form-control-sm" name="hora-salida" id="hora-salida" value="{{tabla[5]}}" required>
                                                 </div>
                                                 <div class="col-lg-3 col-md-6">
                                                     <br>
                                                     <label for="hora-llegada">Hora de llegada <span style="color: red;">*</span></label>
-                                                    <input type="time" class="form-control form-control-sm" name="hora-llegada" id="hora-llegada" value="" required>
+                                                    <input type="time" class="form-control form-control-sm" name="hora-llegada" id="hora-llegada" value="{{tabla[6]}}" required>
                                                 </div>
                                                 <div class="col-lg-3 col-md-6">
                                                     <br>
-                                                    <label for="numcantidadpasajeros">Cantidad de pasajeros <span style="color: red;">*</span></label>
-                                                    <input type="number" class="form-control form-control-sm" name="numcantidadpasajeros" id="numcantidadpasajeros" value="" required>
+                                                    <label for="fecha-salida">Fecha de salida <span style="color: red;">*</span></label>
+                                                    <input type="text" class="form-control form-control-sm datepicker" name="fecha-salida" id="fecha-salida" language="es" data-plugin-datepicker value="{{tabla[7]}}" required>
                                                 </div>
+                                            </div>
+                                            <br>
+                                            <div class="form-row">
                                                 <div class="col-lg-3 col-md-6">
-                                                    <br>
                                                     <label for="estadoVuelo">Estado del vuelo <span style="color: red;">*</span></label>
                                                     <select data-plugin-selectTwo class="form-control form-control-sm" name="estadoVuelo" id="estadoVuelo">
-                                                        <option value="">-</option>
+                                                        <option value="">{{tabla[8]}}</option>
                                                         <option value="A tiempo">A tiempo</option>
                                                         <option value="Retrasado">Retrasado</option>
                                                         <option value="Aterrizó">Aterrizó</option>
                                                         <option value="Despegó">Despegó</option>
                                                     </select> 
+                                                </div>
+                                                <div class="col-lg-3 col-md-6">
+                                                    <label for="txtcappasajeros">Capacidad de pasajeros <span style="color: red;">*</span></label>
+                                                    <input type="text" class="form-control form-control-sm" name="txtcappasajeros" id="txtcappasajeros" value="{{tabla[9]}}" required>
+                                                </div>
+                                                <div class="col-lg-3 col-md-6">
+                                                    <label for="txtcuposdisponibles">Cupos disponibles <span style="color: red;">*</span></label>
+                                                    <input type="text" class="form-control form-control-sm" name="txtcuposdisponibles" id="txtcuposdisponibles" value="{{tabla[11]}}" required>
+                                                </div>
+                                                <div class="col-lg-3 col-md-6">
+                                                    <label for="txtprecio">Precio <span style="color: red;">*</span></label>
+                                                    <input type="text" class="form-control form-control-sm" name="txtprecio" id="txtprecio" value="{{tabla[12]}}" required>
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <div class="form-row">
+                                                <div class="col-lg-3 col-md-6">
+                                                    <label for="piloto">Piloto <span style="color: red;">*</span></label>
+                                                    <select class="form-control form-control-sm" name="piloto" id="piloto">
+                                                        {% for r in pilotos %}
+                                                            {% if r[0] == tabla[13] %}
+                                                        <option value="{{ r[0] }}" selected>{{ r[0] }}</option>
+                                                            {% else %}
+                                                        <option value="{{ r[0] }}">{{ r[0] }}</option>
+                                                            {% endif %}
+                                                        {% endfor %}
+                                                    </select>
                                                 </div>
                                             </div>
                                             <br>
@@ -292,7 +269,7 @@
     <script src="{{ url_for('static', filename='js/tables/dataTables.bootstrap4.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/tables/dataTables.responsive.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/tables/responsive.bootstrap.min.js') }}"></script>
-    
+    <script src="{{ url_for('static', filename='js/datepicker/bootstrap-datepicker.js') }}"></script>
     <!-- start chart js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
     <!-- start highcharts js -->
@@ -310,7 +287,11 @@
     <!-- others plugins -->
     <script src=" {{ url_for('static', filename='js/plugins.js') }}"></script>
     <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
-    
+    <script>
+        $(function(){
+            $('.datepicker').datepicker();
+        });
+    </script>
     </div>
     </div>
 </body>

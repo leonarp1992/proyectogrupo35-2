@@ -13,6 +13,7 @@
         <link rel="stylesheet" href="{{ url_for('static', filename='css/metisMenu.css') }}">
         <link rel="stylesheet" href="{{ url_for('static', filename='css/owl.carousel.min.css') }}">
         <link rel="stylesheet" href="{{ url_for('static', filename='css/slicknav.min.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/datepicker/datepicker3.css') }}">
     
         <!-- amchart css -->
         <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
@@ -53,7 +54,7 @@
                 <div class="menu-inner">
                     <nav>
                         <ul class="metismenu" id="menu">
-                            <li><a href="../perfiladmin" aria-expanded="true"><i class="ti-user"></i><span>Perfil</span></a></li>
+                            <li><a href="../perfiladmin" aria-expanded="true"><i class="ti-user"></i><span>Perfil - Superadmin</span></a></li>
                             <li><a href="../GestionPilotos" aria-expanded="true"><i class="ti-view-list-alt"></i><span>Gestión de Pilotos</span></a></li>
                             <li class="active"><a href="../GestionUsuarios" aria-expanded="true"><i class="ti-user"></i><span>Gestión de usuarios</span></a></li>
                             <li><a href="../GestionVuelos" aria-expanded="true"><i class="ti-view-list-alt"></i><span>Gestión de Vuelos</span></a></li>
@@ -186,7 +187,7 @@
                                                 <div class="col-lg-3 col-md-6">
                                                     <br>
                                                     <label for="txtfechanacimiento">Fecha de Nacimiento <span style="color: red;">*</span></label>
-                                                    <input type="text" class="form-control form-control-sm" name="txtfechanacimiento" id="txtfechanacimiento" language="es" data-plugin-datepicker value="{{tabla[8]}}" required>
+                                                    <input type="text" class="form-control form-control-sm datepicker" name="txtfechanacimiento" id="txtfechanacimiento" language="es" data-plugin-datepicker value="{{tabla[8]}}" required>
                                                 </div>
                                                 <div class="col-lg-2 col-md-3">
                                                     <br>
@@ -261,6 +262,7 @@
     <script src="{{ url_for('static', filename='js/tables/dataTables.bootstrap4.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/tables/dataTables.responsive.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/tables/responsive.bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/datepicker/bootstrap-datepicker.js') }}"></script>
     
     <!-- start chart js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
@@ -279,7 +281,11 @@
     <!-- others plugins -->
     <script src=" {{ url_for('static', filename='js/plugins.js') }}"></script>
     <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
-    
+    <script>
+        $(function(){
+            $('.datepicker').datepicker();
+        });
+    </script>
     </div>
     </div>
 </body>
