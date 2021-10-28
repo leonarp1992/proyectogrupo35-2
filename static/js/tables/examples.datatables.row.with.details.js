@@ -267,12 +267,8 @@
 			return [
 				'<table class="table mb-none">',
 					'<tr class="b-top-none">',
-						'<td><label class="mb-none">Id Avión</label></td>',
-						'<td>' +data[2]+ '</td>',
-					'</tr>',
-					'<tr>',
-						'<td><label class="mb-none">Tipo de aeronave</label></td>',
-						'<td>' +data[10]+'</td>',
+						'<td><label class="mb-none">Aerolinea</label></td>',
+						'<td>' +data[3]+ '</td>',
 					'</tr>',
 				'</div>'
 			].join('');

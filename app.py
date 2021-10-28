@@ -468,9 +468,7 @@ def Editar_Vuelos(Id_vuelo):
                     con3.row_factory = sqlite3.Row
                     cur = con3.cursor()
                     cur.execute("SELECT Nombre FROM Usuarios WHERE tipoPerfil=?", [tipoperfil])
-                    query3 = cur.fetchall() 
-                    for r in query3:
-                        print(r)              
+                    query3 = cur.fetchall()             
                     if query is None:
                         return "Usuario no existe!"
                 return render_template("EditarVuelos.html", perfil = query, tabla = query1, ciudades = query2, pilotos = query3)
@@ -499,9 +497,50 @@ def Editar_Vuelos(Id_vuelo):
         return render_template("EditarVuelos.html")   
     return render_template("Login.html")
 
+@app.route("/EliminarVuelos", methods=["GET", "POST"])
+@app.route("/EliminarVuelos/<int:Id_vuelo>", methods=["GET", "POST"]) 
+def Eliminar_vuelos(Id_vuelo):
+    if "usuario" in session:
+        if request.method == "GET":
+            try:
+                with sqlite3.connect("Plavue.db") as con:
+                    con.row_factory = sqlite3.Row
+                    cur = con.cursor()
+                    cur.execute("SELECT * FROM Usuarios WHERE correo = ?", [session["usuario"]])
+                    query = cur.fetchone()
+                with sqlite3.connect("Plavue.db") as con1:
+                    cur = con1.cursor()
+                    cur.execute("DELETE FROM Vuelos WHERE Id_vuelo = ?", [Id_vuelo])                                   
+                    if query is None:
+                        return "Usuario no existe!"
+                return redirect("/GestionVuelos")
+            except Error as er:
+                print('SQLite error: %s' % (' '.join(er.args)))
+                print('SQLite traceback: ')
+    return render_template("Login.html")
+
 @app.route("/GestionComentarios", methods=["GET"])
-def Gestion_Comentarios():
-    return render_template('GestionComentarios.html')
+def Gestion_Comentarios():    
+    if "usuario" in session:
+        if request.method == "GET":
+            try:
+                with sqlite3.connect("Plavue.db") as con:
+                    con.row_factory = sqlite3.Row
+                    cur = con.cursor()
+                    cur.execute("SELECT * FROM Usuarios WHERE correo = ?", [session["usuario"]])
+                    query = cur.fetchone()
+                with sqlite3.connect("Plavue.db") as con1:
+                    con1.row_factory = sqlite3.Row
+                    cur = con1.cursor()
+                    cur.execute("SELECT * FROM Pasajeros")  
+                    query2 = cur.fetchall()                                 
+                    if query is None:
+                        return "Usuario no existe!"
+                return render_template("GestionComentarios.html", perfil = query, tabla = query2 )
+            except Error as er:
+                print('SQLite error: %s' % (' '.join(er.args)))
+                print('SQLite traceback: ')
+    return render_template("Login.html")
 
 @app.route("/perfilpiloto", methods=["GET", "POST"])
 def perfil_piloto():
@@ -570,8 +609,8 @@ def perfil_piloto():
         return render_template("perfilpiloto.html")   
     return render_template("Login.html")
 
-@app.route("/historialvuelospiloto", methods=["GET"])
-def historial_vuelospiloto():
+@app.route("/historialvuelospiloto/<Nombre>", methods=["GET"])
+def historial_vuelospiloto(Nombre):
     if "usuario" in session:
         if request.method == "GET":
             try:
@@ -582,10 +621,15 @@ def historial_vuelospiloto():
                     query = cur.fetchone()
                 with sqlite3.connect("Plavue.db") as con1:
                     con1.row_factory = sqlite3.Row
-                    cur1 = con1.cursor()
-                    cur1.execute("SELECT * FROM Vuelospiloto")
-                    query1 = cur1.fetchall()
-                return render_template("historialvuelospiloto.html", perfil = query, vuelos = query1)
+                    cur = con1.cursor()
+                    cur.execute("SELECT * FROM Vuelos WHERE piloto=?", [Nombre])
+                    query1 = cur.fetchall()
+                with sqlite3.connect("Plavue.db") as con2:
+                    con2.row_factory = sqlite3.Row
+                    cur2 = con2.cursor()
+                    cur2.execute("SELECT * FROM Ciudades")
+                    query3 = cur2.fetchall()
+                return render_template("historialvuelospiloto.html", perfil = query, vuelos = query1, ciudad = query3)
             except Error as er:
                 print('SQLite error: %s' % (' '.join(er.args)))
                 print('SQLite traceback: ') 

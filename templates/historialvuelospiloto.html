@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="no-js" lang="en">
+<html class="no-js" lang="es">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -49,7 +49,7 @@
         <div class="sidebar-menu">
             <div class="sidebar-header">
                 <div class="logo">
-                    <a><img src="static/images/icon/logo3.png" alt="logo"></a>
+                    <a><img src="{{ url_for('static', filename='images/icon/logo3.png') }}" alt="logo"></a>
                 </div>
             </div>
             <div class="main-menu">
@@ -57,7 +57,7 @@
                     <nav>
                         <ul class="metismenu" id="menu">
                             <li><a href="../perfilpiloto" aria-expanded="true"><i class="ti-user"></i><span>Perfil</span></a></li>
-                            <li class="active"><a href="../historialvuelospiloto" aria-expanded="true"><i class="ti-view-list-alt"></i><span>Historial de Vuelos</span></a></li>
+                            <li class="active"><a href="../historialvuelospiloto/{{perfil[6]}}" aria-expanded="true"><i class="ti-view-list-alt"></i><span>Historial de Vuelos</span></a></li>
                         </ul>
                     </nav>
                 </div>
@@ -80,8 +80,8 @@
 
                     <div class="col-sm-6 clearfix">
                         <div class="user-profile pull-right">
-                            <img class="avatar user-thumb" src="static/images/icon/descarga.jpg" alt="avatar">
-                            <h4 class="user-name dropdown-toggle" data-toggle="dropdown">{{perfil[5]}}<i class="fa fa-angle-down"></i></h4>
+                            <img class="avatar user-thumb" src="{{ url_for('static', filename='images/icon/descarga.jpg') }}" alt="avatar">
+                            <h4 class="user-name dropdown-toggle" data-toggle="dropdown">{{perfil[6]}}<i class="fa fa-angle-down"></i></h4>
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" href="../perfilpiloto">Perfil</a>
                                 <a class="dropdown-item" href="../">Cerrar sesión</a>
@@ -111,45 +111,44 @@
                     <div class="col-12 mt-5">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="header-title" align="center">Vuelos Pendientes</h4>
+                                <h4 class="header-title" align="center">Vuelos Piloto</h4>
                                 <section class="panel">
                                     <div class="panel-body">
                                         <table class="table table-bordered table-striped mb-none" id="datatable-vuelospiloto">
                                             <thead>
                                                 <tr>
                                                     <th>Id Vuelo</th>
-                                                    <th style="display:none;">Avión</th>
-                                                    <th>Aerolinea</th>
+                                                    <th>Placa del Avión</th>
+                                                    <th style="display:none;">Aerolinea</th>
                                                     <th>Origen</th>
                                                     <th>Destino</th>
                                                     <th>Hora de Salida</th>
                                                     <th>Hora de Llegada</th>
                                                     <th>Fecha de Vuelo</th>
-                                                    <th>Capacidad de pasajeros</th>
-                                                    <th style="display:none;">Tipo de Aeronave</th>
-                                                    <th>Estado del Vuelo</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 {% for r in vuelos %}
                                                     <tr>
-                                                        <td>{{r['Id_Vuelo']}}</td>
-                                                        <td style="display:none;">{{r['Avion']}}</td>
-                                                        <td>{{r['Aerolinea']}}</td>
-                                                        <td>{{r['Origen']}}</td>
-                                                        <td>{{r['Destino']}}</td>
-                                                        <td>{{r['Hora_salida']}}</td>
-                                                        <td>{{r['Hora_llegada']}}</td>
-                                                        <td>{{r['Fecha_vuelo']}}</td>
-                                                        <td>{{r['Cap_pasajeros']}}</td>
-                                                        <td style="display:none;">{{r['Tipo_aeronave']}}</td>
+                                                        <td>{{r['Id_vuelo']}}</td>
+                                                        <td>{{r['placa']}}</td>
+                                                        <td style="display:none;">{{r['aereolinea']}}</td>
                                                         <td>
-                                                            {% if r['Estado_vuelo'] == 'Pendiente' %}
-                                                                <span class="status-p bg-primary">{{r['Estado_vuelo']}}</span>
-                                                            {% else %}
-                                                                <span class="status-p bg-success">{{r['Estado_vuelo']}}</span>
+                                                            {% for c in ciudad %}
+                                                            {% if r["origen"] == c["Id_ciudad"] %}
+                                                                <span>{{c["Ciudad"]}}</span>
                                                             {% endif %}
+                                                            {% endfor %}</td>
+                                                        <td> 
+                                                            {% for c in ciudad %}
+                                                            {% if r["destino"] == c["Id_ciudad"] %}
+                                                                <span>{{c["Ciudad"]}}</span>
+                                                            {% endif %}
+                                                            {% endfor %}
                                                         </td>
+                                                        <td>{{r['horaSalida']}}</td>
+                                                        <td>{{r['horaLlegada']}}</td>
+                                                        <td>{{r['fecha']}}</td>
                                                     </tr>
                                                 {% endfor %}
                                             </tbody>

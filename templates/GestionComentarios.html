@@ -57,7 +57,7 @@
                 <div class="menu-inner">
                     <nav>
                         <ul class="metismenu" id="menu">
-                            <li><a href="../perfiladmin" aria-expanded="true"><i class="ti-user"></i><span>Perfil</span></a></li>
+                            <li><a href="../perfiladmin" aria-expanded="true"><i class="ti-user"></i><span>Perfil - Superadmin</span></a></li>
                             <li><a href="../GestionPilotos" aria-expanded="true"><i class="ti-view-list-alt"></i><span>Gestión de Pilotos</span></a></li>
                             <li><a href="../GestionUsuarios" aria-expanded="true"><i class="ti-user"></i><span>Gestión de usuarios</span></a></li>
                             <li><a href="../GestionVuelos" aria-expanded="true"><i class="ti-view-list-alt"></i><span>Gestión de Vuelos</span></a></li>
@@ -84,8 +84,8 @@
 
                     <div class="col-sm-6 clearfix">
                         <div class="user-profile pull-right">
-                            <img class="avatar user-thumb" src="static/images/icon/descarga.jpg" alt="avatar">
-                            <h4 class="user-name dropdown-toggle" data-toggle="dropdown">Alejandra Negrete<i class="fa fa-angle-down"></i></h4>
+                            <img class="avatar user-thumb" src="static/images/icon/admin.jpg" alt="avatar">
+                            <h4 class="user-name dropdown-toggle" data-toggle="dropdown">{{perfil[6]}}<i class="fa fa-angle-down"></i></h4>
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" href="../perfiladmin">Perfil</a>
                                 <a class="dropdown-item" href="../">Cerrar sesión</a>
@@ -124,35 +124,19 @@
                                                     <th>Id Vuelo</th>
                                                     <th>Id Usuario</th>
                                                     <th>Calificación del vuelo</th>
-                                                    <th class="hidden-phone">Comentarios del vuelo</th>
+                                                    <th>Comentarios del vuelo</th>
                                                     
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                                {% for r in tabla %}
                                                 <tr class="gradeX">
-                                                    <td>123452</td>
-                                                    <td>326655 </td>
-                                                    <td> 5</td>
-                                                    <td class="center hidden-phone">excelente servicio</td>
+                                                    <td>{{r ["Id_vuelos"]}}</td>
+                                                    <td>{{r ["Id_usuario"]}}</td>
+                                                    <td>{{r ["Calificacion"]}}</td>
+                                                    <td>{{r ["Comentarios"]}}</td>
                                                 </tr>
-                                                <tr class="gradeX">
-                                                    <td>123452</td>
-                                                    <td>326655 </td>
-                                                    <td> 5</td>
-                                                    <td class="center hidden-phone">excelente servicio</td>
-                                                </tr>
-                                                <tr class="gradeX">
-                                                    <td>123452</td>
-                                                    <td>326655 </td>
-                                                    <td> 5</td>
-                                                    <td class="center hidden-phone">excelente servicio</td>
-                                                </tr>
-                                                <tr class="gradeX">
-                                                    <td>123452</td>
-                                                    <td>326655 </td>
-                                                    <td> 5</td>
-                                                    <td class="center hidden-phone">excelente servicio</td>
-                                                </tr>
+                                                {% endfor %}
                                             </tbody>
                                         </table>
                                     </div>

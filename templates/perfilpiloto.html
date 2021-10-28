@@ -59,7 +59,7 @@
                     <nav>
                         <ul class="metismenu" id="menu">
                             <li class="active"><a href="../perfilpiloto" aria-expanded="true"><i class="ti-user"></i><span>Perfil</span></a></li>
-                            <li><a href="../historialvuelospiloto" aria-expanded="true"><i class="ti-view-list-alt"></i><span>Historial de Vuelos</span></a></li>
+                            <li><a href="../historialvuelospiloto/{{perfil[6]}}" aria-expanded="true"><i class="ti-view-list-alt"></i><span>Historial de Vuelos</span></a></li>
                         </ul>
                     </nav>
                 </div>
@@ -82,8 +82,8 @@
 
                     <div class="col-sm-6 clearfix">
                         <div class="user-profile pull-right">
-                            <img class="avatar user-thumb" src="static/images/icon/descarga.jpg" alt="avatar">
-                            <h4 class="user-name dropdown-toggle" data-toggle="dropdown">{{perfil[5]}}<i class="fa fa-angle-down"></i></h4>
+                            <img class="avatar user-thumb" src="{{ url_for('static', filename='images/icon/admin.jpg') }}"  alt="avatar">
+                            <h4 class="user-name dropdown-toggle" data-toggle="dropdown">{{perfil[6]}}<i class="fa fa-angle-down"></i></h4>
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" href="../perfilpiloto">Perfil</a>
                                 <a class="dropdown-item" href="../">Cerrar sesión</a>
@@ -136,14 +136,14 @@
                                                 <div class="col-lg-3 col-md-6">
                                                     <br>
                                                     <label for="txtdocumento">Documento <span style="color: red;">*</span></label>
-                                                    <input type="text" class="form-control form-control-sm" name="txtdocumento" id="txtdocumento" value="{{perfil[0]}}" >
+                                                    <input type="text" class="form-control form-control-sm" name="txtdocumento" id="txtdocumento" value="{{perfil[1]}}" >
                                                 </div>
                                                 <div class="col-lg-3 col-md-6">
                                                     <br>
                                                     <label for="listtipodocumento">Tipo de Documento <span style="color: red;">*</span></label>
                                                     <select class="form-control form-control-sm" name="listtipodocumento" id="listtipodocumento">
                                                         {% for r in tipodocumento %}
-                                                            {% if r[0] == perfil[1] %}
+                                                            {% if r[0] == perfil[2] %}
                                                                 <option value="{{ r[0] }}" selected>{{ r[1] }}</option>
                                                             {% else %}
                                                                 <option value="{{ r[0] }}">{{ r[1] }}</option>
@@ -156,7 +156,7 @@
                                                     <label for="listperfil">Perfil <span style="color: red;">*</span></label>
                                                     <select data-plugin-selectTwo class="form-control form-control-sm" name="listperfil" id="listperfil">
                                                         {% for r in tipoperfil %}
-                                                            {% if r[0] == perfil[3] %}
+                                                            {% if r[0] == perfil[4] %}
                                                             <option value="{{ r[0] }}" selected>{{ r[1] }}</option>
                                                             {% else %}
                                                             <option value="{{ r[0] }}">{{ r[1] }}</option>
@@ -169,7 +169,7 @@
                                                     <label for="listestado">Estado <span style="color: red;">*</span></label>
                                                     <select data-plugin-selectTwo class="form-control form-control-sm" name="listestado" id="listestado">
                                                         {% for r in estado %}
-                                                            {% if r[0] == perfil[4] %}
+                                                            {% if r[0] == perfil[5] %}
                                                         <option value="{{ r[0] }}" selected>{{ r[1] }}</option>
                                                             {% else %}
                                                         <option value="{{ r[0] }}">{{ r[1] }}</option>
@@ -183,12 +183,12 @@
                                                 <div class="col-md-6">
                                                     <br>
                                                     <label for="txtprimernombre">Nombre completo<span style="color: red;">*</span></label>
-                                                    <input type="text" class="form-control form-control-sm" name="txtnombre" id="txtnombre" value="{{perfil[5]}}" required>
+                                                    <input type="text" class="form-control form-control-sm" name="txtnombre" id="txtnombre" value="{{perfil[6]}}" required>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <br>
                                                     <label for="txtcorreo">Correo <span style="color: red;">*</span></label>
-                                                    <input type="email" class="form-control form-control-sm" name="txtcorreo"id="txtcorreo" value="{{perfil[6]}}" maxlength="100" disabled>
+                                                    <input type="email" class="form-control form-control-sm" name="txtcorreo"id="txtcorreo" value="{{perfil[7]}}" maxlength="100" disabled>
                                                 </div>
                                             </div>
 
@@ -196,14 +196,14 @@
                                                 <div class="col-lg-3 col-md-6">
                                                     <br>
                                                     <label for="txtfechanacimiento">Fecha de Nacimiento <span style="color: red;">*</span></label>
-                                                    <input type="text" class="form-control form-control-sm datepicker" name="txtfechanacimiento" id="txtfechanacimiento" language="es" data-plugin-datepicker value="{{perfil[7]}}" required>
+                                                    <input type="text" class="form-control form-control-sm datepicker" name="txtfechanacimiento" id="txtfechanacimiento" language="es" data-plugin-datepicker value="{{perfil[8]}}" required>
                                                 </div>
                                                 <div class="col-lg-2 col-md-3">
                                                     <br>
                                                     <label for="listsexo">Sexo <span style="color: red;">*</span></label>
                                                     <select id="buscador4" class="form-control form-control-sm" name="listsexo" id="listsexo">
                                                         {% for r in sexo %}
-                                                            {% if r[0] == perfil[8] %}
+                                                            {% if r[0] == perfil[9] %}
                                                         <option value="{{ r[0] }}" selected>{{ r[1] }}</option>
                                                             {% else %}
                                                         <option value="{{ r[0] }}">{{ r[1] }}</option>
@@ -214,14 +214,14 @@
                                                 <div class="col-lg-3 col-md-6">
                                                     <br>
                                                     <label for="txtcelular">Celular <span style="color: red;">*</span></label>
-                                                    <input type="text" class="form-control form-control-sm" name="txtcelular"id="txtcelular" value="{{perfil[9]}}" maxlength="20" required>
+                                                    <input type="text" class="form-control form-control-sm" name="txtcelular"id="txtcelular" value="{{perfil[10]}}" maxlength="20" required>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <br>
                                                     <label for="listnacionalidad">Nacionalidad <span style="color: red;">*</span></label>
                                                     <select class="form-control form-control-sm" name="listnacionalidad" id="listnacionalidad">
                                                         {% for r in pais %}
-                                                            {% if r[0] == perfil[10] %}
+                                                            {% if r[0] == perfil[11] %}
                                                                 <option value="{{ r[0] }}" selected>{{ r[1] }}</option>
                                                             {% else %}
                                                                 <option value="{{ r[0] }}">{{ r[1] }}</option>
@@ -250,12 +250,12 @@
                                                 <div class="col-md-6">
                                                     <br>
                                                     <label for="txtnombres">Nombre completo <span style="color: red;">*</span></label>
-                                                    <input type="text" class="form-control form-control-sm" name="txtnombrecon"id="txtnombrecon" value="{{perfil[11]}}" required>
+                                                    <input type="text" class="form-control form-control-sm" name="txtnombrecon"id="txtnombrecon" value="{{perfil[12]}}" required>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <br>
                                                     <label for="txtcelularcontacto">Celular <span style="color: red;">*</span></label>
-                                                    <input type="text" class="form-control form-control-sm" name="txtcelularcon" id="txtcelularcon" value="{{perfil[12]}}" maxlength="20" required>
+                                                    <input type="text" class="form-control form-control-sm" name="txtcelularcon" id="txtcelularcon" value="{{perfil[13]}}" maxlength="20" required>
                                                 </div>
                                             </div>
                                             <br>
