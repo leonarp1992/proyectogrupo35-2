@@ -109,12 +109,8 @@
 						'<td>' +data[9]+  '</td>',
 					'</tr>',
 					'<tr>',
-						'<td><label class="mb-none">HEstado del vuelo</label></td>',
-						'<td>' +data[10]+  '</td>',
-					'</tr>',
-					'<tr>',
 						'<td><label class="mb-none">Caupos Disponibles</label></td>',
-						'<td>' +data[11]+  '</td>',
+						'<td>' +data[10]+  '</td>',
 					'</tr>',
 				'</div>'
 			].join('');
