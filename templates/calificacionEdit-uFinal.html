@@ -53,9 +53,10 @@
                 <nav>
                     <ul class="metismenu" id="menu">
                         <li><a href="../perfilusuario"><i class="ti-user"></i> <span>Perfil - Usuario final</span></a></li>
-                        <li><a href="../itinerario"><i class="ti-calendar"></i> <span>Itinerario</span></a></li>
-                        <!-- <li><a href="../reservausuario"><i class="ti-ticket"></i> <span>Reserva</span></a></li> -->
-                        <li class="active"><a href="../calificacionvuelosusuario"><i class="ti-star"></i> <span>Calificación de vuelos</span></a></li>
+                        <li><a href="../itinerario"><i class="ti-calendar"></i> <span>Itinerario</span></a>
+                            <ul><li ><a href="../reservausuario"><i class="ti-ticket"></i> <span>Reserva</span></a></li></ul>
+                        </li> 
+                        <li class="active"><a href="../calificacionvuelosusuario"><i class="ti-star"></i> <span>Mis vuelos</span></a></li>
                     </ul>
                 </nav>
             </div>
@@ -158,8 +159,7 @@
                                         <div class="card mt-4">
                                             <div class="card-body">
                                                 <h1 class="header-title">Calificación del servicio</h1>
-                                                <form class="needs-validation" novalidate="" id="formCalificacion" method="POST" action="/calificacioneditar">
-                                                    <input type="hidden" id="Id_pasajero" name="Id_pasajero" value="{{rowcal[0]}}">
+                                                <form class="needs-validation" novalidate="" id="formCalificacion" method="POST" action="/calificacioneditar/{{rowcal}}">
                                                     <div class="form-row">
                                                         <div>
                                                             <table class="table table-bordered border-primary">
@@ -226,8 +226,7 @@
                                                 <div class="col-md-1 mb-0">
                                                 </div>
                                                 
-                                                <form class="needs-validation" novalidate="" id="formComentarios" action="/comentarioeditar" method="POST">
-                                                    <input type="hidden" id="Id_pasajero" name="Id_pasajero" value="{{rowcal[0]}}">
+                                                <form class="needs-validation" novalidate="" id="formComentarios" action="/comentarioeditar/{{rowcal}}" method="POST">
                                                         <div class="col-md-1 mb-0">
                                                             </div>
                                                                 <div >
