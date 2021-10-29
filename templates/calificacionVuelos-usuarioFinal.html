@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="no-js" lang="es">
+<html class="no-js" lang="en">
 
 <head>
     <meta charset="utf-8">
@@ -52,9 +52,9 @@
             <div class="menu-inner">
                 <nav>
                     <ul class="metismenu" id="menu">
-                        <li><a href="../perfilusuario"><i class="ti-user"></i> <span>Perfil - Usuario Final</span></a></li>
+                        <li><a href="../perfilusuario"><i class="ti-user"></i> <span>Perfil - Usuario final</span></a></li>
                         <li><a href="../itinerario"><i class="ti-calendar"></i> <span>Itinerario</span></a></li>
-                        <li><a href="../reservausuario"><i class="ti-ticket"></i> <span>Reserva</span></a></li>
+                        <li><a href="../"><i class="ti-ticket"></i> <span>Reserva</span></a></li>
                         <li class="active"><a href="../calificacionvuelosusuario"><i class="ti-star"></i> <span>Calificación de vuelos</span></a></li>
                     </ul>
                 </nav>
@@ -78,11 +78,11 @@
 
                 <div class="col-sm-6 clearfix">
                     <div class="user-profile pull-right">
-                        <img class="avatar user-thumb" src="static/images/icon/usuariofinal.jpg" alt="avatar">
-                        <h4 class="user-name dropdown-toggle" data-toggle="dropdown">{{perfil[5]}}<i class="fa fa-angle-down"></i></h4>
+                        <img class="avatar user-thumb" src="static/images/icon/usuarioFinal.jpg" alt="avatar">
+                        <h4 class="user-name dropdown-toggle" data-toggle="dropdown">{{perfil[6]}}<i class="fa fa-angle-down"></i></h4>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">Perfil</a>
-                            <a class="dropdown-item" href="Login.html">Cerrar sesión</a>
+                            <a class="dropdown-item" href="../perfilusuario">Perfil</a>
+                            <a class="dropdown-item" href="../">Cerrar sesión</a>
                         </div>
                     </div>
                 </div>
@@ -94,7 +94,7 @@
                 <div class="col-sm-12">
                     <div class="breadcrumbs-area clearfix">
                         <ul class="breadcrumbs pull-left">
-                            <li><a href="perfilusuario.html">P L A V U E</a></li>
+                            <li><a href="../perfilusuario">P L A V U E</a></li>
                             <li><span>Calificación de vuelos</span></li>
                         </ul>
                     </div>
@@ -128,138 +128,68 @@
                                             <th style="display: none;">Comentarios</th>
                                             <th style="display: none;"></th>
                                             <th style="display: none;"></th>
-                                            
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        
-                                        {% for r in rowcal %}
+                                        {% for r in vuelos %}
                                             <tr>
-                                                <td> {{ r ["codigo"] }} </td>
-                                                <td> {{ r ["origen"] }}  </td>
-                                                <td> {{ r ["destino"] }} </td>
+                                                <td> {{ r ["Id_vuelo"] }} </td>
+                                                <td>
+                                                    {% for c in ciudad %}
+                                                    {% if r["origen"] == c["Id_ciudad"] %}
+                                                        <span>{{c["Ciudad"]}}</span>
+                                                    {% endif %}
+                                                    {% endfor %}
+                                                </td>
+                                                <td>
+                                                    {% for c in ciudad %}
+                                                        {% if r["destino"] == c["Id_ciudad"] %}
+                                                            <span>{{c["Ciudad"]}}</span>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                </td>
                                                 <td> {{ r ["horaSalida"] }}  </td>
                                                 <td> {{ r ["horaLlegada"] }}  </td>
                                                 <td> {{ r ["fecha"] }}  </td>
-                                                <td> {{ r ["calificacion"] }}  </td>
-                                                <td><button type=" submit " class="ti-trash" style="border: 0px; border-color: white;"></button></i></td>
-                                                <td><button type=" submit "  class="fa fa-edit" style="border: 0px; border-color: white;"></button></i></td>
-                                                <td style="display: none;"> {{ r ["comentarios"] }}  </td>
-                                                <td style="display: none;"><button type=" submit " class="ti-trash" style="border: 0px; border-color: white;"></button></i></td>
-                                                <td style="display: none;"><button type=" submit "  class="fa fa-edit" style="border: 0px; border-color: white;"></button></i></td>
+                                                <td> 
+                                                    {% for d in rowcal %}
+                                                        <span>{{d["Calificacion"]}}</span>
+                                                    {% endfor %}
+                                                </td>
+                                                <td>
+                                                    {% for d in rowcal %}
+                                                    <a href="../calificacioneditar"><i class="fa fa-edit"></i></a>
+                                                    {% endfor %}
+                                                </td>
+                                                <td>
+                                                    {% for d in rowcal %}
+                                                    <a href="../caleliminar/{{d ['Id_pasajero']}}"><i class="ti-trash"></i></a>
+                                                    {% endfor %}                                                
+                                                </td>
+                                                <td style="display: none;"> 
+                                                    {% for d in rowcal %}
+                                                    <span>{{d["Comentarios"]}}</span>
+                                                    {% endfor %} 
+                                                </td>
+                                                <td style="display: none;">
+                                                    {% for d in rowcal %}
+                                                    <a href="../comentarioeditar"><i class="fa fa-edit"></i></a>
+                                                    {% endfor %}
+                                                </td>
+                                                <td style="display: none;">
+                                                    {% for d in rowcal %}
+                                                    <a href="../comeliminar/{{d ['Id_pasajero']}}"><i class="ti-trash"></i></a>
+                                                    {% endfor %}                                                
+                                                </td>
                                             </tr>
                                         {% endfor %}
+                                        </form>
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                     </div>
 
-
-                    <div class="col-13">
-                        <div class="card mt-4">
-                            <div class="card-body">
-                                <h1 class="header-title">Calificación del servicio</h1>
-                                <form class="needs-validation" novalidate="">
-                                    <div class="form-row">
-                                        <div class="col-md-4 mb-3">
-                                            <table class="table table-bordered border-primary">
-                                                <thead>
-                                                    <div class="rating"></div>
-                                                    <tr>
-                                                        <th scope=""> <span>
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="radio"
-                                                                        name="flexRadioDefault" id="flexRadioDefault1">
-                                                                    <label class="form-check-label"
-                                                                        for="flexRadioDefault1">
-                                                                    </label>
-                                                                </div>
-                                                            </span></th>
-                                                        <th scope="col">Excelente</th>
-                                                    </tr>
-                                                    <tr>
-
-                                                        <th scope="col"> <span>
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="radio"
-                                                                        name="flexRadioDefault" id="flexRadioDefault2">
-                                                                    <label class="form-check-label"
-                                                                        for="flexRadioDefault1">
-                                                                    </label>
-                                                                </div>
-                                                            </span></th>
-                                                        <th scope="col">Muy bueno</th>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="col"> <span>
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="radio"
-                                                                        name="flexRadioDefault" id="flexRadioDefault3">
-                                                                    <label class="form-check-label"
-                                                                        for="flexRadioDefault1">
-                                                                    </label>
-                                                                </div>
-                                                            </span></th>
-                                                        <th scope="col">Bueno</th>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="col"> <span>
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="radio"
-                                                                        name="flexRadioDefault" id="flexRadioDefault4">
-                                                                    <label class="form-check-label"
-                                                                        for="flexRadioDefault1">
-                                                                    </label>
-                                                                </div>
-                                                            </span></th>
-                                                        <th scope="col">Regular </th>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="col"> <span>
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="radio"
-                                                                        name="flexRadioDefault" id="flexRadioDefault5">
-                                                                    <label class="form-check-label"
-                                                                        for="flexRadioDefault1">
-                                                                    </label>
-                                                                </div>
-                                                            </span></th>
-                                                        <th scope="col">Malo</th>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="col"> <span>
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="radio"
-                                                                        name="flexRadioDefault" id="flexRadioDefault6">
-                                                                    <label class="form-check-label"
-                                                                        for="flexRadioDefault1">
-                                                                    </label>
-                                                                </div>
-                                                            </span></th>
-                                                        <th scope="col">No sabe/ No responde</th>
-                                                    </tr>
-                                                </thead>
-                                            </table>
-                                        </div>
-
-                                        <div class="col-md-2 mb-0">
-                                            <h1 class="header-title"></h1>
-                                        </div>
-                                        <div >
-                                            <h1 class="header-title">Comentarios Adicionales</h1>
-                                            <textarea style="border-radius: 5px; border-color:aliceblue; display: inline-block;" name="Cotizacion" rows="8" cols=" 60 " placeholder="Escribe aqui tus comentarios"></textarea>
-                                        </div>
-                                    </div>
-                                    <div class=" col-13 ">
-                                        <div class=" submit-btn-area ">
-                                            <button id=" submit " type=" submit ">Ingresar</button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
 
@@ -290,6 +220,9 @@
 <!-- Examples -->
 <script src="{{ url_for('static', filename='js/tables/examples.datatables.row.with.details.js') }}"></script>
 <script src="{{ url_for('static', filename='js/tables/examples.datatables.tabletools.js') }}"></script>
+
+<!--bd itinerario-->
+<script src="{{ url_for('static', filename='js/con_db_agendaVuelos.js') }}"></script>
 
 <!-- start chart js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>

@@ -48,8 +48,8 @@
 
                     <div class="col-sm-6 clearfix">
                         <div class="user-profile pull-right">
-                            <img class="avatar user-thumb" src="static/images/icon/descarga.jpg" alt="avatar">
-                            <h4 class="user-name dropdown-toggle" data-toggle="dropdown">{{perfil[5]}}<i class="fa fa-angle-down"></i></h4>
+                            <img class="avatar user-thumb" src="static/images/icon/usuariofinal.jpg" alt="avatar">
+                            <h4 class="user-name dropdown-toggle" data-toggle="dropdown">{{perfil[6]}}<i class="fa fa-angle-down"></i></h4>
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" href="../perfilusuario">Perfil</a>
                                 <a class="dropdown-item" href="../">Cerrar sesión</a>
@@ -61,11 +61,11 @@
 
             <div class="page-title-area">
                 <div class="row align-items-center">
-                    <div class="col-sm-12">
+                    <div class="col-sm-12 mt-5">
                         <div class="breadcrumbs-area clearfix">
                             <ul class="breadcrumbs pull-left">
                                 <li><a href="../perfilusuario">P L A V U E</a></li>
-                                <li><span>Calificación de vuelos</span></li>
+                                <li><span>Reserva</span></li>
                             </ul>
                         </div>
                     </div>
@@ -75,200 +75,63 @@
             <!-- final del área del título de la página -->
             <div class="main-content-inner">
                 <div class="row">
-                    
                     <!-- Primary table start -->
                     <div class="col-12 mt-5">
-                        <div class="card">
+                        <div class="card mt-8">
                             <div class="card-body">
-                                <div class="col-md-12 col-lg-12 mt-4"><Tab para formularios -->
-                                    <ul class="nav nav-tabs" id="myTab" role="tablist">
-                                        <li class="nav-item">
-                                            <a class="nav-link active" id="perfil-tab" data-toggle="tab" href="#perfil" role="tab" aria-controls="perfil" aria-selected="true">Vuelos</a>
-                                        </li>
-                                    </ul> 
-                                    <div class="tab-content mt-3" id="myTabContent">
-                                        <div class="tab-pane fade show active" id="perfil" role="tabpanel" aria-labelledby="perfil-tab">
-                                            <form class="needs-validation" name="form_perfil" action="/actualizarperfil" id="form_perfil" enctype="multipart/form-data" method="POST" onsubmit="return validarperfil()">
-                                                <div class="form-row">
-                                                    <div class="col-lg-3 col-md-8">
-                                                        <br>
-                                                        <label for="listtipodocumento">Selecciona tu vuelo <span style="color: red;">*</span></label>
-                                                        <select class="form-control form-control-sm" name="listtipodocumento" id="listtipodocumento">
-                                                            <option value="1" selected="selected">Solo ida</option>
-                                                            <option value="2">Ida y vuelta</option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="col-lg-3 col-md-8" style="margin-left:auto; margin-right:auto;">
-                                                        <br>
-                                                        <label for="listtipodocumento">Origen <span style="color: red;">*</span></label>
-                                                        <select class="form-control form-control-sm" name="listtipodocumento" id="listtipodocumento">
-                                                            <option value="188" selected="selected">Afganistán</option>
-                                                            <option value="355">Alabania</option>
-                                                            <option value="49">Alemania</option>
-                                                            <option value="376">Andorra</option>
-                                                            <option value="244">Angola</option>
-                                                            <option value="6">Anguilla</option>
-                                                        </select>
-                                                        
-                                                    </div>
-                                                    <div class="col-lg-3 col-md-8" style="margin-left:auto; margin-right:auto;">
-                                                        <br>
-                                                        <label for="listtipodocumento">Destino <span style="color: red;">*</span></label>
-                                                        <select class="form-control form-control-sm" name="listtipodocumento" id="listtipodocumento">
-                                                            <option value="188" selected="selected">Afganistán</option>
-                                                            <option value="355">Alabania</option>
-                                                            <option value="49">Alemania</option>
-                                                            <option value="376">Andorra</option>
-                                                            <option value="244">Angola</option>
-                                                            <option value="6">Anguilla</option>
-                                                        </select>
-                                                    </div>
-                                                    
-                                                    
-                                                </div>
-                                                <hr>
-                                                <div class="form-row">
-                                                    <div class="col-lg-3 col-md-8">
-                                                        <br>
-                                                        <label for="listtipodocumento">Pasajeros <span style="color: red;">*</span></label><br>
-                                                        <input type="checkbox" name="pasajeros" id="pasajeros"> Adultos
-                                                        <input type="number" name="numpasajeros" id="numpasajeros" step="1" min="0" max="100" class="sunny"><br><br>
-                                                         
-                                                        <input type="checkbox" name="pasajeros" id="pasajeros"> Niños
-                                                        <input type="number" name="numpasajeros" id="numpasajeros" step="1" min="0" max="100" class="sunny"><br><br>
-                                                        <input type="checkbox" name="pasajeros" id="pasajeros"> Bebes    
-                                                        <input type="number" name="numpasajeros" id="numpasajeros" step="1" min="0" max="100" class="sunny">
-                                                            
-                                                    </div>
-                                                    <div class="col-lg-3 col-md-8">
-                                                        <br>
-                                                        <label for="listtipodocumento">Fecha de vuelo <span style="color: red;">*</span></label><br>
-                                                        <label for="listtipodocumento">Salida  <input type="date" name="fechasalida" id="fechasalida"><br><br>
-                                                        <label for="listtipodocumento">Vuelta  <input type="date" name="fechavuelta" id="fechavuelta"><br><br>
-                                                            
-                                                    </div>
-                                                </div>
-                                                <br>
-                                                <br>
-                                                <hr>
-                                                <div class="form-row"></div>
-                                                    <div class="btncrear" >
-                                                        <div>
-                                                            <button type="button" class="btn btn-rounded btn-primary mb-3">Buscar</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                
-                                            </form>
-                                            <hr>
-                                            <br>
-                                            <h4 class="header-title" align="center">Elige tu vuelo</h4>
-                                                <div class="panel-body">
-                                                    <table class="table table-bordered table-striped mb-none" id="datatable-tabletools" data-swf-path="assets/vendor/jquery-datatables/extras/TableTools/swf/copy_csv_xls_pdf.swf">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>Hora salida</th>
-                                                                <th>Origen</th>
-                                                                <th>Duracion</th>
-                                                                <th>Hora llegada</th>
-                                                                <th>Destino</th>
-                                                                <th>Linea economica</th>
-                                                                <th>Linea ejecutiva</th>
-                                                                <th>Seleccione</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <tr class="gradeX">
-                                                                <td>9:00 p.m</td>
-                                                                <td>Cartagena</td>
-                                                                <td>1 h 9 min</td>
-                                                                <td>10:09 p.m</td>
-                                                                <td>Medellin</td>
-                                                                <td>$716.870,oo</td>
-                                                                <td>$1.016.870,oo</td>
-                                                                <td>
-                                                                    <div class="contenedor">
-                                                                        <input type="radio" checked id="customRadio1" name="customRadio" class="">
-                                                                        <label class="custom-control-label" for="customRadio1"></label>
-                                                                    </div>
-                                                                </td>
-                                                                
-                                                            </tr>
-                                                            <tr class="gradeX">
-                                                                <td>9:00 p.m</td>
-                                                                <td>Cartagena</td>
-                                                                <td>1 h 9 min</td>
-                                                                <td>10:09 p.m</td>
-                                                                <td>Medellin</td>
-                                                                <td>$716.870,oo</td>
-                                                                <td>$1.016.870,oo</td>
-                                                                <td>
-                                                                    <div class="contenedor">
-                                                                        <input type="radio" checked id="customRadio2" name="customRadio" class="">
-                                                                        <label class="custom-control-label" for="customRadio2"></label>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                            <tr class="gradeX">
-                                                                <td>9:00 p.m</td>
-                                                                <td>Cartagena</td>
-                                                                <td>1 h 9 min</td>
-                                                                <td>10:09 p.m</td>
-                                                                <td>Medellin</td>
-                                                                <td>$716.870,oo</td>
-                                                                <td>$1.016.870,oo</td>
-                                                                <td>
-                                                                    <div class="contenedor">
-                                                                        <input type="radio" checked id="customRadio3" name="customRadio" class="">
-                                                                        <label class="custom-control-label" for="customRadio3"></label>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                            <tr class="gradeX">
-                                                                <td>9:00 p.m</td>
-                                                                <td>Cartagena</td>
-                                                                <td>1 h 9 min</td>
-                                                                <td>10:09 p.m</td>
-                                                                <td>Medellin</td>
-                                                                <td>$716.870,oo</td>
-                                                                <td>$1.016.870,oo</td>
-                                                                <td>
-                                                                    <div class="contenedor">
-                                                                        <input type="radio" checked id="customRadio4" name="customRadio" class="">
-                                                                        <label class="custom-control-label" for="customRadio4"></label>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                            <tr class="gradeX">
-                                                                <td>9:00 p.m</td>
-                                                                <td>Cartagena</td>
-                                                                <td>1 h 9 min</td>
-                                                                <td>10:09 p.m</td>
-                                                                <td>Medellin</td>
-                                                                <td>$716.870,oo</td>
-                                                                <td>$1.016.870,oo</td>
-                                                                <td>
-                                                                    <div class="contenedor">
-                                                                        <input type="radio" checked id="customRadio6" name="customRadio" class="">
-                                                                        <label class="custom-control-label" for="customRadio16"></label>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                            
-                                                        </tbody>
-                                                    </table>
-                                                    <div class="form-row"></div>
-                                                    <div class="btncrear" >
-                                                        <div>
-                                                            <button type="button" class="btn btn-rounded btn-primary mb-3">Reservar</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                </div>
-                                            </section>
+                                <h4 class="header-title" align="center">Confirma tu reserva</h4>
+                                <hr>
+                                <form class="needs-validation" name="form_perfil" action="/actualizarperfil" id="form_perfil" enctype="multipart/form-data" method="POST" onsubmit="return validarperfil()">
+                                    <div class="form-row">
+                                        <div class="col-lg-3 col-md-8" style="margin-left:auto; margin-right:auto;">
+                                            
+                                            <label for="listtipodocumento">Ciudad de origen </label>
+                                            <input type="text" class="form-control form-control-sm" name="txtorigen" id="txtorigen" value="" disabled >
+                                        </div>
+                                        <div class="col-lg-3 col-md-8" style="margin-left:auto; margin-right:auto;">
+                                            
+                                            <label for="ciudest">Ciudad de destino </label>
+                                            <input type="text" class="form-control form-control-sm" name="txtdestino" id="txtdestino" value="" disabled >
                                         </div>
                                     </div>
-                                </div>
+                                    <hr>
+                                    <div class="form-row">
+                                        <div class="col-lg-3 col-md-8">
+                                            <br>
+                                            <label for="listtipodocumento">Seleccione cupo de vuelo </label><br>
+                                            <input type="number" name="numpasajeros" id="numpasajeros" step="1" min="0" max="100" class="sunny"><br><br>
+                                        </div>
+                                        <div class="col-lg-3 col-md-8" style="margin-left:auto; margin-right:auto;">
+                                            <br>
+                                            <label for="listtipodocumento">Salida</label><br>
+                                            <input type="date" name="fechasalida" id="fechasalida"><br><br>
+                                        </div>
+                                        <div class="col-lg-3 col-md-8" style="margin-left:auto; margin-right:auto;">
+                                            <br>
+                                            <label for="listtipodocumento">Vuelta</label><br>
+                                            <input type="date" name="fechavuelta" id="fechavuelta"><br><br>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="form-row">
+                                        <div class="col-lg-3 col-md-8" style="margin-left:auto; margin-right:auto;">
+                                            <div class="btncrear">
+                                                <div>
+                                                    <a class="btn btn-rounded btn-primary mb-3" href="../itinerario" role="button">Confirmar reserva</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 col-md-8" style="margin-left:auto; margin-right:auto;">
+                                            <div class="btncrear">
+                                                <div>
+                                                    <a class="btn btn-rounded btn-primary mb-3" href="../itinerario" role="button">Modificar reserva</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                </form>
+                                </section>
                             </div>
                         </div>
                         <!-- Primary table end -->

@@ -746,24 +746,198 @@ def comentarios_usuario():
 @app.route("/calificacionvuelosusuario", methods=["GET", "POST"])
 def calificacionvuelos_usuario():
     if "usuario" in session:
-        if request.method =="GET":
+        if request.method == "GET":
             try:
                 with sqlite3.connect("Plavue.db") as con:
                     con.row_factory = sqlite3.Row
                     cur = con.cursor()
                     cur.execute("SELECT * FROM Usuarios WHERE correo = ?", [session["usuario"]])
                     query = cur.fetchone()
-                with sqlite3.connect("itinerario.db") as con:
-                    con.row_factory = sqlite3.Row
-                    cur = con.cursor()
-                    cur.execute("SELECT * FROM agendaVuelos")
+                with sqlite3.connect("Plavue.db") as con1:
+                    cur = con1.cursor()
+                    cur.execute("SELECT Id_usuario FROM Usuarios WHERE correo = ?", [session["usuario"]])
+                    query2 = cur.fetchone()
+                with sqlite3.connect("Plavue.db") as con2:
+                    con2.row_factory = sqlite3.Row
+                    cur = con2.cursor()
+                    cur.execute("SELECT * FROM Pasajeros WHERE Id_usuario=?", [query2[0]])
                     rowcal = cur.fetchall()
-                    return render_template("calificacionVuelos-usuarioFinal.html",perfil = query, rowcal = rowcal)
+                with sqlite3.connect("Plavue.db") as con2:
+                    con2.row_factory = sqlite3.Row
+                    cur = con2.cursor()
+                    cur.execute("SELECT ID_vuelos FROM Pasajeros WHERE Id_usuario=?", [query2[0]])
+                    rowcal2 = cur.fetchone()
+                with sqlite3.connect("Plavue.db") as con3:
+                    con3.row_factory = sqlite3.Row
+                    cur = con3.cursor()
+                    cur.execute("SELECT * FROM Vuelos WHERE Id_vuelo=?", [rowcal2[0]])
+                    query3 = cur.fetchall()
+                with sqlite3.connect("Plavue.db") as con4:
+                    con4.row_factory = sqlite3.Row
+                    cur = con4.cursor()
+                    cur.execute("SELECT * FROM Ciudades")
+                    query4 = cur.fetchall()
+                    return render_template("calificacionVuelos-usuarioFinal.html", perfil = query, rowcal = rowcal, vuelos = query3, ciudad = query4)
             except Error as er:
                 print('SQLite error: %s' % (' '.join(er.args)))
-                print('SQLite traceback: ')  
-            return render_template('itinerariousuario.html')
-    return render_template ("Login.html")
+                print('SQLite traceback: ') 
+    return render_template("Login.html")
+
+@app.route('/calificacioneditar', methods=['GET','POST'])
+def calificacionEditar():
+    if 'usuario' in session:
+        if request.method == "GET":
+            try:
+                with sqlite3.connect("Plavue.db") as con:
+                    con.row_factory = sqlite3.Row
+                    cur = con.cursor()
+                    cur.execute("SELECT * FROM Usuarios WHERE correo = ?", [session["usuario"]])
+                    query = cur.fetchone()
+                with sqlite3.connect("Plavue.db") as con1:
+                    cur = con1.cursor()
+                    cur.execute("SELECT Id_usuario FROM Usuarios WHERE correo = ?", [session["usuario"]])
+                    query2 = cur.fetchone()
+                with sqlite3.connect("Plavue.db") as con2:
+                    con2.row_factory = sqlite3.Row
+                    cur = con2.cursor()
+                    cur.execute("SELECT * FROM Pasajeros WHERE Id_usuario=?", [query2[0]])
+                    rowcal = cur.fetchone()
+                with sqlite3.connect("Plavue.db") as con2:
+                    con2.row_factory = sqlite3.Row
+                    cur = con2.cursor()
+                    cur.execute("SELECT ID_vuelos FROM Pasajeros WHERE Id_usuario=?", [query2[0]])
+                    rowcal2 = cur.fetchone()
+                with sqlite3.connect("Plavue.db") as con3:
+                    con3.row_factory = sqlite3.Row
+                    cur = con3.cursor()
+                    cur.execute("SELECT * FROM Vuelos WHERE Id_vuelo=?", [rowcal2[0]])
+                    query3 = cur.fetchall()
+                with sqlite3.connect("Plavue.db") as con4:
+                    con4.row_factory = sqlite3.Row
+                    cur = con4.cursor()
+                    cur.execute("SELECT * FROM Ciudades")
+                    query4 = cur.fetchall()
+                    return render_template("calificacionEdit-uFinal.html", perfil = query, rowcal = rowcal, vuelos = query3, ciudad = query4)
+            except Error as er:
+                print('SQLite error: %s' % (' '.join(er.args)))
+                print('SQLite traceback: ') 
+        if request.method == "POST":
+            calificacion = request.form["calificacion"]
+            Id_pasajero = request.form["Id_pasajero"]
+            try:
+                with sqlite3.connect("Plavue.db") as con:
+                    cur = con.cursor()
+                    cur.execute("UPDATE Pasajeros SET Calificacion=? WHERE Id_pasajero = ?", [calificacion, Id_pasajero])
+                    con.commit
+                    return redirect('/calificacionvuelosusuario')
+            except Error as er:
+                print('SQLite error: %s' % (' '.join(er.args)))
+                print('SQLite traceback: ') 
+    return render_template("Login.html")
+
+@app.route('/comentarioeditar', methods=['GET','POST'])
+def comentariosEditar():
+    if 'usuario' in session:
+        if request.method == "GET":
+            try:
+                with sqlite3.connect("Plavue.db") as con:
+                    con.row_factory = sqlite3.Row
+                    cur = con.cursor()
+                    cur.execute("SELECT * FROM Usuarios WHERE correo = ?", [session["usuario"]])
+                    query = cur.fetchone()
+                with sqlite3.connect("Plavue.db") as con1:
+                    cur = con1.cursor()
+                    cur.execute("SELECT Id_usuario FROM Usuarios WHERE correo = ?", [session["usuario"]])
+                    query2 = cur.fetchone()
+                with sqlite3.connect("Plavue.db") as con2:
+                    con2.row_factory = sqlite3.Row
+                    cur = con2.cursor()
+                    cur.execute("SELECT * FROM Pasajeros WHERE Id_usuario=?", [query2[0]])
+                    rowcal = cur.fetchone()
+                with sqlite3.connect("Plavue.db") as con2:
+                    con2.row_factory = sqlite3.Row
+                    cur = con2.cursor()
+                    cur.execute("SELECT ID_vuelos FROM Pasajeros WHERE Id_usuario=?", [query2[0]])
+                    rowcal2 = cur.fetchone()
+                with sqlite3.connect("Plavue.db") as con3:
+                    con3.row_factory = sqlite3.Row
+                    cur = con3.cursor()
+                    cur.execute("SELECT * FROM Vuelos WHERE Id_vuelo=?", [rowcal2[0]])
+                    query3 = cur.fetchall()
+                with sqlite3.connect("Plavue.db") as con4:
+                    con4.row_factory = sqlite3.Row
+                    cur = con4.cursor()
+                    cur.execute("SELECT * FROM Ciudades")
+                    query4 = cur.fetchall()
+                    return render_template("calificacionEdit-uFinal.html", perfil = query, rowcal = rowcal, vuelos = query3, ciudad = query4)
+            except Error as er:
+                print('SQLite error: %s' % (' '.join(er.args)))
+                print('SQLite traceback: ') 
+        if request.method == "POST":
+            comentarios = request.form["comentarios"]
+            Id_pasajero = request.form["Id_pasajero"]
+            try:
+                with sqlite3.connect("Plavue.db") as con:
+                    cur = con.cursor()
+                    cur.execute("UPDATE Pasajeros SET Comentarios=? WHERE Id_pasajero = ?", [comentarios, Id_pasajero])
+                    con.commit
+                    return redirect('/calificacionvuelosusuario')
+            except Error as er:
+                print('SQLite error: %s' % (' '.join(er.args)))
+                print('SQLite traceback: ') 
+    return render_template("Login.html")
+
+@app.route('/caleliminar',methods=['GET','POST'])
+@app.route('/caleliminar/<int:Id_pasajero>', methods=['GET','POST'])
+def calificacionEliminar(Id_pasajero):
+    if 'usuario' in session:
+        if request.method == "GET":
+            print("estoy aqui")
+            codigoedit = Id_pasajero
+            calificaciones = None
+            try:
+                with sqlite3.connect("Plavue.db") as con:
+                    con.row_factory = sqlite3.Row
+                    cur = con.cursor()
+                    cur.execute("SELECT * FROM Usuarios WHERE correo = ?", [session["usuario"]])
+                    query = cur.fetchone()
+                with sqlite3.connect("Plavue.db") as con:
+                    cur = con.cursor()
+                    cur.execute("UPDATE Pasajeros SET Calificacion=? WHERE Id_pasajero = ?", (calificaciones, codigoedit))
+                    con.commit
+                    if query is None:
+                        return "Usuario no existe!"
+                return redirect('/calificacionvuelosusuario')
+            except Error as er:
+                print('SQLite error: %s' % (' '.join(er.args)))
+                print('SQLite traceback: ') 
+    return ("Login.html")
+
+@app.route('/comeliminar', methods=['GET','POST'])
+@app.route('/comeliminar/<int:Id_pasajero>', methods=['GET','POST'])
+def comentariosEliminar(Id_pasajero):
+    if 'usuario' in session:
+        if request.method == "GET":
+            print("estoy aqui")
+            codigoedit = Id_pasajero
+            comentarios = None
+            try:
+                with sqlite3.connect("Plavue.db") as con:
+                    con.row_factory = sqlite3.Row
+                    cur = con.cursor()
+                    cur.execute("SELECT * FROM Usuarios WHERE correo = ?", [session["usuario"]])
+                    query = cur.fetchone()
+                with sqlite3.connect("Plavue.db") as con:
+                    cur = con.cursor()
+                    cur.execute("UPDATE Pasajeros SET Comentarios=? WHERE Id_pasajero = ?", (comentarios, codigoedit))
+                    con.commit
+                    if query is None:
+                        return "Usuario no existe!"
+                return redirect('/calificacionvuelosusuario')
+            except Error as er:
+                print('SQLite error: %s' % (' '.join(er.args)))
+                print('SQLite traceback: ') 
+    return ("Login.html")
 
 
 if __name__ == '__main__':

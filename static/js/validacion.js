@@ -16,36 +16,45 @@ function validar_formulario() {
   }
 }
 
-function validarform(){
+function validarregistro(){
   var user = document.formRegistro.Nombre;
   var correo = document.formRegistro.correo;
   var clave = document.formRegistro.password;
-  var clave2 = document.formRegistro.confpassword;
-  if (clave == clave2){
-    var user_len = user.value.length;
-    if(user_len == 0 || user_len <8){
-        alert("Nombre inválido, el usuario debe tener minimo 8 caracteres");
-    }else{
-        alert("Usuario Validado correctamente");
-    }
-  
-    var formatocorreo = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
-    if (!formatocorreo.test(correo.value)){
-        alert("Debe ingesar un correo valido")
-    }else{
-        alert("Correo validado correctamente")
-    }
-  
-    var pass_len = clave.value.length;
-    if(pass_len == 0 || user_len <8){
-        alert("Contraseña inválida, la contraseña debe tener minimo 8 caracteres");
-    }else{
-        alert("Usuario Validado correctamente");
-    }
+  var user_len = user.value.length;
+  if(user_len == 0 || user_len <8){
+      alert("Nombre inválido, el usuario debe tener minimo 8 caracteres");
   }else{
-    alert("Las Contraseñas deben coincidir");
+      alert("Usuario Validado correctamente");
   }
 
+  var formatocorreo = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
+  if (!formatocorreo.test(correo.value)){
+      alert("Debe ingesar un correo valido")
+  }else{
+      alert("Correo validado correctamente")
+  }
+
+  var pass_len = clave.value.length;
+  if(pass_len == 0 || user_len <8){
+      alert("Contraseña inválida, la contraseña debe tener minimo 8 caracteres");
+  }else{
+      alert("Usuario Validado correctamente");
+    }
 }
+
+function Validarlogin(){
+  var correo = document.loginForm.correo;
+  var pass = document.loginForm.password;
+  var formato_correo = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
+  pass_len = pass.value.length;
+  if (!formato_correo.test(correo.value) & pass_len >= 8){
+    window.alert("Has iniciado sesión correctamente")
+  }
+  else{
+    window.alert("Correo o contraseña inválidos")
+  }
+}
+
+
 
 
