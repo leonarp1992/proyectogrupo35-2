@@ -476,21 +476,24 @@ def Editar_Vuelos(Id_vuelo):
                 print('SQLite error: %s' % (' '.join(er.args)))
                 print('SQLite traceback: ')
         if request.method == "POST":
-                documento = request.form["txtdocumento"]
-                tipodocumento = request.form["listtipodocumento"]
-                perfil = request.form["listperfil"]
-                estado = request.form["listestado"]
-                nombre = request.form["txtnombre"]
-                fechanacimiento = request.form["txtfechanacimiento"]
-                sexo = request.form["listsexo"]
-                celular = request.form["txtcelular"]
-                pais = request.form["listnacionalidad"]
+                placa = request.form["txtplaca"]
+                aereolinea = request.form["txtaereolinea"]
+                ciudorigen = request.form["ciudorigen"]
+                ciudest = request.form["ciudest"]
+                horasalida = request.form["hora-salida"]
+                horallegada = request.form["hora-llegada"]
+                fecha = request.form["fecha-salida"]
+                estadoVuelo = request.form["estadoVuelo"]
+                cappasajeros = request.form["txtcappasajeros"]
+                cupos = request.form["txtcuposdisponibles"]
+                precio = request.form["txtprecio"]
+                piloto = request.form["piloto"]
                 try:
                     with sqlite3.connect('Plavue.db') as con:  
                         cur = con.cursor() #manipular la conexión a la bd
-                        cur.execute('UPDATE Usuarios SET Documento=?, tipoDocumento=?, tipoPerfil=?, estadoUsuario=?, Nombre=?, fechaNacimiento=?, sexo=?, Celular=?, nacionalidad=? WHERE documento=? ', (documento, tipodocumento, perfil, estado, nombre, fechanacimiento, sexo, celular, pais, documento))
+                        cur.execute('UPDATE Vuelos SET placa=?, aereolinea=?, origen=?, destino=?, horaSalida=?, horaLlegada=?, fecha=?, estado=?, capacidad=?, cupos=?, precio=?, piloto = ?  WHERE Id_vuelo=? ', (placa, aereolinea, ciudorigen, ciudest, horasalida, horallegada, fecha, estadoVuelo, cappasajeros, cupos, precio, piloto, Id_vuelo))
                         con.commit()
-                        return redirect('/GestionUsuarios')
+                        return redirect('/GestionVuelos')
                 except Error as er:
                     print('SQLite error: %s' % (' '.join(er.args)))
                     print('SQLite traceback: ') 
@@ -722,8 +725,9 @@ def itinerario_usuario():
                     cur.execute("SELECT * FROM Ciudades")
                     query4 = cur.fetchall()
                     return render_template("itinerario-usuarioFinal.html", perfil = query, row = row, ciudad = query4)
-            except Error:
-                print(Error)
+            except Error as er:
+                print('SQLite error: %s' % (' '.join(er.args)))
+                print('SQLite traceback: ')
             return render_template('itinerariousuario.html')
     return render_template ("Login.html")
 
@@ -740,33 +744,42 @@ def reserva_usuario(Id_vuelo):
                 with sqlite3.connect("Plavue.db") as con:
                     con.row_factory = sqlite3.Row
                     cur = con.cursor()
-                    cur.execute("SELECT * FROM Vuelos")
-                    row = cur.fetchall()
+                    cur.execute("SELECT * FROM Vuelos WHERE Id_vuelo=?", [Id_vuelo])
+                    row2 = cur.fetchall()
                 with sqlite3.connect("Plavue.db") as con4:
                     con4.row_factory = sqlite3.Row
                     cur = con4.cursor()
                     cur.execute("SELECT * FROM Ciudades")
                     query4 = cur.fetchall()
-                    return render_template("reservausuario.html", perfil = query, row = row, ciudad = query4)
+                    return render_template("reservausuario.html", perfil = query, row = Id_vuelo, vuelos= row2, ciudad = query4)
             except Error:
                 print(Error)
+    return render_template ("Login.html")
+
+@app.route("/reservausuario", methods=["GET", "POST"])
+def reservar():
+    if "usuario" in session:
         if request.method == "POST":
             now = datetime.now()
+            Id_vuelo = request.form["Id_vuelo"]
             id_pasajero = now.strftime("%Y%m%d%H%M%S")
+            reserva = request.form["numpasajeros"]
             try:
                 with sqlite3.connect("Plavue.db") as con1:
                     cur = con1.cursor()
                     cur.execute("SELECT Id_usuario FROM Usuarios WHERE correo = ?", [session["usuario"]])
                     query2 = cur.fetchone()
                 with sqlite3.connect("Plavue.db") as con2:
-                    con2.row_factory = sqlite3.Row
                     cur = con2.cursor()
-                    cur.execute("INSERT INTO Pasajeros (Id_pasajero, Id_usuario, Id_vuelos) VALUES (?,?,?)", [id_pasajero, query2[0]], Id_vuelo)
-                    rowcal = cur.fetchall()
+                    cur.execute("UPDATE Vuelos SET reservas=? WHERE Id_vuelo=?", [reserva,Id_vuelo])
+                with sqlite3.connect("Plavue.db") as con2:
+                    cur = con2.cursor()
+                    cur.execute("INSERT INTO Pasajeros (Id_pasajero, Id_usuario, Id_vuelos) VALUES (?,?,?)", [id_pasajero, query2[0],Id_vuelo])
                     return redirect("/itinerario")
-            except Error:
-                print(Error)
-            return render_template("reservausuario.html")
+            except Error as er:
+                print('SQLite error: %s' % (' '.join(er.args)))
+                print('SQLite traceback: ')
+        return redirect("/itinerario")
     return render_template ("Login.html")
            
 @app.route("/comentariosusuario", methods=["GET", "POST"])

@@ -114,11 +114,8 @@
                     
                     <div class="col-12 mt-8">
                         <div class="card">
-                            <div class="card-body">
-                                
-                                <h4 class="header-title" align="center" >Itinerario</h4>
-                                <section class="panel">
-                                    
+                            <div class="card-body">                                
+                                <h4 class="header-title" align="center" >Itinerario</h4>                                    
                                     <div class="panel-body">
                                         <table class="table table-bordered table-striped mb-none" id="datatable-itinerario">
                                             <thead>
@@ -177,17 +174,13 @@
                                                         <td> {{ r ["cupos"] }}  </td>
                                                         <td style="display: none;"> {{ r ["precio"] }}  </td>
                                                         <td>
-                                                            {% for r in row %}
-                                                            <a href="../reservausuario/{{r["Id_vuelo"]}}"><i class="ti-ticket"></i></a>
-                                                            {% endfor %}
+                                                            <a href="../reservausuario/{{r['Id_vuelo']}}"><i class="ti-ticket"></i></a>
                                                         </td>
                                                     </tr>
                                                 {% endfor %}
                                             </tbody>
                                         </table>
-                                    </div>
-                                </section>
-                                  
+                                    </div>                                 
                             </div>
                         </div>
                     </div>

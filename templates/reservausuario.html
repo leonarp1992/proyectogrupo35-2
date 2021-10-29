@@ -12,7 +12,7 @@
         <div class="sidebar-menu">
             <div class="sidebar-header">
                 <div class="logo">
-                    <a><img src="static/images/icon/logo3.png" alt="logo"></a>
+                    <a><img src="{{ url_for('static', filename='images/icon/logo3.png') }}" alt="logo"></a>
                 </div>
             </div>
             <div class="main-menu">
@@ -46,7 +46,7 @@
 
                     <div class="col-sm-6 clearfix">
                         <div class="user-profile pull-right">
-                            <img class="avatar user-thumb" src="static/images/icon/usuariofinal.jpg" alt="avatar">
+                            <img class="avatar user-thumb" src="{{ url_for('static', filename='images/icon/usuariofinal.jpg') }}" alt="avatar">
                             <h4 class="user-name dropdown-toggle" data-toggle="dropdown">{{perfil[6]}}<i class="fa fa-angle-down"></i></h4>
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" href="../perfilusuario">Perfil</a>
@@ -80,44 +80,60 @@
                             <div class="card-body">
                                 <h4 class="header-title" align="center">Confirma tu reserva</h4>
                                 <hr>
-                                <form class="needs-validation" name="form_perfil" action="/actualizarperfil" id="form_perfil" enctype="multipart/form-data" method="POST" onsubmit="return validarperfil()">
+                                <form class="needs-validation" name="form_reservar" action="/reservausuario" id="form_reservar" enctype="multipart/form-data" method="POST" onsubmit="return validarperfil()">
+                                    <input type="hidden" id="Id_vuelo" name="Id_vuelo" value="{{row}}">
                                     <div class="form-row">
-                                        <div class="col-lg-3 col-md-8" style="margin-left:auto; margin-right:auto;">
-                                            
-                                            <label for="listtipodocumento">Ciudad de origen </label>
-                                            <input type="text" class="form-control form-control-sm" name="txtorigen" id="txtorigen" value="" disabled >
-                                        </div>
-                                        <div class="col-lg-3 col-md-8" style="margin-left:auto; margin-right:auto;">
-                                            
-                                            <label for="ciudest">Ciudad de destino </label>
-                                            <input type="text" class="form-control form-control-sm" name="txtdestino" id="txtdestino" value="" disabled >
-                                        </div>
+                                        <table class="table table-bordered table-striped mb-none" id="datatable-comentarios">
+                                            <thead>
+                                                <tr>
+                                                    <th>Código</th>
+                                                    <th>Origen</th>
+                                                    <th>Destino</th>
+                                                    <th>Hora Salida</th>
+                                                    <th>Hora Llegada</th>
+                                                    <th>fecha</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for r in vuelos %}
+                                                    <tr>
+                                                        <td> {{ r ["Id_vuelo"] }} </td>
+                                                        <td>
+                                                            {% for c in ciudad %}
+                                                            {% if r["origen"] == c["Id_ciudad"] %}
+                                                                <span>{{c["Ciudad"]}}</span>
+                                                            {% endif %}
+                                                            {% endfor %}
+                                                        </td>
+                                                        <td>
+                                                            {% for c in ciudad %}
+                                                                {% if r["destino"] == c["Id_ciudad"] %}
+                                                                    <span>{{c["Ciudad"]}}</span>
+                                                                {% endif %}
+                                                            {% endfor %}
+                                                        </td>
+                                                        <td> {{ r ["horaSalida"] }}  </td>
+                                                        <td> {{ r ["horaLlegada"] }}  </td>
+                                                        <td> {{ r ["fecha"] }}  </td>                                          
+                                                    </tr>
+                                                {% endfor %}
+                                                </form>
+                                            </tbody>
+                                        </table>                                           
                                     </div>
                                     <hr>
                                     <div class="form-row">
                                         <div class="col-lg-3 col-md-8">
                                             <br>
-                                            <label for="listtipodocumento">Seleccione cupo de vuelo </label><br>
-                                            <input type="number" name="numpasajeros" id="numpasajeros" step="1" min="0" max="100" class="sunny"><br><br>
-                                        </div>
-                                        <div class="col-lg-3 col-md-8" style="margin-left:auto; margin-right:auto;">
-                                            <br>
-                                            <label for="listtipodocumento">Salida</label><br>
-                                            <input type="date" name="fechasalida" id="fechasalida"><br><br>
-                                        </div>
-                                        <div class="col-lg-3 col-md-8" style="margin-left:auto; margin-right:auto;">
-                                            <br>
-                                            <label for="listtipodocumento">Vuelta</label><br>
-                                            <input type="date" name="fechavuelta" id="fechavuelta"><br><br>
+                                            <label for="listtipodocumento">Cantidad de cupos </label><br>
+                                            <input type="text" name="numpasajeros" id="numpasajeros" step="1" min="0" max="100" class="sunny"><br><br>
                                         </div>
                                     </div>
                                     <hr>
                                     <div class="form-row">
-                                        <div class="col-lg-3 col-md-8" style="margin-left:auto; margin-right:auto;">
-                                            <div class="btncrear">
-                                                <div>
-                                                    <a class="btn btn-rounded btn-primary mb-3" href="../reservausuario" role="button">Confirmar reserva</a>
-                                                </div>
+                                        <div class="btncentrado" >
+                                            <div class="submit-btn-area">
+                                                <button id="form_reservar" type="submit">Confirmar Reserva<i class="ti-arrow-right"></i></button>                                    
                                             </div>
                                         </div>
                                         <div class="col-lg-3 col-md-8" style="margin-left:auto; margin-right:auto;">
