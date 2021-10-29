@@ -130,7 +130,7 @@
                                                     <th>fecha</th>                                                    
                                                     <th>Cupos</th>
                                                     <th style="display: none;">Precio</th>
-                                                    <th>Reservar</th>
+                                                    <th>Reserva</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -158,7 +158,7 @@
                                                         <td> {{ r ["cupos"] }}  </td>
                                                         <td style="display: none;"> {{ r ["precio"] }}  </td>
                                                         <td>
-                                                            <a href="../reservausuario/{{r['Id_vuelo']}}"><i class="ti-ticket"></i></a>
+                                                            <a href="../reservausuario/{{r['Id_vuelo']}}">Reservar<i class="ti-ticket"></i></a>
                                                         </td>
                                                     </tr>
                                                 {% endfor %}
