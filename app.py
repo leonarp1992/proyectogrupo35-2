@@ -808,8 +808,12 @@ def calificacionvuelos_usuario():
                 with sqlite3.connect("Plavue.db") as con2:
                     con2.row_factory = sqlite3.Row
                     cur = con2.cursor()
-                    cur.execute("SELECT ID_vuelos FROM Pasajeros WHERE Id_usuario=?", [query2[0]])
+                    cur.execute("SELECT Id_vuelos FROM Pasajeros WHERE Id_usuario=?", [query2[0]])
                     rowcal2 = cur.fetchone()
+                with sqlite3.connect("Plavue.db") as con2:
+                    cur = con2.cursor()
+                    cur.execute("SELECT Id_pasajero FROM Pasajeros WHERE Id_usuario=?", [query2[0]])
+                    rowcal3 = cur.fetchone()
                 with sqlite3.connect("Plavue.db") as con3:
                     con3.row_factory = sqlite3.Row
                     cur = con3.cursor()
@@ -820,7 +824,7 @@ def calificacionvuelos_usuario():
                     cur = con4.cursor()
                     cur.execute("SELECT * FROM Ciudades")
                     query4 = cur.fetchall()
-                    return render_template("calificacionVuelos-usuarioFinal.html", perfil = query, rowcal = rowcal, vuelos = query3, ciudad = query4)
+                    return render_template("calificacionVuelos-usuarioFinal.html", perfil = query, rowcal = rowcal, vuelos = query3, ciudad = query4, Id_pasajero = rowcal3[0])
             except Error as er:
                 print('SQLite error: %s' % (' '.join(er.args)))
                 print('SQLite traceback: ') 
@@ -841,9 +845,8 @@ def calificacionEditar():
                     cur.execute("SELECT Id_usuario FROM Usuarios WHERE correo = ?", [session["usuario"]])
                     query2 = cur.fetchone()
                 with sqlite3.connect("Plavue.db") as con2:
-                    con2.row_factory = sqlite3.Row
                     cur = con2.cursor()
-                    cur.execute("SELECT * FROM Pasajeros WHERE Id_usuario=?", [query2[0]])
+                    cur.execute("SELECT Id_pasajero FROM Pasajeros WHERE Id_usuario=?", [query2[0]])
                     rowcal = cur.fetchone()
                 with sqlite3.connect("Plavue.db") as con2:
                     con2.row_factory = sqlite3.Row
@@ -860,7 +863,7 @@ def calificacionEditar():
                     cur = con4.cursor()
                     cur.execute("SELECT * FROM Ciudades")
                     query4 = cur.fetchall()
-                    return render_template("calificacionEdit-uFinal.html", perfil = query, rowcal = rowcal, vuelos = query3, ciudad = query4)
+                    return render_template("calificacionEdit-uFinal.html", perfil = query, rowcal = rowcal[0], vuelos = query3, ciudad = query4)
             except Error as er:
                 print('SQLite error: %s' % (' '.join(er.args)))
                 print('SQLite traceback: ') 

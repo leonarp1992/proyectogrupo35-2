@@ -415,12 +415,8 @@ function generateRandomInteger(max) {
 						'<td>' +data[2]+ '</td>',
 					'</tr>',
 					'<tr>',
-						'<td><label class="mb-none">Capacidad pasajeros:</label></td>',
-						'<td>' +data[9]+ '</td>',
-					'</tr>',
-					'<tr>',
 						'<td><label class="mb-none">Precio:</label></td>',
-						'<td>' +data[11]+ '</td>',
+						'<td>' +data[9]+ '</td>',
 					'</tr>',
 				'</div>'
 			].join('');
@@ -486,10 +482,14 @@ function generateRandomInteger(max) {
 			return [
 					'<table class="table mb-none">',
 						'<tr class="b-top-none">',
-							'<td><label class="mb-none">Comentarios:</label></td>',
+							'<td><label class="mb-none">Código del vuelo</label></td>',
 							'<td>' +data[10]+ '</td>',
-							'<td>' +data[11]+ '</td>',
+						'</tr>',
+						'<tr class="b-top-none">',
+							'<td><label class="mb-none">Comentarios:</label></td>',
+							'<td>' +data[11]+ '</td>',					
 							'<td>' +data[12]+ '</td>',
+							'<td>' +data[13]+ '</td>',
 						'</tr>',
 				'</div>'
 			].join('');

@@ -126,9 +126,7 @@
                                                     <th>Destino</th>
                                                     <th>Hora Salida</th>
                                                     <th>Hora Llegada</th>
-                                                    <th>fecha</th>
-                                                    <th>Estado</th>
-                                                    <th style="display: none;">Capacidad</th>
+                                                    <th>fecha</th>                                                    
                                                     <th>Cupos</th>
                                                     <th style="display: none;">Precio</th>
                                                     <th>Reservar</th>
@@ -155,22 +153,7 @@
                                                         </td>
                                                         <td> {{ r ["horaSalida"] }}  </td>
                                                         <td> {{ r ["horaLlegada"] }}  </td>
-                                                        <td> {{ r ["fecha"] }}  </td>
-                                                        <td>
-                                                            {% if r['estado'] == 'Aterrizó' %}
-                                                                <span class="status-p bg-success">{{r['estado']}}</span>
-                                                            {% endif %}
-                                                            {% if  r['estado'] == 'Retrasado' %}
-                                                                <span class="status-p bg-danger">{{r['estado']}}</span>
-                                                            {% endif %}
-                                                            {% if  r['estado'] == 'Despegó' %}
-                                                                <span class="status-p bg-warning">{{r['estado']}}</span>
-                                                            {% endif %}
-                                                            {% if  r['estado'] == 'A tiempo' %}
-                                                                <span class="status-p bg-primary">{{r['estado']}}</span>
-                                                            {% endif %}
-                                                        </td>
-                                                        <td style="display: none;"> {{ r ["capacidad"] }}  </td>
+                                                        <td> {{ r ["fecha"] }}  </td>                                              
                                                         <td> {{ r ["cupos"] }}  </td>
                                                         <td style="display: none;"> {{ r ["precio"] }}  </td>
                                                         <td>

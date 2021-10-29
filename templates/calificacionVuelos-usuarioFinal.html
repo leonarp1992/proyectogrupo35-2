@@ -115,8 +115,8 @@
                             <div class="panel-body">
                                 <table class="table table-bordered table-striped mb-none" id="datatable-comentarios">
                                     <thead>
-                                        <tr>
-                                            <th>Código</th>
+                                        <tr>                                            
+                                            <th>Numero de Reserva</th>
                                             <th>Origen</th>
                                             <th>Destino</th>
                                             <th>Hora Salida</th>
@@ -125,15 +125,16 @@
                                             <th>Calificación</th>
                                             <th></th>
                                             <th></th>
+                                            <th style="display: none;">Código del vuelo</th>
                                             <th style="display: none;">Comentarios</th>
                                             <th style="display: none;"></th>
-                                            <th style="display: none;"></th>
+                                            <th style="display: none;"></th>                                            
                                         </tr>
                                     </thead>
                                     <tbody>
                                         {% for r in vuelos %}
                                             <tr>
-                                                <td> {{ r ["Id_vuelo"] }} </td>
+                                                <td> {{Id_pasajero}} </td>                                                
                                                 <td>
                                                     {% for c in ciudad %}
                                                     {% if r["origen"] == c["Id_ciudad"] %}
@@ -153,33 +154,30 @@
                                                 <td> {{ r ["fecha"] }}  </td>
                                                 <td> 
                                                     {% for d in rowcal %}
-                                                        <span>{{d["Calificacion"]}}</span>
+                                                        {% if d["Id_pasajero"] == Id_pasajero %}
+                                                            <span>{{d["Calificacion"]}}</span>
+                                                        {% endif %}
                                                     {% endfor %}
                                                 </td>
                                                 <td>
-                                                    {% for d in rowcal %}
                                                     <a href="../calificacioneditar"><i class="fa fa-edit"></i></a>
-                                                    {% endfor %}
                                                 </td>
                                                 <td>
-                                                    {% for d in rowcal %}
-                                                    <a href="../caleliminar/{{d ['Id_pasajero']}}"><i class="ti-trash"></i></a>
-                                                    {% endfor %}                                                
+                                                    <a href="../caleliminar/{{Id_pasajero}}"><i class="ti-trash"></i></a>                                               
                                                 </td>
+                                                <td style="display: none;"> {{ r ["Id_vuelo"] }} </td>
                                                 <td style="display: none;"> 
                                                     {% for d in rowcal %}
-                                                    <span>{{d["Comentarios"]}}</span>
+                                                        {% if d["Id_pasajero"] == Id_pasajero %}
+                                                            <span>{{d["Comentarios"]}}</span>
+                                                        {% endif %}
                                                     {% endfor %} 
                                                 </td>
                                                 <td style="display: none;">
-                                                    {% for d in rowcal %}
-                                                    <a href="../comentarioeditar"><i class="fa fa-edit"></i></a>
-                                                    {% endfor %}
+                                                    <a href="../comentarioeditar"><i class="fa fa-edit"></i></a>                                                   
                                                 </td>
                                                 <td style="display: none;">
-                                                    {% for d in rowcal %}
-                                                    <a href="../comeliminar/{{d ['Id_pasajero']}}"><i class="ti-trash"></i></a>
-                                                    {% endfor %}                                                
+                                                    <a href="../comeliminar/{{Id_pasajero}}"><i class="ti-trash"></i></a>                                                                                                 
                                                 </td>
                                             </tr>
                                         {% endfor %}

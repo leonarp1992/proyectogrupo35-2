@@ -148,11 +148,7 @@
                                                 <td> {{ r ["horaSalida"] }}  </td>
                                                 <td> {{ r ["horaLlegada"] }}  </td>
                                                 <td> {{ r ["fecha"] }}  </td> 
-                                                <td>
-                                                    {% for c in rowcal %}                                    
-                                                            <span>{{c["Id_pasajero"]}}</span>                                                       
-                                                    {% endfor %}
-                                                </td>
+                                                <td>{{rowcal}}</td>
                                             </tr>
                                         {% endfor %}
                                     </tbody>
