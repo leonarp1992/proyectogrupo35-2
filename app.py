@@ -711,19 +711,24 @@ def itinerario_usuario():
                     cur = con.cursor()
                     cur.execute("SELECT * FROM Usuarios WHERE correo = ?", [session["usuario"]])
                     query = cur.fetchone()
-                with sqlite3.connect("itinerario.db") as con:
+                with sqlite3.connect("Plavue.db") as con:
                     con.row_factory = sqlite3.Row
                     cur = con.cursor()
-                    cur.execute("SELECT * FROM agendaVuelos")
+                    cur.execute("SELECT * FROM Vuelos")
                     row = cur.fetchall()
-                    return render_template("itinerario-usuarioFinal.html", perfil = query, row = row)
+                with sqlite3.connect("Plavue.db") as con4:
+                    con4.row_factory = sqlite3.Row
+                    cur = con4.cursor()
+                    cur.execute("SELECT * FROM Ciudades")
+                    query4 = cur.fetchall()
+                    return render_template("itinerario-usuarioFinal.html", perfil = query, row = row, ciudad = query4)
             except Error:
                 print(Error)
             return render_template('itinerariousuario.html')
     return render_template ("Login.html")
 
-@app.route("/reservausuario", methods=["GET", "POST"])
-def reserva_usuario():
+@app.route("/reservausuario/<int:Id_vuelo>", methods=["GET", "POST"])
+def reserva_usuario(Id_vuelo):
     if "usuario" in session:
         if request.method =="GET":
             try:
@@ -732,13 +737,38 @@ def reserva_usuario():
                     cur = con.cursor()
                     cur.execute("SELECT * FROM Usuarios WHERE correo = ?", [session["usuario"]])
                     query = cur.fetchone()
-                    return render_template("reservausuario.html",perfil = query)
-            except Error as er:
-                print('SQLite error: %s' % (' '.join(er.args)))
-                print('SQLite traceback: ')  
-            return render_template('itinerariousuario.html')
+                with sqlite3.connect("Plavue.db") as con:
+                    con.row_factory = sqlite3.Row
+                    cur = con.cursor()
+                    cur.execute("SELECT * FROM Vuelos")
+                    row = cur.fetchall()
+                with sqlite3.connect("Plavue.db") as con4:
+                    con4.row_factory = sqlite3.Row
+                    cur = con4.cursor()
+                    cur.execute("SELECT * FROM Ciudades")
+                    query4 = cur.fetchall()
+                    return render_template("reservausuario.html", perfil = query, row = row, ciudad = query4)
+            except Error:
+                print(Error)
+        if request.method == "POST":
+            now = datetime.now()
+            id_pasajero = now.strftime("%Y%m%d%H%M%S")
+            try:
+                with sqlite3.connect("Plavue.db") as con1:
+                    cur = con1.cursor()
+                    cur.execute("SELECT Id_usuario FROM Usuarios WHERE correo = ?", [session["usuario"]])
+                    query2 = cur.fetchone()
+                with sqlite3.connect("Plavue.db") as con2:
+                    con2.row_factory = sqlite3.Row
+                    cur = con2.cursor()
+                    cur.execute("INSERT INTO Pasajeros (Id_pasajero, Id_usuario, Id_vuelos) VALUES (?,?,?)", [id_pasajero, query2[0]], Id_vuelo)
+                    rowcal = cur.fetchall()
+                    return redirect("/itinerario")
+            except Error:
+                print(Error)
+            return render_template("reservausuario.html")
     return render_template ("Login.html")
-
+           
 @app.route("/comentariosusuario", methods=["GET", "POST"])
 def comentarios_usuario():
     return render_template('comentariosusuario.html')

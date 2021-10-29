@@ -1,10 +1,7 @@
 {% extends 'basebuscarvuelo.html' %}
 
 {% block body %}
-
-
-
-    
+   
     <div id="preloader">
         <div class="loader"></div>
     </div>
@@ -22,9 +19,10 @@
                 <div class="menu-inner">
                     <nav>
                         <ul class="metismenu" id="menu">
-                            <li><a href="../perfilusuario"><i class="ti-user"></i> <span>Perfil</span></a></li>
-                            <li><a href="../itinerario"><i class="ti-calendar"></i> <span>Itinerario</span></a></li>
-                            <li class="active"><a href="../reservausuario"><i class="ti-ticket"></i> <span>Reserva</span></a></li>
+                            <li><a href="../perfilusuario"><i class="ti-user"></i> <span>Perfil - Usuario final</span></a></li>
+                            <li><a href="../itinerario"><i class="ti-calendar"></i> <span>Itinerario</span></a>
+                                <ul><li class="active"><a href="../reservausuario"><i class="ti-ticket"></i> <span>Reserva</span></a></li></ul>
+                            </li>   
                             <li><a href="calificacionvuelosusuario"><i class="ti-star"></i> <span>Calificación de vuelos</span></a></li>
                         </ul>
                     </nav>
@@ -65,6 +63,7 @@
                         <div class="breadcrumbs-area clearfix">
                             <ul class="breadcrumbs pull-left">
                                 <li><a href="../perfilusuario">P L A V U E</a></li>
+                                <li><a href="../itinerario"><span>Itinerario</a></li>
                                 <li><span>Reserva</span></li>
                             </ul>
                         </div>
@@ -117,7 +116,7 @@
                                         <div class="col-lg-3 col-md-8" style="margin-left:auto; margin-right:auto;">
                                             <div class="btncrear">
                                                 <div>
-                                                    <a class="btn btn-rounded btn-primary mb-3" href="../itinerario" role="button">Confirmar reserva</a>
+                                                    <a class="btn btn-rounded btn-primary mb-3" href="../reservausuario" role="button">Confirmar reserva</a>
                                                 </div>
                                             </div>
                                         </div>
