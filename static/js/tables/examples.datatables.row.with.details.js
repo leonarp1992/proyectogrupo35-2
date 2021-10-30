@@ -486,12 +486,16 @@ function generateRandomInteger(max) {
 							'<td>' +data[9]+ '</td>',
 						'</tr>',
 						'<tr class="b-top-none">',
-							'<td><label class="mb-none">Comentarios:</label></td>',					
+							'<td><label class="mb-none">Piloto</label></td>',
 							'<td>' +data[10]+ '</td>',
 						'</tr>',
 						'<tr class="b-top-none">',
-							'<td><label class="mb-none">Editar Comentarios</label></td>',					
+							'<td><label class="mb-none">Comentarios:</label></td>',					
 							'<td>' +data[11]+ '</td>',
+						'</tr>',
+						'<tr class="b-top-none">',
+							'<td><label class="mb-none">Editar Comentarios</label></td>',					
+							'<td>' +data[12]+ '</td>',
 						'</tr>',
 				'</div>'
 			].join('');

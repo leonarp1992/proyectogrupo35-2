@@ -761,17 +761,26 @@ def reservar():
             now = datetime.now()
             Id_vuelo = request.form["Id_vuelo"]
             id_pasajero = now.strftime("%Y%m%d%H%M%S")
-            reserva = request.form["numpasajeros"]
+            reserva1 = request.form["numpasajeros"]
             try:
                 with sqlite3.connect("Plavue.db") as con1:
                     cur = con1.cursor()
                     cur.execute("SELECT Id_usuario FROM Usuarios WHERE correo = ?", [session["usuario"]])
                     query2 = cur.fetchone()
-                with sqlite3.connect("Plavue.db") as con2:
-                    cur = con2.cursor()
+                with sqlite3.connect("Plavue.db") as con1:
+                    cur = con1.cursor()
+                    cur.execute("SELECT reservas FROM Vuelos WHERE Id_vuelo= ?", [Id_vuelo])
+                    query3 = cur.fetchone()
+                reserva2 = query3[0]
+                reserva = int(reserva1) + int(reserva2)
+                with sqlite3.connect("Plavue.db") as con3:
+                    cur = con3.cursor()
                     cur.execute("UPDATE Vuelos SET reservas=? WHERE Id_vuelo=?", [reserva,Id_vuelo])
-                with sqlite3.connect("Plavue.db") as con2:
-                    cur = con2.cursor()
+                with sqlite3.connect("Plavue.db") as con5:
+                    cur = con5.cursor()
+                    cur.execute("SELECT (capacidad-reservas) AS cupos FROM Vuelos")
+                with sqlite3.connect("Plavue.db") as con4:
+                    cur = con4.cursor()
                     cur.execute("INSERT INTO Pasajeros (Id_pasajero, Id_usuario, Id_vuelos) VALUES (?,?,?)", [id_pasajero, query2[0],Id_vuelo])
                     return redirect("/calificacionvuelosusuario")
             except Error as er:

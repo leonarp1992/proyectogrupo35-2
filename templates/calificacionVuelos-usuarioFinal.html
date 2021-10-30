@@ -126,6 +126,7 @@
                                             <th>Calificación</th>
                                             <th>Editar calificacion</th>
                                             <th style="display: none;">Código del vuelo</th>
+                                            <th style="display: none;">Piloto</th>
                                             <th style="display: none;">Comentarios</th>
                                             <th style="display: none;">Editar Comentario</th>                                                           
                                         </tr>
@@ -181,6 +182,7 @@
                                                         {% endif %}
                                                     {% endfor %}
                                                 </td>
+                                        
                                                 <td> 
                                                     {% if r["Id_usuario"] == Id_usuario %}
                                                         <span>{{ r ["Calificacion"]}}</span>                                                        
@@ -192,10 +194,17 @@
                                                 </td>
                                                 <td style="display: none;"> {{ r ["Id_vuelos"] }} </td>
                                                 <td style="display: none;">
-                                                        {% if r["Id_usuario"] == Id_usuario %}
-                                                            {{r["Comentarios"]}}
-                                                        {% endif %}
-                                                </td>
+                                                    {% for k in vuelos %}
+                                                        {% if r["Id_vuelos"] == k ["Id_vuelo"]%}
+                                                        <span>{{k["piloto"]}}</span>
+                                                    {% endif %}
+                                                    {% endfor %}
+                                                </td> 
+                                                <td style="display: none;">
+                                                    {% if r["Id_usuario"] == Id_usuario %}
+                                                        {{r["Comentarios"]}}
+                                                    {% endif %}
+                                                </td>                                                                                               
                                                 <td style="display: none;">
                                                     <a href="../comentarioeditar/{{r['Id_pasajero']}}">Editar<i class="fa fa-edit"></i></a> <br> 
                                                     <a href="../comeliminar/{{r['Id_pasajero']}}">Eliminar<i class="ti-trash"></i></a>                                                   
