@@ -83,7 +83,11 @@
 
                     <div class="col-sm-6 clearfix">
                         <div class="user-profile pull-right">
-                            <img class="avatar user-thumb" src="static/images/icon/admin.jpg" alt="avatar">
+                            {% if perfil[14] == None%}
+                                <img class="avatar user-thumb" src="uploads/usuario.jpg" alt="avatar">
+                            {% else %}
+                                <img class="avatar user-thumb" src="uploads/{{perfil[14]}}" alt="avatar">
+                            {% endif %}
                             <h4 class="user-name dropdown-toggle" data-toggle="dropdown">{{perfil[6]}}<i class="fa fa-angle-down"></i></h4>
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" href="../perfiladmin">Perfil</a>

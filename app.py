@@ -1,5 +1,5 @@
 from sqlite3.dbapi2 import Row
-from flask import Flask, render_template, request, flash, redirect, url_for, session
+from flask import Flask, render_template, request, flash, redirect, url_for, session, send_from_directory
 from werkzeug.utils import escape
 import os
 import sqlite3
@@ -9,6 +9,15 @@ from datetime import datetime
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
+
+# Referenciar a la carpeta uploads
+CARPETA = os.path.join('uploads')
+app.config['CARPETA'] = CARPETA
+
+# Crear acceso a la carpeta uploads
+@app.route('/uploads/<nombreFoto>')
+def uploads(nombreFoto):
+    return send_from_directory(app.config['CARPETA'],nombreFoto)
 
 
 @app.route("/", methods=["GET", "POST"])
@@ -154,20 +163,65 @@ def perfil_admin():
                 pais = request.form["listnacionalidad"]
                 nombrecon = request.form["txtnombrecon"]
                 celularcon = request.form["txtcelularcon"]
-                # contraseña1 = request.form["txtcontraseña1"]
-                # contraseña2 = request.form["txtcontraseña2"]
-                # if contraseña1 == contraseña2:
-                #     contraseña = generate_password_hash(contraseña1)
-                try:
-                    with sqlite3.connect('Plavue.db') as con:  
-                        cur = con.cursor() #manipular la conexión a la bd
-                        cur.execute('UPDATE Usuarios SET Documento=?, tipoDocumento=?, tipoPerfil=?, estadoUsuario=?, Nombre=?, fechaNacimiento=?, sexo=?,Celular=?, nacionalidad=?, nombreContacto=?, numeroContacto=? WHERE correo=? ', (documento, tipodocumento, perfil, estado, nombre,fechanacimiento, sexo, celular, pais, nombrecon, celularcon, session['usuario']))
-                        con.commit()
-                        return redirect('/perfiladmin')
-                except Error as er:
-                    print('SQLite error: %s' % (' '.join(er.args)))
-                    print('SQLite traceback: ') 
-        return render_template("perfiladmin.html")   
+                foto = request.files["txtfoto"]
+                if  (foto.filename == ''):
+                    try:
+                        with sqlite3.connect('Plavue.db') as con:
+                            cur = con.cursor() #manipular la conexión a la bd
+                            cur.execute('UPDATE Usuarios SET Documento=?, tipoDocumento=?, Nombre=?, fechaNacimiento=?, sexo=?, Celular=?, nacionalidad=?, nombreContacto=?, numeroContacto=? WHERE correo=? ', (documento, tipodocumento, nombre, fechanacimiento, sexo, celular, pais, nombrecon, celularcon, session['usuario']))
+                            con.commit()
+                            return redirect('/perfilusuario')
+                    except Error as er:
+                        print('SQLite error: %s' % (' '.join(er.args)))
+                        print('SQLite traceback: ')
+                else:
+                    try:
+                        with sqlite3.connect("Plavue.db") as con:
+                            con.row_factory = sqlite3.Row
+                            cur = con.cursor()
+                            cur.execute("SELECT foto FROM Usuarios WHERE correo = ?", [session["usuario"]])
+                            query = cur.fetchone()
+                        if query[0] == None and foto.filename != '':
+                            # crear la variable now y almacenamos la fecha y hora actual
+                            now = datetime.now()
+                            # Dar formato a la información almacena en now y la almacenamos en una variable llmada tiempo
+                            tiempo = now.strftime("%Y%m%d%H%M%S")
+                            # if foto.filename!="":
+                            nuevoNombreFoto = tiempo + foto.filename
+                            foto.save("uploads/" + nuevoNombreFoto)
+
+                            with sqlite3.connect('Plavue.db') as con1:
+                                cur = con1.cursor() #manipular la conexión a la bd
+                                cur.execute('UPDATE Usuarios SET foto=? WHERE correo=? ', (nuevoNombreFoto, session['usuario']))
+                                con1.commit()
+                                return redirect('/perfilusuario')
+                        else:
+                            # crear la variable now y almacenamos la fecha y hora actual
+                            now = datetime.now()
+                            # Dar formato a la información almacena en now y la almacenamos en una variable llmada tiempo
+                            tiempo = now.strftime("%Y%m%d%H%M%S")
+                            # if foto.filename!="":
+                            nuevoNombreFoto = tiempo + foto.filename
+                            foto.save("uploads/" + nuevoNombreFoto)
+                            with sqlite3.connect("Plavue.db") as con:
+                                con.row_factory = sqlite3.Row
+                                cur = con.cursor()
+                                cur.execute('SELECT foto FROM Usuarios WHERE correo=? ', [session['usuario']])
+                                fila = cur.fetchall()
+                                # Remover la foto de la carpeta uploads cuando se actualiza
+                                os.remove(os.path.join(app.config['CARPETA'],fila[0][0]))
+                            with sqlite3.connect('Plavue.db') as con1:
+                                cur = con1.cursor() #manipular la conexión a la bd
+                                cur.execute('UPDATE Usuarios SET foto=? WHERE correo=? ', (nuevoNombreFoto, session['usuario']))
+                                con1.commit()
+                            with sqlite3.connect('Plavue.db') as con2:
+                                cur = con2.cursor() #manipular la conexión a la bd
+                                cur.execute('UPDATE Usuarios SET Documento=?, tipoDocumento=?, Nombre=?, fechaNacimiento=?, sexo=?, Celular=?, nacionalidad=?, nombreContacto=?, numeroContacto=?, foto=? WHERE correo=? ', (documento, tipodocumento, nombre, fechanacimiento, sexo, celular, pais, nombrecon, celularcon, nuevoNombreFoto, session['usuario']))
+                                con2.commit()
+                                return redirect('/perfilusuario')
+                    except Error as er:
+                        print('SQLite error: %s' % (' '.join(er.args)))
+                        print('SQLite traceback: ')  
     return render_template("Login.html")
 
 @app.route("/GestionPilotos", methods=["GET"])
@@ -587,8 +641,6 @@ def perfil_piloto():
         if request.method == "POST":
                 documento = request.form["txtdocumento"]
                 tipodocumento = request.form["listtipodocumento"]
-                perfil = request.form["listperfil"]
-                estado = request.form["listestado"]
                 nombre = request.form["txtnombre"]
                 fechanacimiento = request.form["txtfechanacimiento"]
                 sexo = request.form["listsexo"]
@@ -596,18 +648,65 @@ def perfil_piloto():
                 pais = request.form["listnacionalidad"]
                 nombrecon = request.form["txtnombrecon"]
                 celularcon = request.form["txtcelularcon"]
-                # contraseña1 = request.form["txtcontraseña1"]
-                # contraseña2 = request.form["txtcontraseña2"]
-                try:
-                    with sqlite3.connect('Plavue.db') as con:  
-                        cur = con.cursor() #manipular la conexión a la bd
-                        cur.execute('UPDATE Usuarios SET Documento=?, tipoDocumento=?, tipoPerfil=?, estadoUsuario=?, Nombre=?, fechaNacimiento=?, sexo=?, Celular=?, nacionalidad=?, nombreContacto=?, numeroContacto=? WHERE correo=? ', (documento, tipodocumento, perfil, estado, nombre, fechanacimiento, sexo, celular, pais, nombrecon, celularcon, session['usuario']))
-                        con.commit()
-                        return redirect('/perfilpiloto')
-                except Error as er:
-                    print('SQLite error: %s' % (' '.join(er.args)))
-                    print('SQLite traceback: ') 
-        return render_template("perfilpiloto.html")   
+                foto = request.files["txtfoto"]
+                if  (foto.filename == ''):
+                    try:
+                        with sqlite3.connect('Plavue.db') as con:
+                            cur = con.cursor() #manipular la conexión a la bd
+                            cur.execute('UPDATE Usuarios SET Documento=?, tipoDocumento=?, Nombre=?, fechaNacimiento=?, sexo=?, Celular=?, nacionalidad=?, nombreContacto=?, numeroContacto=? WHERE correo=? ', (documento, tipodocumento, nombre, fechanacimiento, sexo, celular, pais, nombrecon, celularcon, session['usuario']))
+                            con.commit()
+                            return redirect('/perfilusuario')
+                    except Error as er:
+                        print('SQLite error: %s' % (' '.join(er.args)))
+                        print('SQLite traceback: ')
+                else:
+                    try:
+                        with sqlite3.connect("Plavue.db") as con:
+                            con.row_factory = sqlite3.Row
+                            cur = con.cursor()
+                            cur.execute("SELECT foto FROM Usuarios WHERE correo = ?", [session["usuario"]])
+                            query = cur.fetchone()
+                        if query[0] == None and foto.filename != '':
+                            # crear la variable now y almacenamos la fecha y hora actual
+                            now = datetime.now()
+                            # Dar formato a la información almacena en now y la almacenamos en una variable llmada tiempo
+                            tiempo = now.strftime("%Y%m%d%H%M%S")
+                            # if foto.filename!="":
+                            nuevoNombreFoto = tiempo + foto.filename
+                            foto.save("uploads/" + nuevoNombreFoto)
+
+                            with sqlite3.connect('Plavue.db') as con1:
+                                cur = con1.cursor() #manipular la conexión a la bd
+                                cur.execute('UPDATE Usuarios SET foto=? WHERE correo=? ', (nuevoNombreFoto, session['usuario']))
+                                con1.commit()
+                                return redirect('/perfilusuario')
+                        else:
+                            # crear la variable now y almacenamos la fecha y hora actual
+                            now = datetime.now()
+                            # Dar formato a la información almacena en now y la almacenamos en una variable llmada tiempo
+                            tiempo = now.strftime("%Y%m%d%H%M%S")
+                            # if foto.filename!="":
+                            nuevoNombreFoto = tiempo + foto.filename
+                            foto.save("uploads/" + nuevoNombreFoto)
+                            with sqlite3.connect("Plavue.db") as con:
+                                con.row_factory = sqlite3.Row
+                                cur = con.cursor()
+                                cur.execute('SELECT foto FROM Usuarios WHERE correo=? ', [session['usuario']])
+                                fila = cur.fetchall()
+                                # Remover la foto de la carpeta uploads cuando se actualiza
+                                os.remove(os.path.join(app.config['CARPETA'],fila[0][0]))
+                            with sqlite3.connect('Plavue.db') as con1:
+                                cur = con1.cursor() #manipular la conexión a la bd
+                                cur.execute('UPDATE Usuarios SET foto=? WHERE correo=? ', (nuevoNombreFoto, session['usuario']))
+                                con1.commit()
+                            with sqlite3.connect('Plavue.db') as con2:
+                                cur = con2.cursor() #manipular la conexión a la bd
+                                cur.execute('UPDATE Usuarios SET Documento=?, tipoDocumento=?, Nombre=?, fechaNacimiento=?, sexo=?, Celular=?, nacionalidad=?, nombreContacto=?, numeroContacto=?, foto=? WHERE correo=? ', (documento, tipodocumento, nombre, fechanacimiento, sexo, celular, pais, nombrecon, celularcon, nuevoNombreFoto, session['usuario']))
+                                con2.commit()
+                                return redirect('/perfilusuario')
+                    except Error as er:
+                        print('SQLite error: %s' % (' '.join(er.args)))
+                        print('SQLite traceback: ')   
     return render_template("Login.html")
 
 @app.route("/historialvuelospiloto/<Nombre>", methods=["GET"])
@@ -688,18 +787,65 @@ def perfil_usuario():
                 pais = request.form["listnacionalidad"]
                 nombrecon = request.form["txtnombrecon"]
                 celularcon = request.form["txtcelularcon"]
-                # contraseña1 = request.form["txtcontraseña1"]
-                # contraseña2 = request.form["txtcontraseña2"]
-                try:
-                    with sqlite3.connect('Plavue.db') as con:  
-                        cur = con.cursor() #manipular la conexión a la bd
-                        cur.execute('UPDATE Usuarios SET Documento=?, tipoDocumento=?, Nombre=?, fechaNacimiento=?, sexo=?, Celular=?, nacionalidad=?, nombreContacto=?, numeroContacto=? WHERE correo=? ', (documento, tipodocumento, nombre, fechanacimiento, sexo, celular, pais, nombrecon, celularcon, session['usuario']))
-                        con.commit()
-                        return redirect('/perfilusuario')
-                except Error as er:
-                    print('SQLite error: %s' % (' '.join(er.args)))
-                    print('SQLite traceback: ') 
-        return render_template("perfilusuario.html")   
+                foto = request.files["txtfoto"]
+                if  (foto.filename == ''):
+                    try:
+                        with sqlite3.connect('Plavue.db') as con:
+                            cur = con.cursor() #manipular la conexión a la bd
+                            cur.execute('UPDATE Usuarios SET Documento=?, tipoDocumento=?, Nombre=?, fechaNacimiento=?, sexo=?, Celular=?, nacionalidad=?, nombreContacto=?, numeroContacto=? WHERE correo=? ', (documento, tipodocumento, nombre, fechanacimiento, sexo, celular, pais, nombrecon, celularcon, session['usuario']))
+                            con.commit()
+                            return redirect('/perfilusuario')
+                    except Error as er:
+                        print('SQLite error: %s' % (' '.join(er.args)))
+                        print('SQLite traceback: ')
+                else:
+                    try:
+                        with sqlite3.connect("Plavue.db") as con:
+                            con.row_factory = sqlite3.Row
+                            cur = con.cursor()
+                            cur.execute("SELECT foto FROM Usuarios WHERE correo = ?", [session["usuario"]])
+                            query = cur.fetchone()
+                        if query[0] == None and foto.filename != '':
+                            # crear la variable now y almacenamos la fecha y hora actual
+                            now = datetime.now()
+                            # Dar formato a la información almacena en now y la almacenamos en una variable llmada tiempo
+                            tiempo = now.strftime("%Y%m%d%H%M%S")
+                            # if foto.filename!="":
+                            nuevoNombreFoto = tiempo + foto.filename
+                            foto.save("uploads/" + nuevoNombreFoto)
+
+                            with sqlite3.connect('Plavue.db') as con1:
+                                cur = con1.cursor() #manipular la conexión a la bd
+                                cur.execute('UPDATE Usuarios SET foto=? WHERE correo=? ', (nuevoNombreFoto, session['usuario']))
+                                con1.commit()
+                                return redirect('/perfilusuario')
+                        else:
+                            # crear la variable now y almacenamos la fecha y hora actual
+                            now = datetime.now()
+                            # Dar formato a la información almacena en now y la almacenamos en una variable llmada tiempo
+                            tiempo = now.strftime("%Y%m%d%H%M%S")
+                            # if foto.filename!="":
+                            nuevoNombreFoto = tiempo + foto.filename
+                            foto.save("uploads/" + nuevoNombreFoto)
+                            with sqlite3.connect("Plavue.db") as con:
+                                con.row_factory = sqlite3.Row
+                                cur = con.cursor()
+                                cur.execute('SELECT foto FROM Usuarios WHERE correo=? ', [session['usuario']])
+                                fila = cur.fetchall()
+                                # Remover la foto de la carpeta uploads cuando se actualiza
+                                os.remove(os.path.join(app.config['CARPETA'],fila[0][0]))
+                            with sqlite3.connect('Plavue.db') as con1:
+                                cur = con1.cursor() #manipular la conexión a la bd
+                                cur.execute('UPDATE Usuarios SET foto=? WHERE correo=? ', (nuevoNombreFoto, session['usuario']))
+                                con1.commit()
+                            with sqlite3.connect('Plavue.db') as con2:
+                                cur = con2.cursor() #manipular la conexión a la bd
+                                cur.execute('UPDATE Usuarios SET Documento=?, tipoDocumento=?, Nombre=?, fechaNacimiento=?, sexo=?, Celular=?, nacionalidad=?, nombreContacto=?, numeroContacto=?, foto=? WHERE correo=? ', (documento, tipodocumento, nombre, fechanacimiento, sexo, celular, pais, nombrecon, celularcon, nuevoNombreFoto, session['usuario']))
+                                con2.commit()
+                                return redirect('/perfilusuario')
+                    except Error as er:
+                        print('SQLite error: %s' % (' '.join(er.args)))
+                        print('SQLite traceback: ')   
     return render_template("Login.html")
 
 @app.route("/itinerario", methods=["GET", "POST"])

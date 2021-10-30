@@ -85,7 +85,11 @@
 
                     <div class="col-sm-6 clearfix">
                         <div class="user-profile pull-right">
-                            <img class="avatar user-thumb" src="../static/images/icon/admin.jpg" alt="avatar">
+                            {% if perfil[14] == None%}
+                                <img class="avatar user-thumb" src="uploads/usuario.jpg" alt="avatar">
+                            {% else %}
+                                <img class="avatar user-thumb" src="uploads/{{perfil[14]}}" alt="avatar">
+                            {% endif %}
                             <h4 class="user-name dropdown-toggle" data-toggle="dropdown">{{perfil[6]}}<i class="fa fa-angle-down"></i></h4>
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" href="../perfiladmin">Perfil</a>
@@ -115,7 +119,11 @@
                     <div class="col-md-6 col-lg-2 mt-4"><!-- foto de usuario -->
                         <div class="panel-body">
                             <div class="thumb-info mb-md">
-                                <img src="static/images/icon/admin.jpg" class="rounded img-responsive" alt="Foto del usuario">
+                                {% if perfil[14] == None %}
+                                    <img src="uploads/usuario.jpg" class="rounded img-responsive" alt="Foto del usuario">
+                                {% else %}
+                                    <img src="uploads/{{perfil[14]}}" class="rounded img-responsive" alt="Foto del usuario">
+                                {% endif %}
                             </div>
                         </div>
                     </div>
@@ -240,13 +248,15 @@
                                                 <div class="col-md-6">
                                                     <br>
                                                     <label for="txtfoto">Foto</label><br>
-                                                    <img class="img-thumbnail" width="100" src="static/images/icon/admin.jpg">
+                                                    {% if perfil[14] == None %}
+                                                        <img class="img-thumbnail" width="100" src="uploads/usuario.jpg">
+                                                    {% else %}                                                        
+                                                        <img class="img-thumbnail" width="100" src="uploads/{{perfil[14]}}">
+                                                    {% endif %}
                                                     <input type="file" class="form-control form-control-sm" name="txtfoto"id="txtfoto" value="">
                                                 </div>
                                             </div>
-
                                             <hr>
-
                                             <p>Ingrese los datos de un familiar en caso de emergencia:</p>
 
                                             <div class="form-row">
