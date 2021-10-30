@@ -1,8 +1,6 @@
 from sqlite3.dbapi2 import Row
 from flask import Flask, render_template, request, flash, redirect, url_for, session
 from werkzeug.utils import escape
-import utils
-import yagmail
 import os
 import sqlite3
 from sqlite3 import Error
