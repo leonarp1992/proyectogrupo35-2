@@ -930,7 +930,6 @@ def reservar():
                     query4 = cur.fetchone()
                 capacidad = query4[0]
                 cupos = int(capacidad) - int(reserva)
-                print(cupos)
                 with sqlite3.connect("Plavue.db") as con3:
                     cur = con3.cursor()
                     cur.execute("UPDATE Vuelos SET reservas=? WHERE Id_vuelo=?", [reserva,Id_vuelo])
