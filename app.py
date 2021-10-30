@@ -584,6 +584,11 @@ def Gestion_Comentarios():
                     cur = con.cursor()
                     cur.execute("SELECT * FROM Usuarios WHERE correo = ?", [session["usuario"]])
                     query = cur.fetchone()
+                with sqlite3.connect("Plavue.db") as con2:
+                    con2.row_factory = sqlite3.Row
+                    cur = con2.cursor()
+                    cur.execute("SELECT * FROM Usuarios")
+                    query1 = cur.fetchall()
                 with sqlite3.connect("Plavue.db") as con1:
                     con1.row_factory = sqlite3.Row
                     cur = con1.cursor()
@@ -591,7 +596,7 @@ def Gestion_Comentarios():
                     query2 = cur.fetchall()                                 
                     if query is None:
                         return "Usuario no existe!"
-                return render_template("GestionComentarios.html", perfil = query, tabla = query2 )
+                return render_template("GestionComentarios.html", perfil = query, tabla = query2, usuarios = query1 )
             except Error as er:
                 print('SQLite error: %s' % (' '.join(er.args)))
                 print('SQLite traceback: ')

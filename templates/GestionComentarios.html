@@ -127,9 +127,9 @@
                                                 <tr>
                                                     <th>Id Vuelo</th>
                                                     <th>Id Usuario</th>
+                                                    <th>Nombre Usuario</th>
                                                     <th>Calificación del vuelo</th>
-                                                    <th>Comentarios del vuelo</th>
-                                                    
+                                                    <th>Comentarios del vuelo</th>                                                    
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -137,6 +137,13 @@
                                                 <tr class="gradeX">
                                                     <td>{{r ["Id_vuelos"]}}</td>
                                                     <td>{{r ["Id_usuario"]}}</td>
+                                                    <td>
+                                                        {% for i in usuarios %}
+                                                            {% if i["Id_usuario"] == r["Id_usuario"] %}
+                                                            <span>{{i["Nombre"]}}</span>
+                                                            {% endif %}
+                                                        {% endfor%}
+                                                    </td>
                                                     <td>{{r ["Calificacion"]}}</td>
                                                     <td>{{r ["Comentarios"]}}</td>
                                                 </tr>
