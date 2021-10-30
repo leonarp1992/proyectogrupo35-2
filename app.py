@@ -170,7 +170,7 @@ def perfil_admin():
                             cur = con.cursor() #manipular la conexión a la bd
                             cur.execute('UPDATE Usuarios SET Documento=?, tipoDocumento=?, Nombre=?, fechaNacimiento=?, sexo=?, Celular=?, nacionalidad=?, nombreContacto=?, numeroContacto=? WHERE correo=? ', (documento, tipodocumento, nombre, fechanacimiento, sexo, celular, pais, nombrecon, celularcon, session['usuario']))
                             con.commit()
-                            return redirect('/perfilusuario')
+                            return redirect('/perfiladmin')
                     except Error as er:
                         print('SQLite error: %s' % (' '.join(er.args)))
                         print('SQLite traceback: ')
@@ -194,7 +194,7 @@ def perfil_admin():
                                 cur = con1.cursor() #manipular la conexión a la bd
                                 cur.execute('UPDATE Usuarios SET foto=? WHERE correo=? ', (nuevoNombreFoto, session['usuario']))
                                 con1.commit()
-                                return redirect('/perfilusuario')
+                                return redirect('/perfiladmin')
                         else:
                             # crear la variable now y almacenamos la fecha y hora actual
                             now = datetime.now()
@@ -218,7 +218,7 @@ def perfil_admin():
                                 cur = con2.cursor() #manipular la conexión a la bd
                                 cur.execute('UPDATE Usuarios SET Documento=?, tipoDocumento=?, Nombre=?, fechaNacimiento=?, sexo=?, Celular=?, nacionalidad=?, nombreContacto=?, numeroContacto=?, foto=? WHERE correo=? ', (documento, tipodocumento, nombre, fechanacimiento, sexo, celular, pais, nombrecon, celularcon, nuevoNombreFoto, session['usuario']))
                                 con2.commit()
-                                return redirect('/perfilusuario')
+                                return redirect('/perfiladmin')
                     except Error as er:
                         print('SQLite error: %s' % (' '.join(er.args)))
                         print('SQLite traceback: ')  
@@ -660,7 +660,7 @@ def perfil_piloto():
                             cur = con.cursor() #manipular la conexión a la bd
                             cur.execute('UPDATE Usuarios SET Documento=?, tipoDocumento=?, Nombre=?, fechaNacimiento=?, sexo=?, Celular=?, nacionalidad=?, nombreContacto=?, numeroContacto=? WHERE correo=? ', (documento, tipodocumento, nombre, fechanacimiento, sexo, celular, pais, nombrecon, celularcon, session['usuario']))
                             con.commit()
-                            return redirect('/perfilusuario')
+                            return redirect('/perfilpiloto')
                     except Error as er:
                         print('SQLite error: %s' % (' '.join(er.args)))
                         print('SQLite traceback: ')
@@ -684,7 +684,7 @@ def perfil_piloto():
                                 cur = con1.cursor() #manipular la conexión a la bd
                                 cur.execute('UPDATE Usuarios SET foto=? WHERE correo=? ', (nuevoNombreFoto, session['usuario']))
                                 con1.commit()
-                                return redirect('/perfilusuario')
+                                return redirect('/perfilpiloto')
                         else:
                             # crear la variable now y almacenamos la fecha y hora actual
                             now = datetime.now()
@@ -708,7 +708,7 @@ def perfil_piloto():
                                 cur = con2.cursor() #manipular la conexión a la bd
                                 cur.execute('UPDATE Usuarios SET Documento=?, tipoDocumento=?, Nombre=?, fechaNacimiento=?, sexo=?, Celular=?, nacionalidad=?, nombreContacto=?, numeroContacto=?, foto=? WHERE correo=? ', (documento, tipodocumento, nombre, fechanacimiento, sexo, celular, pais, nombrecon, celularcon, nuevoNombreFoto, session['usuario']))
                                 con2.commit()
-                                return redirect('/perfilusuario')
+                                return redirect('/perfilpiloto')
                     except Error as er:
                         print('SQLite error: %s' % (' '.join(er.args)))
                         print('SQLite traceback: ')   
