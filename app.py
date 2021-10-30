@@ -773,12 +773,19 @@ def reservar():
                     query3 = cur.fetchone()
                 reserva2 = query3[0]
                 reserva = int(reserva1) + int(reserva2)
+                with sqlite3.connect("Plavue.db") as con6:
+                    cur = con6.cursor()
+                    cur.execute("SELECT capacidad FROM Vuelos WHERE Id_vuelo= ?", [Id_vuelo])
+                    query4 = cur.fetchone()
+                capacidad = query4[0]
+                cupos = int(capacidad) - int(reserva)
+                print(cupos)
                 with sqlite3.connect("Plavue.db") as con3:
                     cur = con3.cursor()
                     cur.execute("UPDATE Vuelos SET reservas=? WHERE Id_vuelo=?", [reserva,Id_vuelo])
                 with sqlite3.connect("Plavue.db") as con5:
                     cur = con5.cursor()
-                    cur.execute("SELECT (capacidad-reservas) AS cupos FROM Vuelos")
+                    cur.execute("UPDATE Vuelos SET cupos=? WHERE Id_vuelo=?", [cupos, Id_vuelo])
                 with sqlite3.connect("Plavue.db") as con4:
                     cur = con4.cursor()
                     cur.execute("INSERT INTO Pasajeros (Id_pasajero, Id_usuario, Id_vuelos) VALUES (?,?,?)", [id_pasajero, query2[0],Id_vuelo])
