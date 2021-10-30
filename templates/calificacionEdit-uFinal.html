@@ -164,62 +164,66 @@
                                                 <h1 class="header-title">Calificación del servicio</h1>
                                                 <form class="needs-validation" novalidate="" id="formCalificacion" method="POST" action="/calificacioneditar/{{rowcal}}">
                                                     <div class="form-row">
-                                                        <div>
+                                                        <div style="width: 100%;" >
                                                             <table class="table table-bordered border-primary">
                                                                 <thead>
                                                                     <div class="rating"></div>
-                                                                    <tr>
-                                                                        <th scope=""> <span>
+                                                                   <tr>
+                                                                        <td scope="">
+                                                                            <span>
                                                                                 <div class="form-check">
                                                                                     <input class="form-check-input" type="radio" name="calificacion" id="excelente" value="Excelente">
-                                                                                    <label class="form-check-label" for="Excelente">Excelente</label>
+                                                                                     <label class="form-check-label" for="Excelente">Excelente</label>
                                                                                 </div>
-                                                                            </span></th>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <th scope="col"> <span>
-                                                                                <div class="form-check">
-                                                                                    <input class="form-check-input" type="radio" name="calificacion" id="muybueno" value="Muy Bueno">
-                                                                                    <label class="form-check-label" for="Muy Bueno">Muy Bueno</label>
-                                                                                </div>
-                                                                            </span></th>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <th scope="col"> <span>
+                                                                            </span>
+                                                                        </td>
+                                                                        <td scope="col">
+                                                                            <span>
+                                                                                    <div class="form-check">
+                                                                                        <input class="form-check-input" type="radio" name="calificacion" id="muybueno" value="Muy Bueno">
+                                                                                        <label class="form-check-label" for="Muy Bueno">Muy Bueno</label>
+                                                                                    </div>
+                                                                            </span>
+                                                                        </td>
+                                                                        <td scope="col">
+                                                                            <span>
                                                                                 <div class="form-check">
                                                                                     <input class="form-check-input" type="radio" name="calificacion" id="bueno" value="Bueno">
                                                                                     <label class="form-check-label" for="Bueno">Bueno</label>
                                                                                 </div>
-                                                                            </span></th>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <th scope="col"> <span>
+                                                                            </span>
+                                                                        </td>
+                                                                        <td scope="col"> 
+                                                                            <span>
                                                                                 <div class="form-check">
                                                                                     <input class="form-check-input" type="radio" name="calificacion" id="regular" value="Regular">
                                                                                     <label class="form-check-label" for="Regular">Regular</label>
                                                                                 </div>
-                                                                            </span></th>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <th scope="col"> <span>
+                                                                            </span>
+                                                                        </td>
+                                                                        <td scope="col">
+                                                                            <span>
                                                                                 <div class="form-check">
                                                                                     <input class="form-check-input" type="radio" name="calificacion" id="malo" value="Malo">
                                                                                     <label class="form-check-label" for="Malo">Malo</label>
                                                                                 </div>
-                                                                            </span></th>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <th scope="col"> <span>
+                                                                            </span>
+                                                                        </td>
+                                                                        <td scope="col"> 
+                                                                            <span>
                                                                                 <div class="form-check">
                                                                                     <input class="form-check-input" type="radio" name="calificacion" id="nosabenoresponde" value="No Sabe/ No Responde">
                                                                                     <label class="form-check-label" for="No Sabe/ No Responde">No Sabe/ No Responde</label>
                                                                                 </div>
-                                                                            </span></th>
-                                                                    </tr>
+                                                                            </span>
+                                                                        </td>
+                                                                   </tr>
                                                                 </thead>
                                                             </table>
-                                                            <div class=" submit-btn-area ">
-                                                                <button id="calificar" type="submit" >Calificar</button>
+                                                            <div class="btncentrado">
+                                                                <div class=" submit-btn-area ">
+                                                                    <button id="calificar" type="submit" >Calificar</button>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>

@@ -115,77 +115,78 @@
                     <!-- Primary table start -->
                     <div class="col-12 mt-5">
                         <div class="card mt-8">
-                            <div class="card-body">
-                                <h4 class="header-title" align="center">Confirma tu reserva</h4>
-                                <hr>
-                                <form class="needs-validation" name="form_reservar" action="/reservausuario" id="form_reservar" enctype="multipart/form-data" method="POST" onsubmit="return validarperfil()">
-                                    <input type="hidden" id="Id_vuelo" name="Id_vuelo" value="{{row}}">
-                                    <div class="form-row">
-                                        <table class="table table-bordered table-striped mb-none" id="datatable-comentarios">
-                                            <thead>
-                                                <tr>
-                                                    <th>Código</th>
-                                                    <th>Origen</th>
-                                                    <th>Destino</th>
-                                                    <th>Hora Salida</th>
-                                                    <th>Hora Llegada</th>
-                                                    <th>fecha</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                {% for r in vuelos %}
+                                <div class="card-body">
+                                    <h4 class="header-title" align="center">Confirma tu reserva</h4>
+                                    <hr>
+                                    <form class="needs-validation" name="form_reservar" action="/reservausuario" id="form_reservar" enctype="multipart/form-data" method="POST" onsubmit="return validarperfil()">
+                                        <input type="hidden" id="Id_vuelo" name="Id_vuelo" value="{{row}}">
+                                        <div class="form-row">
+                                            <table class="table table-bordered table-striped mb-none" id="datatable-comentarios">
+                                                <thead>
                                                     <tr>
-                                                        <td> {{ r ["Id_vuelo"] }} </td>
-                                                        <td>
-                                                            {% for c in ciudad %}
-                                                            {% if r["origen"] == c["Id_ciudad"] %}
-                                                                <span>{{c["Ciudad"]}}</span>
-                                                            {% endif %}
-                                                            {% endfor %}
-                                                        </td>
-                                                        <td>
-                                                            {% for c in ciudad %}
-                                                                {% if r["destino"] == c["Id_ciudad"] %}
+                                                        <th>Código</th>
+                                                        <th>Origen</th>
+                                                        <th>Destino</th>
+                                                        <th>Hora Salida</th>
+                                                        <th>Hora Llegada</th>
+                                                        <th>fecha</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {% for r in vuelos %}
+                                                        <tr>
+                                                            <td> {{ r ["Id_vuelo"] }} </td>
+                                                            <td>
+                                                                {% for c in ciudad %}
+                                                                {% if r["origen"] == c["Id_ciudad"] %}
                                                                     <span>{{c["Ciudad"]}}</span>
                                                                 {% endif %}
-                                                            {% endfor %}
-                                                        </td>
-                                                        <td> {{ r ["horaSalida"] }}  </td>
-                                                        <td> {{ r ["horaLlegada"] }}  </td>
-                                                        <td> {{ r ["fecha"] }}  </td>                                          
-                                                    </tr>
-                                                {% endfor %}
-                                                </form>
-                                            </tbody>
-                                        </table>                                           
-                                    </div>
-                                    <hr>
-                                    <div class="form-row">
-                                        <div class="col-lg-3 col-md-8">
-                                            <br>
-                                            <label for="listtipodocumento">Cantidad de cupos </label><br>
-                                            <input type="text" name="numpasajeros" id="numpasajeros" step="1" min="0" max="100" class="sunny"><br><br>
+                                                                {% endfor %}
+                                                            </td>
+                                                            <td>
+                                                                {% for c in ciudad %}
+                                                                    {% if r["destino"] == c["Id_ciudad"] %}
+                                                                        <span>{{c["Ciudad"]}}</span>
+                                                                    {% endif %}
+                                                                {% endfor %}
+                                                            </td>
+                                                            <td> {{ r ["horaSalida"] }}  </td>
+                                                            <td> {{ r ["horaLlegada"] }}  </td>
+                                                            <td> {{ r ["fecha"] }}  </td>                                          
+                                                        </tr>
+                                                    {% endfor %}
+                                                </tbody>
+                                            </table>                                          
                                         </div>
-                                    </div>
-                                    <hr>
-                                    <div class="form-row">
-                                        <div class="btncentrado" >
-                                            <div class="submit-btn-area">
-                                                <button id="form_reservar" type="submit">Confirmar Reserva<i class="ti-arrow-right"></i></button>                                    
+                                        <hr>
+                                        <div class="form-row">
+                                            <div class="col-lg-3 col-md-8">
+                                                <br>
+                                                <label for="listtipodocumento">Cantidad de cupos </label><br>
+                                                <input type="text" name="numpasajeros" id="numpasajeros" step="1" min="0" max="100" class="sunny"><br><br>
                                             </div>
                                         </div>
-                                        <div class="col-lg-3 col-md-8" style="margin-left:auto; margin-right:auto;">
-                                            <div class="btncrear">
-                                                <div>
-                                                    <a class="btn btn-rounded btn-primary mb-3" href="../itinerario" role="button">Modificar reserva</a>
+                                        <hr>
+                                        <div class="form-row">
+                                            <div class="btncentrado" >
+                                                <div class="submit-btn-area">
+                                                    <button id="form_reservar" type="submit">Confirmar Reserva<i class="ti-arrow-right"></i></button>                                    
+                                                </div>
+                                            </div>
+                                        </div>                                    
+                                    </form>
+                                    <br>
+                                    <br>                                    
+                                    <form action="../itinerario">
+                                        <div  style="margin-left:auto; margin-right:auto;">
+                                            <div class="btncentrado">
+                                                <div class="submit-btn-area">
+                                                    <button style="width: 200px;">Modificar reserva</button>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <hr>
-                                </form>
-                                </section>
-                            </div>
+                                    </form>                                   
+                                </div> <hr>
                         </div>
                         <!-- Primary table end -->
                     </div> 
